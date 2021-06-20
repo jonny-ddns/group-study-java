@@ -27,8 +27,8 @@ usage : study management
 #### package description
 
 	application	: application 실행시 필요한 파일묶음
-	data 		: Student 정보가 보관되는 장소
-	service 	: 요청을 전달받아 실행되는 기능들 묶음
+	data 		: Student 및 StudentList 정보가 보관되는 장소
+	service 	: application에서의 요청을 받아 실행되는 기능들 묶음
 	
 ##### ====================================================================================
 
