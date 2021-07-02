@@ -1,5 +1,9 @@
 package beverage_order_kiosk.kiosk;
 
+import java.util.Calendar;
+import java.util.List;
+import beverage_order_kiosk.customerOrder.Order_data;
+import beverage_order_kiosk.customerOrder.Order_specifications;
 import beverage_order_kiosk.menu_enums.Menu;
 import beverage_order_kiosk.operation.Operation;
 import beverage_order_kiosk.operation.Operation0_kind;
@@ -12,78 +16,121 @@ import beverage_order_kiosk.operation.Operation5_insertData;
 public class KioskOrder {
     String[] ments = null;
     
-    KioskOrder() {
+    boolean wantToCancel = false;
+    boolean orderMore = true;
+    
+    KioskOrder() {    	
     	System.out.println("ORDER START!\n");
-        Menu beverage = new Menu();
-        beverage.printMenu();
         start();
     }
     
-    private void start() {
-        Operation oper = null;
-        boolean wantToCancel = false;
-        
-        String beverKind = "";
-        String beverTemper = "";
-        String beverShot = "";
-        String beverSize = "";
-        String beverWhere = "";       
-
-        while (!wantToCancel) {
+    private void start() {   	
+    	while(orderMore) {
+        	Menu beverage = new Menu();
+            beverage.printMenu();
+    		
+    		boolean more = receiveOrder();
+    		orderMore = more;
+    	}
+    	
+    	//주문내역 출력하기
+    	String invoice = printCustomerOrder();
+    	System.out.println(invoice);
+    }
+    
+    private boolean receiveOrder() {
+        while (!wantToCancel) {        	
+        	Operation oper = null;
+        	
             for (int index=0; index<6; index ++) {
-                switch (index) {
+            	
+                switch (index) {                
                     case 0:
-                    {
-                        System.out.println("swich - 0");
                         oper = new Operation0_kind();
-                        beverKind = oper.execute();
-                    }   
+                        wantToCancel = oper.execute();
+                        if(wantToCancel == true) {	break; }   
                         break;
+                        
                     case 1:
-                    {
-                        System.out.println("swich - 1");
                         oper = new Operation1_temper();
-                        beverTemper = oper.execute();
-                    }
+                        wantToCancel = oper.execute();
+                        if(wantToCancel == true) {	break; }   
                         break;
+                        
                     case 2:
-                    {
-                        System.out.println("swich - 2");
                         oper = new Operation2_shot();
-                        beverShot = oper.execute();
-                    }
+                        wantToCancel = oper.execute();
+                        if(wantToCancel == true) {	break; }   
                         break;
+                        
                     case 3:
-                    {
-                        System.out.println("swich - 3");
                         oper = new Operation3_size();
-                        beverSize = oper.execute();
-                    }
+                        wantToCancel = oper.execute();
+                        if(wantToCancel == true) {	break; }   
                         break;
+                        
                     case 4:
-                    {
-                        System.out.println("swich - 4");
                         oper = new Operation4_where();
-                        beverWhere = oper.execute();
-                    }
+                        wantToCancel = oper.execute();
+                        if(wantToCancel == true) {	break; } 
                         break;
+                        
                     case 5:
-                    {
-                        System.out.println("swich - 5");
-                        oper = new Operation5_insertData(beverKind, beverTemper, beverShot, beverSize, beverWhere);
-                    }
+                        oper = new Operation5_insertData();
+                        orderMore = oper.execute();
+                        wantToCancel = true;
                         break; 
                     default:
-                        System.out.println("swich - default");
+                        System.out.println("swich - error");
                         break;
                 }
-                System.out.println("주문확인 : ");
             }
         }
-        System.out.println("주문이 취소되었습니다. 다시 주문해주세요");
+        return orderMore;
     }
-//    private void exit() {
-//    	System.out.println("exit()");
-//        System.exit(0);
-//    }
+    
+    //주문내역 출력하기
+    private String printCustomerOrder() {
+    	System.out.println("--최종주문 내역을 출력하기");
+    	
+    	Calendar cal = Calendar.getInstance();
+    	String customerNum = null;
+    	String month = Integer.toString(cal.get(2));  
+    	String day = Integer.toString(cal.get(3));
+    	String hour = Integer.toString(cal.get(11));
+    	customerNum = month+ day+ hour;
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	StringBuilder sb = new StringBuilder();
+    	sb.append("====================\n");
+    	sb.append("\t"+ customerNum+ "\n");
+    	
+    	sb.append("========결제내역=========\n");
+    	sb.append("품목\t수량\t금액\n");
+    	
+    	List<Order_data> orders = Order_specifications.get_orderList();
+    	for(Order_data order: orders) {
+    		int kind = order.getBeverKind();
+    		int temper = order.getBeverTemper();
+    		int shot = order.getBeverShot();
+    		int size = order.getBeverSize();
+    		int where = order.getBeverWhere();
+    		
+    		sb.append(kind);
+    		sb.append(temper);
+    		sb.append(shot);
+    		sb.append(size);
+    		sb.append(where);
+    		System.out.println("-----------");
+    	}
+    	sb.append("합계\t\t\t\n");
+    	sb.append("====================");
+    	
+    	return sb.toString();
+    }
 }

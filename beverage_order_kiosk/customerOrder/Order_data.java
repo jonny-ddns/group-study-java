@@ -1,48 +1,48 @@
 package beverage_order_kiosk.customerOrder;
 
 public class Order_data {
-    private String beverKind;
-    private String beverIceHot;
-    private String beverShot;
-    private String beverSize;
-    private String beverWhere;
+    private int beverKind;
+    private int beverTemper;
+    private int beverShot;
+    private int beverSize;
+    private int beverWhere;
 
-    public String getBeverKind() {
+    public int getBeverKind() {
         return beverKind;
     }
-    public Order_data setBeverKind(String beverKind) {
+    public Order_data setBeverKind(int beverKind) {
         this.beverKind = beverKind;
         return this;
     }
 
-    public String getBeverIceHot() {
-        return beverIceHot;
+    public int getBeverTemper() {
+        return beverTemper;
     }
-    public Order_data setBever_iceHot(String beverIceHot) {
-        this.beverIceHot = beverIceHot;
+    public Order_data setBeverTemper(int beverTemper) {
+        this.beverTemper = beverTemper;
         return this;
     }
 
-    public String getBeverShot() {
+    public int getBeverShot() {
         return beverShot;
     }
-    public Order_data setBeverShot(String beverShot) {
+    public Order_data setBeverShot(int beverShot) {
         this.beverShot = beverShot;
         return this;
     }
 
-    public String getBeversize() {
+    public int getBeverSize() {
         return beverSize;
     }
-    public Order_data setBeverSize(String beverSize) {
+    public Order_data setBeverSize(int beverSize) {
         this.beverSize = beverSize;
         return this;
     }
 
-    public String getBeverWhere() {
+    public int getBeverWhere() {
         return beverWhere;
     }
-    public Order_data setBeverWhere(String beverWhere) {
+    public Order_data setBeverWhere(int beverWhere) {
         this.beverWhere = beverWhere;
         return this;
     }

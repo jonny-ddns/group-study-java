@@ -6,10 +6,11 @@ import java.util.List;
 public class Order_specifications {
     private static Order_specifications orderSpec = null;
     private static List<Order_data> orderList = null;
+    private static Order_data order = null;
 
     private Order_specifications(){	}
 
-    public static Order_specifications get_orderSpec(){
+    public static Order_specifications getInstance(){
         if(orderSpec == null){
         	orderSpec = new Order_specifications();
         }
@@ -22,13 +23,22 @@ public class Order_specifications {
         }
         return orderList;
     }
+    
+    public static Order_data get_orderData() {
+    	if(order == null) {
+    		order = new Order_data();
+    	}
+    	return order;
+    }
+    
+    /*-------------------------------------------------*/
 
-	public List<Order_data> add_orderInfo(String beverKind, String beverTemper, String beverShot, String beverSize, String beverWhere) {
+	public List<Order_data> add_orderInfo(int beverKind, int beverTemper, int beverShot, int beverSize, int beverWhere) {
 		orderList = get_orderList();		
 		
 		Order_data orderData = new Order_data();
 		orderData.setBeverKind(beverKind)
-				 .setBever_iceHot(beverTemper)
+				 .setBeverTemper(beverTemper)
 				 .setBeverShot(beverShot)
 				 .setBeverSize(beverSize)
 				 .setBeverWhere(beverWhere);

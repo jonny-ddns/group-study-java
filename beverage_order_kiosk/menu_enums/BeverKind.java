@@ -5,6 +5,6 @@ public enum BeverKind {
     VANILLA_LATTE,
     LEMON_ADE,
     GRAPEFRUIT_ADE,
-    WATERMELON_ADE,
+    WATERMELON_JUICE,
     TOMATO_JUICE
 }

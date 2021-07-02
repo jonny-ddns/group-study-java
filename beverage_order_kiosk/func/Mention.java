@@ -1,6 +1,6 @@
-package beverage_order_kiosk.menu_enums;
+package beverage_order_kiosk.func;
 
-public class Ment {
+public class Mention {
     private static final String MENT0_CHOOSE = "음료를 선택해주세요 :";
     private static final String MENT1_TEMPER = "1.ice 2.hot 선택 (주문취소c) :";
     private static final String MENT2_SHOT = "1.1샷(+0원) 2.2샷(+500원) 선택 (주문취소c) :";
@@ -29,9 +29,5 @@ public class Ment {
 	}
 	public static String getMent6Cancel() {
 		return MENT6_CANCEL;
-	}
-	
-    public static void printOrderCheck() {
-    	System.out.println("ORDER CHECK");
-    }
+	}   
 }
