@@ -16,25 +16,24 @@ public class Order_specifications {
         return orderSpec;
     }
 
-    public static List<Order_data> get_orderInfo(){
+    public static List<Order_data> get_orderList(){
         if(orderList == null){
         	orderList = new ArrayList<>();
         }
         return orderList;
     }
 
-	public List<Order_data> add_orderInfo(String beverKind, String beverIceHot, String beverShot, String beverSize, String beverWhere) {
-	
-		orderList = get_orderInfo();		
+	public List<Order_data> add_orderInfo(String beverKind, String beverTemper, String beverShot, String beverSize, String beverWhere) {
+		orderList = get_orderList();		
 		
 		Order_data orderData = new Order_data();
 		orderData.setBeverKind(beverKind)
-				 .setBever_iceHot(beverIceHot)
+				 .setBever_iceHot(beverTemper)
 				 .setBeverShot(beverShot)
 				 .setBeverSize(beverSize)
 				 .setBeverWhere(beverWhere);
 		orderList.add(orderData);
 		
 		return orderList;
-	}
+	}	
 }
