@@ -1,16 +1,16 @@
-package beverage_order_kiosk.order;
+package beverage_order_kiosk.customerOrder;
 
-public class orderRequests {
+public class Order_data {
     private String beverKind;
     private String beverIceHot;
     private String beverShot;
     private String beverSize;
-    private String beverTakeout;
+    private String beverWhere;
 
     public String getBeverKind() {
         return beverKind;
     }
-    public orderRequests setBeverKind(String beverKind) {
+    public Order_data setBeverKind(String beverKind) {
         this.beverKind = beverKind;
         return this;
     }
@@ -18,7 +18,7 @@ public class orderRequests {
     public String getBeverIceHot() {
         return beverIceHot;
     }
-    public orderRequests setBever_iceHot(String beverIceHot) {
+    public Order_data setBever_iceHot(String beverIceHot) {
         this.beverIceHot = beverIceHot;
         return this;
     }
@@ -26,7 +26,7 @@ public class orderRequests {
     public String getBeverShot() {
         return beverShot;
     }
-    public orderRequests setBeverShot(String beverShot) {
+    public Order_data setBeverShot(String beverShot) {
         this.beverShot = beverShot;
         return this;
     }
@@ -34,16 +34,16 @@ public class orderRequests {
     public String getBeversize() {
         return beverSize;
     }
-    public orderRequests setBeverSize(String beverSize) {
+    public Order_data setBeverSize(String beverSize) {
         this.beverSize = beverSize;
         return this;
     }
 
-    public String getBeverTakeout() {
-        return beverTakeout;
+    public String getBeverWhere() {
+        return beverWhere;
     }
-    public orderRequests setBeverTakeout(String beverTakeout) {
-        this.beverTakeout = beverTakeout;
+    public Order_data setBeverWhere(String beverWhere) {
+        this.beverWhere = beverWhere;
         return this;
     }
 }

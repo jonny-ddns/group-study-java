@@ -1,6 +1,8 @@
 package beverage_order_kiosk.kiosk;
 
 public class Beverage {
+    public int beverageCount = 6;
+
     private String beverage01 = "아메리카노";
     private String beverage02 = "바닐라라떼";
     private String beverage03 = "레몬에이드";
@@ -14,6 +16,7 @@ public class Beverage {
     private int price04 = 3000;
     private int price05 = 4000;
     private int price06 = 4000;
+
 
     private String menuElement(String beverage, int price){
         String menuElement = beverage+ " " + String.valueOf(price)+"원";
