@@ -1,20 +1,19 @@
-package beverage_order_kiosk.operation;
+package beverage_order_kiosk.kiosk.operation;
 
 import java.util.Scanner;
-import beverage_order_kiosk.customerOrder.Order_data;
-import beverage_order_kiosk.customerOrder.Order_specifications;
-import beverage_order_kiosk.func.CheckRequest;
-import beverage_order_kiosk.func.EnumToString;
-import beverage_order_kiosk.func.Mention;
-import beverage_order_kiosk.menu_enums.BeverKind;
+import beverage_order_kiosk.kiosk.customerOrder.Orders;
+import beverage_order_kiosk.kiosk.customerOrder.Order_specifications;
+import beverage_order_kiosk.kiosk.operation.func.CheckRequest;
+import beverage_order_kiosk.kiosk.receipt.UnitChange;
+import beverage_order_kiosk.kiosk.menu_enums.BeverKind;
+import beverage_order_kiosk.kiosk.operation.func.Mention;
 
 public class Operation0_kind implements Operation {
     @Override
     public boolean execute() {
     	@SuppressWarnings("resource")
 		Scanner scan = new Scanner(System.in);
-//    	System.out.println(">>Operation0_kind");
-    	
+
         int input	 		= 0;		//주문내역 저장
         boolean goToNext 	= false;	//반복 플래그 변수
         boolean wantToCancel = false;	//리턴 객체
@@ -23,7 +22,8 @@ public class Operation0_kind implements Operation {
         while(!goToNext) {
     	
 	        //멘트 출력 및 입력값 받기
-	    	System.out.print(Mention.getMent0Choose());	    	
+			Mention m = new Mention();
+	    	System.out.print(m.getMent0Choose());
 	    	String request = scan.next().trim().toLowerCase();  
       		boolean isNumber = CheckRequest.isNumber(request);
       		
@@ -34,11 +34,10 @@ public class Operation0_kind implements Operation {
                 int count = BeverKind.values().length;
                 
                 if(0<num && num<count+1) {
-//                	System.out.println("request : "+ num);
                 	input = num;
 
                 	//입력 내용 확인
-                	String str1 = EnumToString.strKind(num);
+                	String str1 = UnitChange.toString_kind(num);
                 	System.out.printf("%s\n", str1);       
                 	
             		goToNext = true;
@@ -47,24 +46,24 @@ public class Operation0_kind implements Operation {
             	}         
             }
             else if(request.equals("c")) {
-            	System.out.println(Mention.getMent6Cancel());
+            	System.out.println(m.getMent6Cancel());
             	
             	request = scan.next().trim().toLowerCase();
             	boolean isYesOrNo = CheckRequest.isYesOrNo(request);
             	
             	if(isYesOrNo && request.equals("y")) {
+					System.out.println(m.getMent7OrderAgain());
                 	wantToCancel = true;
                 	break;
             	}
             }        
             else {
-            	System.out.println("숫자를 입력바랍니다");
+				System.out.println(m.getMent_NumberOnly());
             }
     	}
-        Order_data order = Order_specifications.get_orderData();
+        Orders order = Order_specifications.get_orderData();
         order.setBeverKind(input);
     	
-//    	System.out.println("Operation0_kind - end");
     	return wantToCancel;
     }    
 }

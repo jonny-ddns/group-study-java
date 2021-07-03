@@ -1,4 +1,4 @@
-package beverage_order_kiosk.func;
+package beverage_order_kiosk.kiosk.operation.func;
 
 public class CheckRequest {
     //입력값이 숫자인지 확인하기

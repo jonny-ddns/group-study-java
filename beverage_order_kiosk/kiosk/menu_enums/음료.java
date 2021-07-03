@@ -1,4 +1,4 @@
-package beverage_order_kiosk.menu_enums;
+package beverage_order_kiosk.kiosk.menu_enums;
 
 public enum 음료 {
 	아메리카노,

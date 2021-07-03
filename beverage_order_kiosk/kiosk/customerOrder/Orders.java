@@ -1,6 +1,6 @@
-package beverage_order_kiosk.customerOrder;
+package beverage_order_kiosk.kiosk.customerOrder;
 
-public class Order_data {
+public class Orders {
     private int beverKind;
     private int beverTemper;
     private int beverShot;
@@ -10,7 +10,7 @@ public class Order_data {
     public int getBeverKind() {
         return beverKind;
     }
-    public Order_data setBeverKind(int beverKind) {
+    public Orders setBeverKind(int beverKind) {
         this.beverKind = beverKind;
         return this;
     }
@@ -18,7 +18,7 @@ public class Order_data {
     public int getBeverTemper() {
         return beverTemper;
     }
-    public Order_data setBeverTemper(int beverTemper) {
+    public Orders setBeverTemper(int beverTemper) {
         this.beverTemper = beverTemper;
         return this;
     }
@@ -26,7 +26,7 @@ public class Order_data {
     public int getBeverShot() {
         return beverShot;
     }
-    public Order_data setBeverShot(int beverShot) {
+    public Orders setBeverShot(int beverShot) {
         this.beverShot = beverShot;
         return this;
     }
@@ -34,7 +34,7 @@ public class Order_data {
     public int getBeverSize() {
         return beverSize;
     }
-    public Order_data setBeverSize(int beverSize) {
+    public Orders setBeverSize(int beverSize) {
         this.beverSize = beverSize;
         return this;
     }
@@ -42,7 +42,7 @@ public class Order_data {
     public int getBeverWhere() {
         return beverWhere;
     }
-    public Order_data setBeverWhere(int beverWhere) {
+    public Orders setBeverWhere(int beverWhere) {
         this.beverWhere = beverWhere;
         return this;
     }

@@ -1,12 +1,12 @@
-package beverage_order_kiosk.operation;
+package beverage_order_kiosk.kiosk.operation;
 
 import java.util.Scanner;
-import beverage_order_kiosk.customerOrder.Order_data;
-import beverage_order_kiosk.customerOrder.Order_specifications;
-import beverage_order_kiosk.func.CheckRequest;
-import beverage_order_kiosk.func.EnumToString;
-import beverage_order_kiosk.func.Mention;
-import beverage_order_kiosk.menu_enums.BeverWhere;
+import beverage_order_kiosk.kiosk.customerOrder.Orders;
+import beverage_order_kiosk.kiosk.customerOrder.Order_specifications;
+import beverage_order_kiosk.kiosk.operation.func.CheckRequest;
+import beverage_order_kiosk.kiosk.receipt.UnitChange;
+import beverage_order_kiosk.kiosk.menu_enums.BeverWhere;
+import beverage_order_kiosk.kiosk.operation.func.Mention;
 
 public class Operation4_where implements Operation {
     @Override
@@ -23,7 +23,8 @@ public class Operation4_where implements Operation {
         while(!goToNext) {
     	
 	        //멘트 출력 및 입력값 받기
-	    	System.out.print(Mention.getMent4Where());	    	
+			Mention m = new Mention();
+	    	System.out.print(m.getMent4Where());
 	    	String request = scan.next().trim().toLowerCase();  
       		boolean isNumber = CheckRequest.isNumber(request);
       		
@@ -34,20 +35,19 @@ public class Operation4_where implements Operation {
                 int count = BeverWhere.values().length;
                 
                 if(0<num && num<count+1) {
-//                	System.out.println("request : "+ num);
                 	input = num;
             		
                 	//입력 내용 확인
-                	Order_data order = Order_specifications.get_orderData();
+                	Orders order = Order_specifications.get_orderData();
                 	int kind = order.getBeverKind();
                 	int temper = order.getBeverTemper();
                 	int shot = order.getBeverShot();
                 	int size = order.getBeverSize();
-                	String str1 = EnumToString.strKind(kind); 
-                	String str2 = EnumToString.strTemper(temper);
-                	String str3 = EnumToString.strShot(shot);
-                	String str4 = EnumToString.strSize(size);
-                	String str5 = EnumToString.strWhere(num);
+                	String str1 = UnitChange.toString_kind(kind);
+                	String str2 = UnitChange.toString_temper(temper);
+                	String str3 = UnitChange.toString_shot(shot);
+                	String str4 = UnitChange.toString_size(size);
+                	String str5 = UnitChange.toString_where(num);
                 	
                 	System.out.printf("%s(%s/%s/%s/%s)\n", str1, str2, str3, str4, str5);
                 	
@@ -57,25 +57,25 @@ public class Operation4_where implements Operation {
             	}         
             }
             else if(request.equals("c")) {
-            	System.out.println(Mention.getMent6Cancel());
+            	System.out.println(m.getMent6Cancel());
             	
             	request = scan.next().trim().toLowerCase();
             	boolean isYesOrNo = CheckRequest.isYesOrNo(request);
             	
             	if(isYesOrNo && request.equals("y")) {
+					System.out.println(m.getMent7OrderAgain());
                 	wantToCancel = true;
                 	break;
             	}
             }        
             else {
-            	System.out.println("숫자를 입력바랍니다");
+            	System.out.println(m.getMent_NumberOnly());
             }
     	}
     	
-    	Order_data order = Order_specifications.get_orderData();
+    	Orders order = Order_specifications.get_orderData();
         order.setBeverWhere(input);
-    	
-//    	System.out.println("Operation4_where - end");
+
 		return wantToCancel;    	
     }
 }
