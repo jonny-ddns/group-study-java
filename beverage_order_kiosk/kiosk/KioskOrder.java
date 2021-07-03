@@ -1,10 +1,11 @@
 package beverage_order_kiosk.kiosk;
 
+import beverage_order_kiosk.kiosk.customerOrder.OrderCollection;
+import beverage_order_kiosk.kiosk.menu_enum.BeverKind;
+import beverage_order_kiosk.kiosk.menu_enum.Pricing;
+import beverage_order_kiosk.kiosk.menu_enum.음료;
 import beverage_order_kiosk.kiosk.operation.*;
 import beverage_order_kiosk.kiosk.receipt.CreateReceipt;
-import beverage_order_kiosk.kiosk.menu_enums.BeverKind;
-import beverage_order_kiosk.kiosk.menu_enums.Pricing;
-import beverage_order_kiosk.kiosk.menu_enums.음료;
 
 public class KioskOrder {
 
@@ -16,13 +17,15 @@ public class KioskOrder {
     	System.out.println("ORDER START!\n");
         start();
     }
-    
+
     private void start() {
+        wantToCancel = false;
+        orderMore = true;
+        orderCheck = true;
         int count = 0;
 
         while (orderMore) {
-            printMenu();
-            wantToCancel    = false;
+        	wantToCancel    = false;
             orderMore       = receiveOrder();
             count++;
         }
@@ -32,62 +35,53 @@ public class KioskOrder {
             //주문내역 출력하기
             new CreateReceipt(count);
         } else {
-            this.start();
+        	orderMore = true;
+        	orderCheck = true;
+        	this.start();
         }
     }
     
     private boolean receiveOrder() {
-        while (!wantToCancel) {
-        	Operation oper = null;
-        	
-            for (int index=0; index<7; index ++) {
-            	
-                switch (index) {                
-                    case 0:
-                        oper = new Operation0_kind();
-                        wantToCancel = oper.execute();
-                        if(wantToCancel == true) {	break; }   
-                        break;
-                        
-                    case 1:
-                        oper = new Operation1_temper();
-                        wantToCancel = oper.execute();
-                        if(wantToCancel == true) {	break; }   
-                        break;
-                        
-                    case 2:
-                        oper = new Operation2_shot();
-                        wantToCancel = oper.execute();
-                        if(wantToCancel == true) {	break; }   
-                        break;
-                        
-                    case 3:
-                        oper = new Operation3_size();
-                        wantToCancel = oper.execute();
-                        if(wantToCancel == true) {	break; }   
-                        break;
-                        
-                    case 4:
-                        oper = new Operation4_where();
-                        wantToCancel = oper.execute();
-                        if(wantToCancel == true) {	break; } 
-                        break;
-                        
-                    case 5:
-                        oper = new Operation5_orderMore();
-                        orderMore = oper.execute();
-//                        wantToCancel = true;
-                        break;
 
-                    case 6:
-                        oper = new Operation6_orderCheck();
-                        orderCheck = oper.execute();
-                        wantToCancel = true;
-                        break;
-                }
+        while (!wantToCancel) {
+            printMenu();
+        	Operation oper = null;
+
+            oper = new Operation0_kind();
+            wantToCancel = oper.execute();
+            if(wantToCancel) { reset(); break; }
+
+            oper = new Operation1_temper();
+            wantToCancel = oper.execute();
+            if(wantToCancel) { reset(); break; }
+
+            oper = new Operation2_shot();
+            wantToCancel = oper.execute();
+            if(wantToCancel) { reset(); break; }
+
+            oper = new Operation3_size();
+            wantToCancel = oper.execute();
+            if(wantToCancel) { reset(); break; }
+
+            oper = new Operation4_where();
+            wantToCancel = oper.execute();
+            if(wantToCancel) { reset(); break; }
+
+            oper = new Operation5_orderMore();
+            orderMore = oper.execute();
+
+            if(!orderMore) {
+                oper = new Operation6_orderCheck();
+                orderCheck = oper.execute();
+                wantToCancel = true;
             }
         }
         return orderMore;
+    }
+
+    private void reset(){
+        OrderCollection col = OrderCollection.getInstance();
+        col.reset_orderInfo();
     }
         
     //메뉴 프린트
@@ -98,7 +92,7 @@ public class KioskOrder {
 		
 		System.out.println("----------------------");
 		System.out.println("메뉴");
-		for(int i=0; i<BeverKind.values().length; i++) {
+		for(int i = 0; i<BeverKind.values().length; i++) {
 			System.out.printf(" %d. %s\t%d원\n", i+1, 음료배열[i], priceArr[i]);
 		}
 		System.out.println("----------------------");

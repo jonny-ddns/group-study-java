@@ -1,4 +1,4 @@
-package beverage_order_kiosk.kiosk.menu_enums;
+package beverage_order_kiosk.kiosk.menu_enum;
 
 public class Pricing {
     private final int PRICE01 = 1000;

@@ -2,10 +2,10 @@ package beverage_order_kiosk.kiosk.operation;
 
 import java.util.Scanner;
 import beverage_order_kiosk.kiosk.customerOrder.Orders;
-import beverage_order_kiosk.kiosk.customerOrder.Order_specifications;
+import beverage_order_kiosk.kiosk.customerOrder.OrderCollection;
 import beverage_order_kiosk.kiosk.operation.func.CheckRequest;
 import beverage_order_kiosk.kiosk.receipt.UnitChange;
-import beverage_order_kiosk.kiosk.menu_enums.BeverSize;
+import beverage_order_kiosk.kiosk.menu_enum.BeverSize;
 import beverage_order_kiosk.kiosk.operation.func.Mention;
 
 public class Operation3_size implements Operation {
@@ -37,7 +37,7 @@ public class Operation3_size implements Operation {
                 	input = num;
 
                 	//입력 내용 확인
-                	Orders order = Order_specifications.get_orderData();
+                	Orders order = OrderCollection.get_orderData();
                 	int kind = order.getBeverKind();
                 	int temper = order.getBeverTemper();
                 	int shot = order.getBeverShot();
@@ -69,10 +69,9 @@ public class Operation3_size implements Operation {
 				System.out.println(m.getMent_NumberOnly());
             }
     	}
-        Orders order = Order_specifications.get_orderData();
+        Orders order = OrderCollection.get_orderData();
         order.setBeverSize(input);
         
 		return wantToCancel;
-    }    
-    
+    }
 }

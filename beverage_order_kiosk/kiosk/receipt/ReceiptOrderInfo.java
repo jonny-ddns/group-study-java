@@ -5,7 +5,7 @@ import beverage_order_kiosk.kiosk.customerOrder.Orders;
 public class ReceiptOrderInfo {
 
     //create bill items
-    public String[] receiptItem(Orders order){
+    String[] receiptItem(Orders order){
         String[] billCategory = new String[5];
 
         int kindInt = order.getBeverKind();
@@ -30,7 +30,7 @@ public class ReceiptOrderInfo {
     }
 
     //create bill money
-    public int[] receiptMoney(Orders order){
+    int[] receiptMoney(Orders order){
         UnitChange cu = new UnitChange();
         int[] billMoney = new int[5];
 

@@ -2,10 +2,10 @@ package beverage_order_kiosk.kiosk.operation;
 
 import java.util.Scanner;
 import beverage_order_kiosk.kiosk.customerOrder.Orders;
-import beverage_order_kiosk.kiosk.customerOrder.Order_specifications;
+import beverage_order_kiosk.kiosk.customerOrder.OrderCollection;
 import beverage_order_kiosk.kiosk.operation.func.CheckRequest;
 import beverage_order_kiosk.kiosk.operation.func.Mention;
-public class Operation5_orderMore implements Operation{
+public class Operation5_orderMore implements Operation {
 	
 	@Override
 	public boolean execute() {
@@ -17,8 +17,8 @@ public class Operation5_orderMore implements Operation{
 		boolean orderMore	= false;	//추가 주문 여부 리턴
 
 		//주문내역 리스트에 저장하기
-		Orders data = Order_specifications.get_orderData();
-		Order_specifications spec = Order_specifications.getInstance();
+		Orders data = OrderCollection.get_orderData();
+		OrderCollection spec = OrderCollection.getInstance();
 		spec.add_orderInfo(data);
 
         //추가 주문 확인하기

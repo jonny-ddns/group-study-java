@@ -3,16 +3,19 @@ package beverage_order_kiosk.kiosk.customerOrder;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Order_specifications {
-    private static Order_specifications orderSpec = null;
+public class OrderCollection {
+    private static OrderCollection orderSpec = null;
     private static List<Orders> orderList = null;
     private static Orders order = null;
 
-    private Order_specifications(){	}
+    private OrderCollection(){	}
+	private void resetData(){
+		orderList = null;
+	}
 
-    public static Order_specifications getInstance(){
+    public static OrderCollection getInstance(){
         if(orderSpec == null){
-        	orderSpec = new Order_specifications();
+        	orderSpec = new OrderCollection();
         }
         return orderSpec;
     }
@@ -30,7 +33,7 @@ public class Order_specifications {
     	}
     	return order;
     }
-    
+
     /*-------------------------------------------------*/
 
 	public List<Orders> add_orderInfo(Orders data) {
@@ -45,5 +48,9 @@ public class Order_specifications {
 		orderList.add(orderData);
 		
 		return orderList;
-	}	
+	}
+
+	public void reset_orderInfo() {
+		resetData();
+	}
 }
