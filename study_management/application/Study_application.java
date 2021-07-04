@@ -11,7 +11,7 @@ import study_management.service.Study5_fineStatus;
 import study_management.service.Study6_overView;
 
 public class Study_application {
-		Study_application() {
+	protected Study_application() {
 		System.out.println("STUDY MANAGEMENT START!");
 		
 		StudyManage studymanage = new Study0_menu();

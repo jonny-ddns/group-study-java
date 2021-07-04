@@ -1,14 +1,9 @@
 # STUDY MANAGEMENT PROGRAM
-##### ====================================================================================
-code language : java
-
-created by : jonny-ddns
-
-created : Jun.11, 2021
-
-updated : Jun.17, 2021
-
-usage : study management
+    code language : java
+    created by : jonny-ddns
+    created : Jun.11, 2021
+    updated : Jul.4, 2021
+    usage : study management
 ##### ====================================================================================
 
 ### flow of execution
