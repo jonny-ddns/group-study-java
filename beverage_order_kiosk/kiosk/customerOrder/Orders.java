@@ -1,11 +1,11 @@
 package beverage_order_kiosk.kiosk.customerOrder;
 
 public class Orders {
-    private int beverKind;
-    private int beverTemper;
-    private int beverShot;
-    private int beverSize;
-    private int beverWhere;
+    private int beverKind;		//종류
+    private int beverTemper;	//음료 온도
+    private int beverShot;		//음료 샷
+    private int beverSize;		//음료 크기
+    private int beverWhere;		//음료 섭취장소
 
     public int getBeverKind() {
         return beverKind;

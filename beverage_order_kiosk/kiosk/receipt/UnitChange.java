@@ -4,6 +4,7 @@ import beverage_order_kiosk.kiosk.menu_enum.*;
 
 public class UnitChange {
 	
+	//int -> 요청사항(String)으로 변경
 	public static String toString_kind(int i) {
 		return 음료.values()[--i].toString();
 	}
@@ -31,7 +32,7 @@ public class UnitChange {
 	}
 
 	/*------------------------------------------*/
-
+	//int -> 금액(int)으로 변경
 	public int toMoney_kind(int i){
 		Pricing p = new Pricing();
 		return p.getBeveragePrice()[i-1];

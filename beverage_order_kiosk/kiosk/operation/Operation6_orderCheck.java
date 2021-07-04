@@ -9,6 +9,7 @@ import beverage_order_kiosk.kiosk.receipt.UnitChange;
 import java.util.List;
 import java.util.Scanner;
 
+//주문내역 확인결과를 입력받는 역할 수행
 public class Operation6_orderCheck implements Operation {
     @Override
     public boolean execute() {
@@ -17,11 +18,12 @@ public class Operation6_orderCheck implements Operation {
         Scanner scan = new Scanner(System.in);
 
         boolean goToNext 	= false;	//반복 플래그 변수
-        boolean OrderCheck	= false;	//추가 주문 여부 리턴
+        boolean OrderCheck	= false;	//주문 확인결과 리턴
 
         //주문내역 출력하기
         List<Orders> orderList = OrderCollection.get_orderList();        
-        
+
+        //OrderCollection 접근해서 List에 담긴 요청사항 출력하기
         System.out.println();
         for(Orders order: orderList) {        
 	        int kind = order.getBeverKind();
@@ -38,7 +40,8 @@ public class Operation6_orderCheck implements Operation {
 	        System.out.printf("%s(%s/%s/%s/%s)\n", str1, str2, str3, str4, str5);
         }
         System.out.print("주문하시겠습니까? (y/n): ");
-        //입력 내용 확인
+        
+		//주문확인 결과를 받기위한 반복문
         while(!goToNext) {
             Mention m = new Mention();
             String request = scan.next().trim().toLowerCase();

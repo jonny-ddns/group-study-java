@@ -4,14 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class OrderCollection {
+	/*
+	 * singleton 으로 구성
+	 * -OrderCollection(클래스)
+	 * -orderList(List)
+	 * -order(Orders)
+	 */
     private static OrderCollection orderSpec = null;
     private static List<Orders> orderList = null;
     private static Orders order = null;
-
+    
     private OrderCollection(){	}
-	private void resetData(){
-		orderList = null;
-	}
 
     public static OrderCollection getInstance(){
         if(orderSpec == null){
@@ -33,9 +36,12 @@ public class OrderCollection {
     	}
     	return order;
     }
+    
+	private void resetData(){
+		orderList = null;
+	}
 
-    /*-------------------------------------------------*/
-
+    //List에 데이터 추가하기
 	public List<Orders> add_orderInfo(Orders data) {
 		orderList = get_orderList();		
 		
@@ -50,6 +56,7 @@ public class OrderCollection {
 		return orderList;
 	}
 
+	//List에 담긴 정보 초기화
 	public void reset_orderInfo() {
 		resetData();
 	}

@@ -8,36 +8,30 @@ import beverage_order_kiosk.kiosk.receipt.UnitChange;
 import beverage_order_kiosk.kiosk.menu_enum.BeverWhere;
 import beverage_order_kiosk.kiosk.operation.func.Mention;
 
+//음료 섭취장소를 입력받는 역할 수행
 public class Operation4_where implements Operation {
     @Override
     public boolean execute() {
     	@SuppressWarnings("resource")
 		Scanner scan = new Scanner(System.in);
-//    	System.out.println(">>Operation4_where");
     	
     	int input	 		= 0;		//주문내역 저장
         boolean goToNext 	= false;	//반복 플래그 변수
         boolean wantToCancel = false;	//리턴 객체
         
-        //입력 반복문      	
         while(!goToNext) {
-    	
-	        //멘트 출력 및 입력값 받기
 			Mention m = new Mention();
 	    	System.out.print(m.getMent4Where());
 	    	String request = scan.next().trim().toLowerCase();  
       		boolean isNumber = CheckRequest.isNumber(request);
       		
-      		//숫자 입력시
             if(isNumber){
-            	//입력한 숫자 변환하기
               	int num = Integer.parseInt(request);
                 int count = BeverWhere.values().length;
                 
                 if(0<num && num<count+1) {
                 	input = num;
             		
-                	//입력 내용 확인
                 	Orders order = OrderCollection.get_orderData();
                 	int kind = order.getBeverKind();
                 	int temper = order.getBeverTemper();
@@ -72,7 +66,6 @@ public class Operation4_where implements Operation {
             	System.out.println(m.getMent_NumberOnly());
             }
     	}
-    	
     	Orders order = OrderCollection.get_orderData();
         order.setBeverWhere(input);
 

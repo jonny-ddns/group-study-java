@@ -9,30 +9,32 @@ import beverage_order_kiosk.kiosk.receipt.CreateReceipt;
 
 public class KioskOrder {
 
-    boolean wantToCancel = false;
-    boolean orderMore = true;
-    boolean orderCheck = true;
+    boolean wantToCancel = false;	//주문취소 여부
+    boolean orderMore = true;		//추가주문 여부
+    boolean orderCheck = true;		//주문확인 결과
     
+    //constructor. 생성과 동시에 start() 메서드 호출
     protected KioskOrder() {    	
     	System.out.println("ORDER START!\n");
         start();
     }
 
+    //주문받고(receiveOrder) 영수증을 출력(CreateReceipt)하는 메서드 호출
     private void start() {
         wantToCancel = false;
         orderMore = true;
         orderCheck = true;
         int count = 0;
 
+        //추가주문 여부
         while (orderMore) {
         	wantToCancel    = false;
             orderMore       = receiveOrder();
-            count++;
+            count++;		//주문개수 증가
         }
 
-        //주문내역 확인하기
-        if(orderCheck == true){
-            //주문내역 출력하기
+        //주문확인 결과
+        if(orderCheck){
             new CreateReceipt(count);
         } else {
         	orderMore = true;
@@ -41,28 +43,33 @@ public class KioskOrder {
         }
     }
     
+    //Operation 인터페이스 구현객체를 호출하여 주문받기
     private boolean receiveOrder() {
-
         while (!wantToCancel) {
             printMenu();
         	Operation oper = null;
 
+        	//음료 종류
             oper = new Operation0_kind();
             wantToCancel = oper.execute();
             if(wantToCancel) { reset(); break; }
 
+        	//음료 온도
             oper = new Operation1_temper();
             wantToCancel = oper.execute();
             if(wantToCancel) { reset(); break; }
 
+        	//음료 샷
             oper = new Operation2_shot();
             wantToCancel = oper.execute();
             if(wantToCancel) { reset(); break; }
 
+        	//음료 크기
             oper = new Operation3_size();
             wantToCancel = oper.execute();
             if(wantToCancel) { reset(); break; }
 
+        	//음료 섭취장소
             oper = new Operation4_where();
             wantToCancel = oper.execute();
             if(wantToCancel) { reset(); break; }
@@ -70,6 +77,7 @@ public class KioskOrder {
             oper = new Operation5_orderMore();
             orderMore = oper.execute();
 
+            //추가주문을 원치 않는다면
             if(!orderMore) {
                 oper = new Operation6_orderCheck();
                 orderCheck = oper.execute();
@@ -79,14 +87,15 @@ public class KioskOrder {
         return orderMore;
     }
 
+    //주문취소시 List를 null로 만듬
     private void reset(){
         OrderCollection col = OrderCollection.getInstance();
         col.reset_orderInfo();
     }
         
-    //메뉴 프린트
+    //메뉴 출력
 	private void printMenu() {
-		음료[] 음료배열	= 음료.values();
+		음료[] 음료배열		= 음료.values();
 		Pricing p		= new Pricing();
 		int[] priceArr	= p.getBeveragePrice();
 		
