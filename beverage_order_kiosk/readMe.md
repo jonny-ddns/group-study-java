@@ -1,11 +1,16 @@
 # BEVERAGE ORDER KIOSK
-    code language : java
-    created by : jonny-ddns
-    created : Jul.3, 2021
-    updated : Jun.4, 2021
-    usage : making order using kiosk
-##### --------------------------------------------------------------------------------------
-### flow of execution
+
+### Change Logs   
+    Jul.4, 2021 | added comments
+
+### Project Description
+    o usage : making order using kiosk
+    o code language : java
+
+### Prerequisites
+    JRE or JDK8 (or higher version is recommended)
+
+### Flow of Execution
 	kioskStart.java - 프로그램 실행
 	-> 음료 메뉴 출력.
     -> 선택하기
@@ -21,14 +26,14 @@
     -> 요청사항 선택 끝나면 주문확인내용 출력
     -> 주문확인이 끝나면 영수증 출력
     -> 프로그램 종료
-##### --------------------------------------------------------------------------------------
-### package description
+
+### Package Description
     menu_enum       : 음료 종류, 가격, 요청사항 등 정보가 담긴 장소
     operation       : 주문요청사항을 입력받는 역할
     customerOrder   : 주문요청사항을 보관하는 장소
     receipt         : 영수증을 제작하는 역할
-##### --------------------------------------------------------------------------------------
-### class description
+
+### File Description
 #### KioskStart.java
 	main method 실행. KioskOrder 클래스 생성
 #### KioskOrder.java
@@ -84,3 +89,10 @@
     영수증에 들어갈 주문요청 및 금액을 생성하는 역할
 #### UnitChange.java
     menu_enum 패키지의 enum 및 주문요청 정보(int)를 적절히 변환하는 역할
+
+### Bugs
+    카페인이 없는 음료수는 샷 추가선택 기능이 없어야 하는데 있음
+
+### Authors
+    created : Jul.3, 2021 by jonny-ddns
+### Thanks
