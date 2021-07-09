@@ -10,11 +10,17 @@ public class UnitChange {
 	}
 	
 	public static String toString_temper(int i) {
+		if(i == 0){
+			return "";
+		}
 		return BeverTemper.values()[--i].toString();
 	}
 	
 	public static String toString_shot(int i) {
-		if(BeverShot.values()[--i].toString().equals(BeverShot.ONE_SHOT.toString())) {
+		if(i == 0){
+			return "";
+		}
+		else if(BeverShot.values()[--i].toString().equals(BeverShot.ONE_SHOT.toString())) {
 			return "1¼¦";
 		}
 		return "2¼¦";

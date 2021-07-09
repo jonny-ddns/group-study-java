@@ -21,18 +21,24 @@ public class KioskOrder {
 
     //주문받고(receiveOrder) 영수증을 출력(CreateReceipt)하는 메서드 호출
     private void start() {
-        wantToCancel = false;
+
+        wantToCancel= false;
         orderMore = true;
         orderCheck = true;
         int count = 0;
 
         //추가주문 여부
         while (orderMore) {
-        	wantToCancel    = false;
-            orderMore       = receiveOrder();
-            count++;		//주문개수 증가
-        }
+          	wantToCancel        = false;
+        	boolean[] boolArr   = receiveOrder();
+            orderMore           = boolArr[0];
 
+            //주문개수 증가
+            if(!boolArr[1]){
+                count++;
+                System.out.println("count++");
+            }
+        }
         //주문확인 결과
         if(orderCheck){
             new CreateReceipt(count);
@@ -44,7 +50,8 @@ public class KioskOrder {
     }
     
     //Operation 인터페이스 구현객체를 호출하여 주문받기
-    private boolean receiveOrder() {
+    private boolean[] receiveOrder() {
+        boolean[] booleans = new boolean[2];
         while (!wantToCancel) {
             printMenu();
         	Operation oper = null;
@@ -81,14 +88,18 @@ public class KioskOrder {
             if(!orderMore) {
                 oper = new Operation6_orderCheck();
                 orderCheck = oper.execute();
-                wantToCancel = true;
+//                wantToCancel = true;
+                break;
             }
         }
-        return orderMore;
+        booleans[0] = orderMore;
+        booleans[1] = wantToCancel;
+        return booleans;
     }
 
     //주문취소시 List를 null로 만듬
     private void reset(){
+        System.out.println("reset 호출");
         OrderCollection col = OrderCollection.getInstance();
         col.reset_orderInfo();
     }

@@ -24,7 +24,7 @@ public class Operation0_kind implements Operation {
     	
 	        //멘트 출력 및 입력값 받기
 			Mention m = new Mention();
-	    	System.out.print(m.getMent0Choose());
+	    	System.out.print(m.getMent0_choose());
 	    	String request = scan.next().trim().toLowerCase();
 	    	//입력값이 숫자인지 확인
       		boolean isNumber = CheckRequest.isNumber(request);
@@ -48,20 +48,20 @@ public class Operation0_kind implements Operation {
             }
             //취소 희망시
             else if(request.equals("c")) {
-            	System.out.println(m.getMent6Cancel());
+            	System.out.println(m.getMent6_cancel());
             	
             	//y or n 입력 확인
             	request = scan.next().trim().toLowerCase();
             	boolean isYesOrNo = CheckRequest.isYesOrNo(request);
             	
             	if(isYesOrNo && request.equals("y")) {
-					System.out.println(m.getMent7OrderAgain());
+					System.out.println(m.getMent7_orderAgain());
                 	wantToCancel = true;
                 	break;
             	}
             }        
             else {
-				System.out.println(m.getMent_NumberOnly());
+				System.out.println(m.getMent8_numberOnly());
             }
     	}
         //요청사항 반영

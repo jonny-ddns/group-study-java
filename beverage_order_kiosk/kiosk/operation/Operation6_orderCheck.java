@@ -53,12 +53,12 @@ public class Operation6_orderCheck implements Operation {
                     OrderCheck = true;
                     break;
                 } else if(request.equals("n")){
-                    System.out.println(m.getMent7OrderAgain());
+                    System.out.println(m.getMent7_orderAgain());
                     goToNext = true;
                     break;
                 }
             } else {
-                System.out.println(m.getMent_NumberOnly());
+                System.out.println(m.getMent9_yn_only());
             }
         }
         return OrderCheck;

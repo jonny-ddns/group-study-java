@@ -28,7 +28,7 @@ public class Operation5_orderMore implements Operation {
 		//추가주문 여부를 받기위한 반복문
     	while(!goToNext) {
     		Mention m = new Mention();
-        	System.out.print(m.getMent5Ordermore());
+        	System.out.print(m.getMent5_orderMore());
         	request = scan.next().trim().toLowerCase();    	
     		
         	//y or n 입력 확인

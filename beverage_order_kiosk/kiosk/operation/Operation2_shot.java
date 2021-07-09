@@ -18,10 +18,16 @@ public class Operation2_shot implements Operation {
         int input	 		= 0;		//주문내역 저장
         boolean goToNext 	= false;	//반복 플래그 변수
         boolean wantToCancel = false;	//리턴 객체
+
+		//커피 종류를 주문하지 않았다면 아래 while 문 실행되지 않음
+		Orders order = OrderCollection.get_orderData();
+		if(!(order.getBeverKind()==1 || order.getBeverKind()==2)){
+			goToNext = true;
+		}
    	
         while(!goToNext) {    	
 			Mention m = new Mention();
-			System.out.print(m.getMent2Shot());
+			System.out.print(m.getMent2_shot());
 	    	String request = scan.next().trim().toLowerCase();  
       		boolean isNumber = CheckRequest.isNumber(request);
       		
@@ -32,7 +38,6 @@ public class Operation2_shot implements Operation {
                 if(0<num && num<count+1) {
                 	input = num;
                 	
-                	Orders order = OrderCollection.get_orderData();
                 	int kind = order.getBeverKind();
                 	int temper = order.getBeverTemper();
                 	String str1 = UnitChange.toString_kind(kind);
@@ -47,22 +52,21 @@ public class Operation2_shot implements Operation {
             	}         
             }
             else if(request.equals("c")) {
-            	System.out.println(m.getMent6Cancel());
+            	System.out.println(m.getMent6_cancel());
             	
             	request = scan.next().trim().toLowerCase();
             	boolean isYesOrNo = CheckRequest.isYesOrNo(request);
             	
             	if(isYesOrNo && request.equals("y")) {
-					System.out.println(m.getMent7OrderAgain());
+					System.out.println(m.getMent7_orderAgain());
                 	wantToCancel = true;
                 	break;
             	}
             }        
             else {
-				System.out.println(m.getMent_NumberOnly());
+				System.out.println(m.getMent8_numberOnly());
             }
     	}
-    	Orders order = OrderCollection.get_orderData();
         order.setBeverShot(input);
 
 		return wantToCancel;
