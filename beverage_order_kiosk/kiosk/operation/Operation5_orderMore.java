@@ -10,10 +10,7 @@ import beverage_order_kiosk.kiosk.operation.func.Mention;
 public class Operation5_orderMore implements Operation {
 	
 	@Override
-	public boolean execute() {
-		@SuppressWarnings("resource")
-		Scanner scan = new Scanner(System.in);
-
+	public boolean execute(Scanner scan) {
 		String request 		= "";		//입력 버튼
 		boolean goToNext 	= false;	//반복 플래그 변수
 		boolean orderMore	= false;	//추가 주문 여부 리턴

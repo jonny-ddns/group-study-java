@@ -11,10 +11,7 @@ import beverage_order_kiosk.kiosk.operation.func.Mention;
 //음료 샷 개수를 입력받는 역할 수행
 public class Operation2_shot implements Operation {
 	@Override
-	public boolean execute() {	
-		@SuppressWarnings("resource")
-		Scanner scan = new Scanner(System.in);
-    	
+	public boolean execute(Scanner scan) {
         int input	 		= 0;		//주문내역 저장
         boolean goToNext 	= false;	//반복 플래그 변수
         boolean wantToCancel = false;	//리턴 객체

@@ -1,7 +1,10 @@
 # BEVERAGE ORDER KIOSK
 
 ### Change Logs   
-    Jul.4, 2021 | added comments
+    Jul.4, 2021 : added comments.
+	Jul.9, 2021 : 
+		1) modified process not to ask about temperature, shot when taking order except coffee.
+		2) setup to use scanner object only one.
 
 ### Project Description
     o usage : making order using kiosk

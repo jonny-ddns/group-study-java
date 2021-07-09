@@ -7,6 +7,8 @@ import beverage_order_kiosk.kiosk.menu_enum.음료;
 import beverage_order_kiosk.kiosk.operation.*;
 import beverage_order_kiosk.kiosk.receipt.CreateReceipt;
 
+import java.util.Scanner;
+
 public class KioskOrder {
 
     boolean wantToCancel = false;	//주문취소 여부
@@ -51,6 +53,8 @@ public class KioskOrder {
     
     //Operation 인터페이스 구현객체를 호출하여 주문받기
     private boolean[] receiveOrder() {
+        Scanner scan = new Scanner(System.in);
+
         boolean[] booleans = new boolean[2];
         while (!wantToCancel) {
             printMenu();
@@ -58,37 +62,36 @@ public class KioskOrder {
 
         	//음료 종류
             oper = new Operation0_kind();
-            wantToCancel = oper.execute();
+            wantToCancel = oper.execute(scan);
             if(wantToCancel) { reset(); break; }
 
         	//음료 온도
             oper = new Operation1_temper();
-            wantToCancel = oper.execute();
+            wantToCancel = oper.execute(scan);
             if(wantToCancel) { reset(); break; }
 
         	//음료 샷
             oper = new Operation2_shot();
-            wantToCancel = oper.execute();
+            wantToCancel = oper.execute(scan);
             if(wantToCancel) { reset(); break; }
 
         	//음료 크기
             oper = new Operation3_size();
-            wantToCancel = oper.execute();
+            wantToCancel = oper.execute(scan);
             if(wantToCancel) { reset(); break; }
 
         	//음료 섭취장소
             oper = new Operation4_where();
-            wantToCancel = oper.execute();
+            wantToCancel = oper.execute(scan);
             if(wantToCancel) { reset(); break; }
 
             oper = new Operation5_orderMore();
-            orderMore = oper.execute();
+            orderMore = oper.execute(scan);
 
             //추가주문을 원치 않는다면
             if(!orderMore) {
                 oper = new Operation6_orderCheck();
-                orderCheck = oper.execute();
-//                wantToCancel = true;
+                orderCheck = oper.execute(scan);
                 break;
             }
         }

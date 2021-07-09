@@ -5,18 +5,13 @@ import beverage_order_kiosk.kiosk.customerOrder.Orders;
 import beverage_order_kiosk.kiosk.operation.func.CheckRequest;
 import beverage_order_kiosk.kiosk.operation.func.Mention;
 import beverage_order_kiosk.kiosk.receipt.UnitChange;
-
 import java.util.List;
 import java.util.Scanner;
 
 //주문내역 확인결과를 입력받는 역할 수행
 public class Operation6_orderCheck implements Operation {
     @Override
-    public boolean execute() {
-
-        @SuppressWarnings("resource")
-        Scanner scan = new Scanner(System.in);
-
+    public boolean execute(Scanner scan) {
         boolean goToNext 	= false;	//반복 플래그 변수
         boolean OrderCheck	= false;	//주문 확인결과 리턴
 
