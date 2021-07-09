@@ -1,18 +1,19 @@
 # BEVERAGE ORDER KIOSK
-
+### Authors
+    Jul.3, 2021 : jonny-ddns
 ### Change Logs   
-    Jul.4, 2021 : added comments.
+	Jul.4, 2021 : added comments.
 	Jul.9, 2021 : 
-		1) modified process not to ask about temperature, shot when taking order except coffee.
-		2) setup to use scanner object only one.
-
+		1) modified not to ask about temperature, shot when taking order except coffee.
+		2) modified not to add count when order canceled			
+		3) setup to use only one scanner object.
+### Bugs
+    영수증 출력 부분이 매끄럽지 않아 수정필요
 ### Project Description
     o usage : making order using kiosk
     o code language : java
-
 ### Prerequisites
     JRE or JDK8 (or higher version is recommended)
-
 ### Flow of Execution
 	kioskStart.java - 프로그램 실행
 	-> 음료 메뉴 출력.
@@ -24,18 +25,16 @@
         음료 섭취장소(where)
     -> 적절한 값이 입력되어야 다음단계로 진행가능
         요청사항은 List 형태로 저장됨
-        취소("c") 요청시 주문내역 삭제 
+        취소("c") 요청시 주문내역 삭제되고 다시 처음부터 주문해야함
         추가주문 희망시 음료메뉴 출력. 음료종류부터 다시 받을 수 있음
     -> 요청사항 선택 끝나면 주문확인내용 출력
     -> 주문확인이 끝나면 영수증 출력
     -> 프로그램 종료
-
 ### Package Description
     menu_enum       : 음료 종류, 가격, 요청사항 등 정보가 담긴 장소
     operation       : 주문요청사항을 입력받는 역할
     customerOrder   : 주문요청사항을 보관하는 장소
     receipt         : 영수증을 제작하는 역할
-
 ### File Description
 #### KioskStart.java
 	main method 실행. KioskOrder 클래스 생성
@@ -93,9 +92,4 @@
 #### UnitChange.java
     menu_enum 패키지의 enum 및 주문요청 정보(int)를 적절히 변환하는 역할
 
-### Bugs
-    카페인이 없는 음료수는 샷 추가선택 기능이 없어야 하는데 있음
-
-### Authors
-    created : Jul.3, 2021 by jonny-ddns
 ### Thanks
