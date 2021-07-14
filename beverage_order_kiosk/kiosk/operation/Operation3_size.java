@@ -3,10 +3,8 @@ package beverage_order_kiosk.kiosk.operation;
 import java.util.Scanner;
 import beverage_order_kiosk.kiosk.customerOrder.Orders;
 import beverage_order_kiosk.kiosk.customerOrder.OrderCollection;
-import beverage_order_kiosk.kiosk.operation.func.CheckRequest;
 import beverage_order_kiosk.kiosk.receipt.UnitChange;
 import beverage_order_kiosk.kiosk.menu_enum.BeverSize;
-import beverage_order_kiosk.kiosk.operation.func.Mention;
 
 //음료 크기를 입력받는 역할 수행
 public class Operation3_size implements Operation {

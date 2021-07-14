@@ -3,8 +3,6 @@ package beverage_order_kiosk.kiosk.operation;
 import java.util.Scanner;
 import beverage_order_kiosk.kiosk.customerOrder.Orders;
 import beverage_order_kiosk.kiosk.customerOrder.OrderCollection;
-import beverage_order_kiosk.kiosk.operation.func.CheckRequest;
-import beverage_order_kiosk.kiosk.operation.func.Mention;
 
 //추가주문 여부를 입력받는 역할 수행
 public class Operation5_orderMore implements Operation {

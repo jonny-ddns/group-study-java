@@ -2,8 +2,6 @@ package beverage_order_kiosk.kiosk.operation;
 
 import beverage_order_kiosk.kiosk.customerOrder.OrderCollection;
 import beverage_order_kiosk.kiosk.customerOrder.Orders;
-import beverage_order_kiosk.kiosk.operation.func.CheckRequest;
-import beverage_order_kiosk.kiosk.operation.func.Mention;
 import beverage_order_kiosk.kiosk.receipt.UnitChange;
 import java.util.List;
 import java.util.Scanner;
