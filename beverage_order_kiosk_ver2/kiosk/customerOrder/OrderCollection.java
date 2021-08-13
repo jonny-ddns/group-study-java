@@ -10,29 +10,29 @@ public class OrderCollection {
 	 * -orderList(List)
 	 * -order(Orders)
 	 */
-    private static OrderCollection orderSpec = null;
-    private static List<Orders> orderList = null;
-    private static Orders order = null;
+    private static OrderCollection orderCollection = null;
+    private static List<Order> orderList = null;
+    private static Order order = null;
 
     private OrderCollection(){	}
 
     public static OrderCollection getInstance(){
-        if(orderSpec == null){
-        	orderSpec = new OrderCollection();
+        if(orderCollection == null){
+        	orderCollection = new OrderCollection();
         }
-        return orderSpec;
+        return orderCollection;
     }
 
-    public static List<Orders> get_orderList(){
+    public static List<Order> get_orderList(){
         if(orderList == null){
         	orderList = new ArrayList<>();
         }
         return orderList;
     }
 
-    public static Orders get_orderData() {
+    public static Order get_orderData() {
     	if(order == null) {
-    		order = new Orders();
+    		order = new Order();
     	}
     	return order;
     }
@@ -42,10 +42,10 @@ public class OrderCollection {
 	}
 
     //List에 데이터 추가하기
-	public List<Orders> add_orderInfo(Orders data) {
+	public List<Order> add_orderInfo(Order data) {
 		orderList = get_orderList();
 
-		Orders orderData = new Orders();
+		Order orderData = new Order();
 		orderData.setBeverKind(data.getBeverKind())
 				 .setBeverTemper(data.getBeverTemper())
 				 .setBeverShot(data.getBeverShot())

@@ -1,7 +1,7 @@
 package beverage_order_kiosk_ver2.kiosk.receipt;
 
 import beverage_order_kiosk_ver2.kiosk.customerOrder.OrderCollection;
-import beverage_order_kiosk_ver2.kiosk.customerOrder.Orders;
+import beverage_order_kiosk_ver2.kiosk.customerOrder.Order;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -29,9 +29,9 @@ public class CreateReceipt {
         sb.append("---------------------\n");
         
         //항목별 금액 생성하기
-        List <Orders> orders = OrderCollection.get_orderList();
+        List <Order> orders = OrderCollection.get_orderList();
         int sum = 0;
-        for (Orders order : orders) {
+        for (Order order : orders) {
         	
         	//ReceiptOrderInfo 클래스 인스턴스로 값 변환하기
             ReceiptOrderInfo rc = new ReceiptOrderInfo();
@@ -63,7 +63,7 @@ public class CreateReceipt {
     private class ReceiptOrderInfo {
 
         //create bill items. 영수증 품목생성
-        String[] receiptItem(Orders order){
+        String[] receiptItem(Order order){
             String[] billCategory = new String[5];
 
             int kindInt = order.getBeverKind();
@@ -88,7 +88,7 @@ public class CreateReceipt {
         }
 
         //create bill money. 영수증 금액 생성
-        int[] receiptMoney(Orders order){
+        int[] receiptMoney(Order order){
             UnitChange cu = new UnitChange();
             int[] billMoney = new int[5];
 

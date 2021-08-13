@@ -1,25 +1,25 @@
-package beverage_order_kiosk_ver2.kiosk.operation;
+package beverage_order_kiosk_ver2.kiosk.command.order_operation;
 
 import beverage_order_kiosk_ver2.kiosk.customerOrder.OrderCollection;
-import beverage_order_kiosk_ver2.kiosk.customerOrder.Orders;
+import beverage_order_kiosk_ver2.kiosk.customerOrder.Order;
 import beverage_order_kiosk_ver2.kiosk.receipt.UnitChange;
 
 import java.util.List;
 import java.util.Scanner;
 
 //주문내역 확인결과를 입력받는 역할 수행
-public class Operation6_orderCheck implements Operation {
+public class OrderOperation6_orderCheck implements OrderOperation {
     @Override
     public boolean execute(Scanner scan) {
         boolean goToNext 	= false;	//반복 플래그 변수
         boolean OrderCheck	= false;	//주문 확인결과 리턴
 
         //주문내역 출력하기
-        List<Orders> orderList = OrderCollection.get_orderList();
+        List<Order> orderList = OrderCollection.get_orderList();
 
         //OrderCollection 접근해서 List에 담긴 요청사항 출력하기
         System.out.println();
-        for(Orders order: orderList) {
+        for(Order order: orderList) {
 	        int kind = order.getBeverKind();
 	        int temper = order.getBeverTemper();
 	        int shot = order.getBeverShot();

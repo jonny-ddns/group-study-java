@@ -1,12 +1,12 @@
-package beverage_order_kiosk_ver2.kiosk.operation;
+package beverage_order_kiosk_ver2.kiosk.command.order_operation;
 
 import beverage_order_kiosk_ver2.kiosk.customerOrder.OrderCollection;
-import beverage_order_kiosk_ver2.kiosk.customerOrder.Orders;
+import beverage_order_kiosk_ver2.kiosk.customerOrder.Order;
 
 import java.util.Scanner;
 
 //추가주문 여부를 입력받는 역할 수행
-public class Operation5_orderMore implements Operation {
+public class OrderOperation5_orderMore implements OrderOperation {
 	
 	@Override
 	public boolean execute(Scanner scan) {
@@ -17,7 +17,7 @@ public class Operation5_orderMore implements Operation {
 		//OrderCollection 클래스의 인스턴스 호출
 		//-> add_orderInfo() 메서드 호출
 		//-> 요청사항 리스트에 삽입하기
-		Orders data = OrderCollection.get_orderData();
+		Order data = OrderCollection.get_orderData();
 		OrderCollection spec = OrderCollection.getInstance();
 		spec.add_orderInfo(data);
 

@@ -1,4 +1,4 @@
-package beverage_order_kiosk_ver2.kiosk.operation;
+package beverage_order_kiosk_ver2.kiosk.command.order_operation;
 
 public class Mention {
     private final String MENT0_CHOOSE		= "\n음료(번호)를 선택해주세요 (주문취소 c): ";

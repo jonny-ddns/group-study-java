@@ -1,14 +1,14 @@
-package beverage_order_kiosk_ver2.kiosk.operation;
+package beverage_order_kiosk_ver2.kiosk.command.order_operation;
 
 import beverage_order_kiosk_ver2.kiosk.customerOrder.OrderCollection;
-import beverage_order_kiosk_ver2.kiosk.customerOrder.Orders;
+import beverage_order_kiosk_ver2.kiosk.customerOrder.Order;
 import beverage_order_kiosk_ver2.kiosk.menu_enum.BeverKind;
 import beverage_order_kiosk_ver2.kiosk.receipt.UnitChange;
 
 import java.util.Scanner;
 
 //음료 종류를 입력받는 역할 수행
-public class Operation0_kind implements Operation {
+public class OrderOperation0_kind implements OrderOperation {
     @Override
     public boolean execute(Scanner scan) {
         int input	 		= 0;		//주문내역 저장
@@ -60,7 +60,7 @@ public class Operation0_kind implements Operation {
             }
     	}
         //요청사항 반영
-        Orders order = OrderCollection.get_orderData();
+        Order order = OrderCollection.get_orderData();
         order.setBeverKind(input);
     	
     	return wantToCancel;

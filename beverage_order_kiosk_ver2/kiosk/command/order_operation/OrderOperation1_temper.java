@@ -1,14 +1,14 @@
-package beverage_order_kiosk_ver2.kiosk.operation;
+package beverage_order_kiosk_ver2.kiosk.command.order_operation;
 
 import beverage_order_kiosk_ver2.kiosk.customerOrder.OrderCollection;
-import beverage_order_kiosk_ver2.kiosk.customerOrder.Orders;
+import beverage_order_kiosk_ver2.kiosk.customerOrder.Order;
 import beverage_order_kiosk_ver2.kiosk.menu_enum.BeverTemper;
 import beverage_order_kiosk_ver2.kiosk.receipt.UnitChange;
 
 import java.util.Scanner;
 
 //음료 온도를 입력받는 역할 수행
-public class Operation1_temper implements Operation {
+public class OrderOperation1_temper implements OrderOperation {
     @Override
     public boolean execute(Scanner scan) {
         int input	 		= 0;		//주문내역 저장
@@ -16,7 +16,7 @@ public class Operation1_temper implements Operation {
         boolean wantToCancel = false;	//리턴 객체
 
 		//커피 종류를 주문하지 않았다면 아래 while 문 실행되지 않음
-		Orders order = OrderCollection.get_orderData();
+		Order order = OrderCollection.get_orderData();
 		if(!(order.getBeverKind()==1 || order.getBeverKind()==2)){
 			goToNext = true;
 		}

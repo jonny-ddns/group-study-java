@@ -1,10 +1,12 @@
 package beverage_order_kiosk_ver2.kiosk;
 
+import beverage_order_kiosk_ver2.kiosk.command.member_operation.MemberOperation;
+import beverage_order_kiosk_ver2.kiosk.command.member_operation.MemberOperation_orderWay;
+import beverage_order_kiosk_ver2.kiosk.command.order_operation.*;
 import beverage_order_kiosk_ver2.kiosk.customerOrder.OrderCollection;
 import beverage_order_kiosk_ver2.kiosk.menu_enum.BeverKind;
 import beverage_order_kiosk_ver2.kiosk.menu_enum.Pricing;
 import beverage_order_kiosk_ver2.kiosk.menu_enum.음료;
-import beverage_order_kiosk_ver2.kiosk.operation.*;
 import beverage_order_kiosk_ver2.kiosk.receipt.CreateReceipt;
 
 import java.util.Scanner;
@@ -14,23 +16,37 @@ public class KioskOrder {
     boolean wantToCancel = false;	//주문취소 여부
     boolean orderMore = true;		//추가주문 여부
     boolean orderCheck = true;		//주문확인 결과
+    private final Scanner scan;
     
     //constructor. 생성과 동시에 start() 메서드 호출
     protected KioskOrder() {    	
     	System.out.println("ORDER START!\n");
-        start();
+    	scan = new Scanner(System.in);
+        orderStart();
     }
 
     //주문받고(receiveOrder) 영수증을 출력(CreateReceipt)하는 메서드 호출
-    private void start() {
-
+    private void orderStart() {
         wantToCancel= false;
         orderMore = true;
         orderCheck = true;
         int count = 0;
 
-        //추가주문 여부
-        while (orderMore) {
+        /*
+        회원여부 확인하기
+        .회원 -> 로그인 or 회원가입
+        .비회원 -> 바로 주문
+         */
+
+        //주문방식을 받기위해 메서드 호출
+        orderWay();
+
+
+
+
+
+        //추가주문하지 않을 때까지 반복
+        while(orderMore) {
           	wantToCancel        = false;
         	boolean[] boolArr   = receiveOrder();
             orderMore           = boolArr[0];
@@ -43,54 +59,78 @@ public class KioskOrder {
         //주문확인 결과
         if(orderCheck){
             new CreateReceipt(count);
+            scan.close();
         } else {
         	orderMore = true;
         	orderCheck = true;
-        	this.start();
+        	this.orderStart();
         }
     }
-    
+
+
+    private void orderWay(){
+        MemberOperation memberOperation;
+        boolean orderAsMember;
+        boolean wantoSignup;
+
+        //주문방식 정하기 - 회원/비회원
+        memberOperation = new MemberOperation_orderWay();
+        orderAsMember = memberOperation.execute(scan);
+
+        if(orderAsMember){
+            //회원 로그인 처리
+            memberOperation = new MemberOperation_orderWay();
+            wantoSignup = memberOperation.execute(scan);
+            if(wantoSignup){
+                //회원가입 처리
+                memberOperation = new MemberOperation_orderWay();
+                memberOperation.execute(scan);
+            }
+        }
+    }
+
+
     //Operation 인터페이스 구현객체를 호출하여 주문받기
     private boolean[] receiveOrder() {
-        Scanner scan = new Scanner(System.in);
+//        Scanner scan = new Scanner(System.in);
 
         boolean[] booleans = new boolean[2];
         while (!wantToCancel) {
             printMenu();
-        	Operation oper = null;
+        	OrderOperation orderOperation;
 
         	//음료 종류
-            oper = new Operation0_kind();
-            wantToCancel = oper.execute(scan);
+            orderOperation = new OrderOperation0_kind();
+            wantToCancel = orderOperation.execute(scan);
             if(wantToCancel) { reset(); break; }
 
         	//음료 온도
-            oper = new Operation1_temper();
-            wantToCancel = oper.execute(scan);
+            orderOperation = new OrderOperation1_temper();
+            wantToCancel = orderOperation.execute(scan);
             if(wantToCancel) { reset(); break; }
 
         	//음료 샷
-            oper = new Operation2_shot();
-            wantToCancel = oper.execute(scan);
+            orderOperation = new OrderOperation2_shot();
+            wantToCancel = orderOperation.execute(scan);
             if(wantToCancel) { reset(); break; }
 
         	//음료 크기
-            oper = new Operation3_size();
-            wantToCancel = oper.execute(scan);
+            orderOperation = new OrderOperation3_size();
+            wantToCancel = orderOperation.execute(scan);
             if(wantToCancel) { reset(); break; }
 
         	//음료 섭취장소
-            oper = new Operation4_where();
-            wantToCancel = oper.execute(scan);
+            orderOperation = new OrderOperation4_where();
+            wantToCancel = orderOperation.execute(scan);
             if(wantToCancel) { reset(); break; }
 
-            oper = new Operation5_orderMore();
-            orderMore = oper.execute(scan);
+            orderOperation = new OrderOperation5_orderMore();
+            orderMore = orderOperation.execute(scan);
 
             //추가주문을 원치 않는다면
             if(!orderMore) {
-                oper = new Operation6_orderCheck();
-                orderCheck = oper.execute(scan);
+                orderOperation = new OrderOperation6_orderCheck();
+                orderCheck = orderOperation.execute(scan);
                 break;
             }
         }

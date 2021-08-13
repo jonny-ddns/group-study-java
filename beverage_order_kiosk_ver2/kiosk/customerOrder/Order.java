@@ -1,6 +1,6 @@
 package beverage_order_kiosk_ver2.kiosk.customerOrder;
 
-public class Orders {
+public class Order {
     private int beverKind;		//종류
     private int beverTemper;	//음료 온도
     private int beverShot;		//음료 샷
@@ -10,7 +10,7 @@ public class Orders {
     public int getBeverKind() {
         return beverKind;
     }
-    public Orders setBeverKind(int beverKind) {
+    public Order setBeverKind(int beverKind) {
         this.beverKind = beverKind;
         return this;
     }
@@ -18,7 +18,7 @@ public class Orders {
     public int getBeverTemper() {
         return beverTemper;
     }
-    public Orders setBeverTemper(int beverTemper) {
+    public Order setBeverTemper(int beverTemper) {
         this.beverTemper = beverTemper;
         return this;
     }
@@ -26,7 +26,7 @@ public class Orders {
     public int getBeverShot() {
         return beverShot;
     }
-    public Orders setBeverShot(int beverShot) {
+    public Order setBeverShot(int beverShot) {
         this.beverShot = beverShot;
         return this;
     }
@@ -34,7 +34,7 @@ public class Orders {
     public int getBeverSize() {
         return beverSize;
     }
-    public Orders setBeverSize(int beverSize) {
+    public Order setBeverSize(int beverSize) {
         this.beverSize = beverSize;
         return this;
     }
@@ -42,7 +42,7 @@ public class Orders {
     public int getBeverWhere() {
         return beverWhere;
     }
-    public Orders setBeverWhere(int beverWhere) {
+    public Order setBeverWhere(int beverWhere) {
         this.beverWhere = beverWhere;
         return this;
     }
