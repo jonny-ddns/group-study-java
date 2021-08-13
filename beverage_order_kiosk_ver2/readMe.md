@@ -1,14 +1,10 @@
 # BEVERAGE ORDER KIOSK
 ### Authors
-    Jul.3, 2021 : jonny-ddns
+    Aug.13, 2021 : 장원준(Wonjun.Jang)
 ### Change Logs   
-	Jul.4, 2021 : added comments.
-	Jul.9, 2021 : 
-		1) modified not to ask about temperature, shot when taking order except coffee.
-		2) modified not to add count when order canceled			
-		3) setup to use only one scanner object.
+	
 ### Bugs
-    영수증 출력 부분이 매끄럽지 않아 수정필요
+    
 ### Project Description
     o usage : making order using kiosk
     o code language : java
