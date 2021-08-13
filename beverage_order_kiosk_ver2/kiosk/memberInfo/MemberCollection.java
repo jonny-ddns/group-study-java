@@ -30,13 +30,28 @@ public class MemberCollection {
         return member;
     }
 
-    //이름과 휴대전화로 회원여부 확인하기
-    public boolean checkMemberInList(String name, String phone){
+    //휴대전화로 회원여부 확인하기
+    public Member checkMemberInList(String phone){
+        memberList = get_memberList();
+        Member member = null;
+        for(Member m : memberList){
+            if( m.getPhone().equals(phone) ){
+                member = m;
+                break;
+            }
+        }
+        return member;
+    }
+
+    //휴대전화로 회원여부 리턴하기
+    public boolean isMemberInList(String phone){
         memberList = get_memberList();
         boolean isMember = false;
+        Member member = null;
         for(Member m : memberList){
-            if( m.getName().equals(name) && m.getPhone().equals(phone) ){
+            if( m.getPhone().equals(phone) ){
                 isMember = true;
+                member = m;
                 break;
             }
         }

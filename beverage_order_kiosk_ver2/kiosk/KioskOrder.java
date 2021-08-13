@@ -2,6 +2,8 @@ package beverage_order_kiosk_ver2.kiosk;
 
 import beverage_order_kiosk_ver2.kiosk.command.member_operation.MemberOperation;
 import beverage_order_kiosk_ver2.kiosk.command.member_operation.MemberOperation_orderWay;
+import beverage_order_kiosk_ver2.kiosk.command.member_operation.MemberOperation_signIn;
+import beverage_order_kiosk_ver2.kiosk.command.member_operation.MemberOperation_signUp;
 import beverage_order_kiosk_ver2.kiosk.command.order_operation.*;
 import beverage_order_kiosk_ver2.kiosk.customerOrder.OrderCollection;
 import beverage_order_kiosk_ver2.kiosk.menu_enum.BeverKind;
@@ -68,25 +70,30 @@ public class KioskOrder {
     }
 
 
+    //주문방식 > 회원로그인 > 회원가입으로 단계 진행하기
     private void orderWay(){
         MemberOperation memberOperation;
-        boolean orderAsMember;
-        boolean wantoSignup;
 
-        //주문방식 정하기 - 회원/비회원
+        int result_orderWay;
+        int result_signIn;
+        int result_signUp;
+
+        //주문방식 정하기 - 회원1 /비회원2
         memberOperation = new MemberOperation_orderWay();
-        orderAsMember = memberOperation.execute(scan);
+        result_orderWay = memberOperation.execute(scan);
 
-        if(orderAsMember){
-            //회원 로그인 처리
-            memberOperation = new MemberOperation_orderWay();
-            wantoSignup = memberOperation.execute(scan);
-            if(wantoSignup){
-                //회원가입 처리
-                memberOperation = new MemberOperation_orderWay();
-                memberOperation.execute(scan);
+        if(result_orderWay == 1){
+            memberOperation = new MemberOperation_signIn();
+            result_signIn = memberOperation.execute(scan);
+
+            if(result_signIn == 3){
             }
         }
+
+
+        memberOperation = new MemberOperation_signUp();
+        result_signUp = memberOperation.execute(scan);
+
     }
 
 

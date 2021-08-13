@@ -5,6 +5,7 @@ public class Member {
     private String nick;
     private String birthday;
     private String phone;
+    private int point;
 
     public String getName() {
         return name;
@@ -35,6 +36,14 @@ public class Member {
     }
     public Member setPhone(String phone) {
         this.phone = phone;
+        return this;
+    }
+
+    public int getPoint() {
+        return point;
+    }
+    public Member setPoint(int point) {
+        this.point = point;
         return this;
     }
 }
