@@ -9,6 +9,8 @@ public class MemberCollection {
     private static List<Member> memberList = null;
     private static Member member = null;
 
+    private MemberCollection(){ }
+
     public static MemberCollection getInstance(){
         if(memberCollection == null){
             memberCollection = new MemberCollection();

@@ -30,7 +30,8 @@ public class MemberOperation_orderWay implements MemberOperation {
             scanInput = scan.next().trim();
 
             //입력한 번호 검증하기
-            if(!isNumber(scanInput)){
+            MemberFunction f = new MemberFunction();
+            if(!f.isNumber(scanInput)){
                 System.out.println("숫자를 입력해주세요");
                 continue;
             } if(!(scanInput.equals("1") || scanInput.equals("2"))){
@@ -48,13 +49,5 @@ public class MemberOperation_orderWay implements MemberOperation {
         return stepParameter;
     }
 
-    //인자값이 숫자인지 확인하기
-    private boolean isNumber(String inputNumber){
-        boolean isNum = false;
-        try{
-            Integer.parseInt(inputNumber);
-            isNum = true;
-        } catch (NumberFormatException nfe){ }
-        return isNum;
-    }
+
 }
