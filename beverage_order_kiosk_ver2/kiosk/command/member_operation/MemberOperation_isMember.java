@@ -3,25 +3,30 @@ package beverage_order_kiosk_ver2.kiosk.command.member_operation;
 import java.util.Scanner;
 
 //주문방식 결정하기 - 회원/비회원
-public class MemberOperation_orderWay implements MemberOperation {
+/*
+#리턴
+0 취소
+1 회원
+2 비회원
+ */
+public class MemberOperation_isMember implements MemberOperation {
     @Override
     public int execute(Scanner scan) {
         int stepParameter = 2;
 
-        System.out.println("Operation_orderWay");
+        System.out.println("MemberOperation_isMember");
         boolean isOk = false;
         String scanInput;
 
         System.out.println("1. 회원으로 주문");
         System.out.println("2. 비회원으로 주문");
 
-
         int count = 0;
         while(!isOk){
             //횟수 제한
             count++;
-            if( count>5 ){
-                System.out.println("다시 시도해주시기 바랍니다");
+            if( count>3 ){
+                System.out.println(new Mention().getMENT_ORDER_AGAIN());
                 stepParameter = 3;
                 break;
             }
@@ -45,9 +50,7 @@ public class MemberOperation_orderWay implements MemberOperation {
             }
             isOk = true;
         }
-        System.out.println("Operation_orderWay end");
+        System.out.println("MemberOperation_isMember end");
         return stepParameter;
     }
-
-
 }

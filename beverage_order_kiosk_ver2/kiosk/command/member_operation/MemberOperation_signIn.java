@@ -6,16 +6,19 @@ import java.util.Scanner;
 
 //회원 로그인 처리하기
 /*
-리턴
--로그인1 / 가입2 / 취소3
+#리턴
+0 취소
+1 로그인
+2 가입
  */
 public class MemberOperation_signIn implements MemberOperation {
     @Override
     public int execute(Scanner scan) {
         System.out.println("Operation_signIn");
         int stepParameter = 0;
-
-        System.out.println("휴대폰 번호를 입력하세요");
+        
+        System.out.println("회원여부를 확인합니다");
+        System.out.println("휴대폰 번호 8자리를 입력하세요");
         System.out.println("-회원가입하려면 'q' 입력");
         System.out.println("-가입취소하려면 'c' 입력");
 
@@ -24,8 +27,8 @@ public class MemberOperation_signIn implements MemberOperation {
         while(!isOk){
             //횟수 제한
             count++;
-            if( count>5 ){
-                System.out.println("다시 시도해주시기 바랍니다");
+            if( count>3 ){
+                System.out.println("처음부터 다시 시도해주시기 바랍니다");
                 stepParameter = 3;
                 break;
             }

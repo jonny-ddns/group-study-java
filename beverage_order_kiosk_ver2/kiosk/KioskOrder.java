@@ -1,7 +1,7 @@
 package beverage_order_kiosk_ver2.kiosk;
 
 import beverage_order_kiosk_ver2.kiosk.command.member_operation.MemberOperation;
-import beverage_order_kiosk_ver2.kiosk.command.member_operation.MemberOperation_orderWay;
+import beverage_order_kiosk_ver2.kiosk.command.member_operation.MemberOperation_isMember;
 import beverage_order_kiosk_ver2.kiosk.command.member_operation.MemberOperation_signIn;
 import beverage_order_kiosk_ver2.kiosk.command.member_operation.MemberOperation_signUp;
 import beverage_order_kiosk_ver2.kiosk.command.order_operation.*;
@@ -34,18 +34,12 @@ public class KioskOrder {
         orderCheck = true;
         int count = 0;
 
-        /*
-        회원여부 확인하기
-        .회원 -> 로그인 or 회원가입
-        .비회원 -> 바로 주문
-         */
-
-        //주문방식을 받기위해 메서드 호출
-        orderWay();
-
-
-
-
+        //주문방식 결정
+        int result_orderDecide = 0;
+        while(result_orderDecide == 0){
+            result_orderDecide = orderWayDecide();
+            System.out.println("result_orderDecide : "+ result_orderDecide);
+        }
 
         //추가주문하지 않을 때까지 반복
         while(orderMore) {
@@ -70,37 +64,58 @@ public class KioskOrder {
     }
 
 
-    //주문방식 > 회원로그인 > 회원가입으로 단계 진행하기
-    private void orderWay(){
-        MemberOperation memberOperation;
+    
+    /*
+    #리턴값에 따른 분기
+    .주문방식 - 0취소 / 1회원 / 2비회원
+    .로그인 - 0취소 / 1로그인 / 2회원가입
+    .회원가입 - 0취소 / 1가입완료
+    */
+    /*
+    #프로세스
+    비회원 -> 주문창으로 이동
+    회원 -> 로그인(기존)
+    회원 -> 로그인(신규) -> 회원가입
+     */
+    //리턴; 0취소 1회원 2비회원
+    private int orderWayDecide(){
+        System.out.println("orderWayDecide");
 
-        int result_orderWay;
+        MemberOperation memberOperation;
+        int result_orderDecide = 0; //리턴값
+        int result_isMember;
         int result_signIn;
-        int result_signUp;
 
         //주문방식 정하기 - 회원1 /비회원2
-        memberOperation = new MemberOperation_orderWay();
-        result_orderWay = memberOperation.execute(scan);
+        memberOperation = new MemberOperation_isMember();
+        result_isMember = memberOperation.execute(scan);
 
-        if(result_orderWay == 1){
+        //비회원주문
+        if(result_isMember == 2 ){
+            result_orderDecide = 2;
+        }
+        //회원주문
+        else if(result_isMember == 1) {
             memberOperation = new MemberOperation_signIn();
             result_signIn = memberOperation.execute(scan);
 
-            if(result_signIn == 3){
+            //로그인
+            if(result_signIn == 1){
+                result_orderDecide = 1;
+            }
+            //회원가입
+            else if(result_signIn == 2){
+                memberOperation = new MemberOperation_signUp();
+                memberOperation.execute(scan);
+                result_orderDecide = 1;
             }
         }
-
-
-        memberOperation = new MemberOperation_signUp();
-        result_signUp = memberOperation.execute(scan);
-
+        System.out.println("orderWayDecide end");
+        return result_orderDecide;
     }
-
 
     //Operation 인터페이스 구현객체를 호출하여 주문받기
     private boolean[] receiveOrder() {
-//        Scanner scan = new Scanner(System.in);
-
         boolean[] booleans = new boolean[2];
         while (!wantToCancel) {
             printMenu();
@@ -148,7 +163,6 @@ public class KioskOrder {
 
     //주문취소시 List를 null로 만듬
     private void reset(){
-        System.out.println("reset 호출");
         OrderCollection col = OrderCollection.getInstance();
         col.reset_orderInfo();
     }

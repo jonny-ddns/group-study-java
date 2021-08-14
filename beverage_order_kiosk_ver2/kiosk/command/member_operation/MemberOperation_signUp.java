@@ -7,9 +7,9 @@ import java.util.Scanner;
 
 //회원가입 처리하기
 /*
-처리코드
-.취소 0
-
+#리턴
+0 취소
+1 정상처리
  */
 public class MemberOperation_signUp implements MemberOperation {
     @Override
@@ -26,7 +26,7 @@ public class MemberOperation_signUp implements MemberOperation {
         String scan_birthday = "";
 
         //입력; 휴대폰
-        System.out.println("휴대폰번호를 - 없이 숫자만 입력하세요 (취소는 c)");
+        System.out.println("휴대폰번호를 입력하세요 (취소는 c)");
         goToNext = false;
         while(!goToNext){
             System.out.print("입력 : 010-");
