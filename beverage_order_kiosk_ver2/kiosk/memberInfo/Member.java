@@ -1,19 +1,10 @@
 package beverage_order_kiosk_ver2.kiosk.memberInfo;
 
 public class Member {
-    private String name;
     private String nick;
     private String birthday;
     private String phone;
     private int point;
-
-    public String getName() {
-        return name;
-    }
-    public Member setName(String name) {
-        this.name = name;
-        return this;
-    }
 
     public String getNick() {
         return nick;

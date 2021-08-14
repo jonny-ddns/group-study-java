@@ -26,8 +26,6 @@ public class MemberOperation_signUp implements MemberOperation {
         getScanPhone(scan);
         getScanName(scan);
         getScanBirthday(scan);
-
-
         
         //리스트에 회원정보 삽입하기
         Member member = new Member();
