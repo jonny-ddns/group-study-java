@@ -2,8 +2,6 @@ package beverage_order_kiosk_ver2.kiosk.command.member_operation;
 
 import beverage_order_kiosk_ver2.kiosk.memberInfo.Member;
 import beverage_order_kiosk_ver2.kiosk.memberInfo.MemberCollection;
-import sun.misc.ClassLoaderUtil;
-
 import java.util.Scanner;
 
 //회원가입 처리하기
@@ -25,26 +23,28 @@ public class MemberOperation_signUp implements MemberOperation {
 
         MemberCollection memberCollection =  null;
         int stepParameter = 0;
-
         boolean resultScan_phone;
         boolean resultScan_nick = false;
-        boolean resultScan_birthday;
+        boolean resultScan_birthday = false;
 
         resultScan_phone = getScanPhone(scan);
         if(resultScan_phone){
             resultScan_nick = getScanNick(scan);
         }
         if(resultScan_nick){
-            getScanBirthday(scan);
+            resultScan_birthday = getScanBirthday(scan);
         }
 
-        //리스트에 회원정보 삽입하기
-        Member member = new Member();
-        member.setNick(scan_nick)
-                .setBirthday(scan_birthday)
-                .setPhone(scan_phone)
-                .setPoint(0);
-        memberCollection.addCustomer(member);
+        if(resultScan_birthday){
+            //리스트에 회원정보 삽입하기
+            Member member = new Member();
+            member.setNick(scan_nick)
+                    .setBirthday(scan_birthday)
+                    .setPhone(scan_phone)
+                    .setPoint(0);
+            memberCollection.addCustomer(member);
+        }
+
 
         System.out.println("MemberOperation_signUp end");
         return stepParameter;
@@ -55,7 +55,13 @@ public class MemberOperation_signUp implements MemberOperation {
         System.out.println("휴대폰번호를 입력하세요 (취소는 c)");
         boolean goToNext = false;
         boolean scanWell = false;
+        int count = 0;
         while(!scanWell){
+            count++;
+            if( count>3 ){
+                System.out.println("처음부터 다시 시도해주시기 바랍니다");
+                break;
+            }
 
             System.out.print("입력 : 010-");
             scan_phone = scan.next().trim();
@@ -97,7 +103,14 @@ public class MemberOperation_signUp implements MemberOperation {
         System.out.println("닉네임을 입력하세요 (취소는 c)");
         boolean goToNext = false;
         boolean scanWell = false;
+        int count = 0;
         while(!scanWell){
+            count++;
+            if( count>3 ){
+                System.out.println("처음부터 다시 시도해주시기 바랍니다");
+                break;
+            }
+
             System.out.print("입력 : ");
             scan_nick = scan.next().trim();
 
@@ -122,7 +135,14 @@ public class MemberOperation_signUp implements MemberOperation {
         System.out.println("생일 4자리를 입력하세요 [0813] (취소는 c)");
         boolean goToNext = false;
         boolean scanWell = false;
+        int count = 0;
         while(!scanWell){
+            count++;
+            if( count>3 ){
+                System.out.println("처음부터 다시 시도해주시기 바랍니다");
+                break;
+            }
+
             System.out.print("입력 : ");
             scan_birthday = scan.next().trim();
 
@@ -143,9 +163,11 @@ public class MemberOperation_signUp implements MemberOperation {
 
             //월, 일 확인
             String strMonth = scan_birthday.substring(0, 2);
+            System.out.println(strMonth);
             int month = Integer.parseInt(strMonth);
 
             String strDay = scan_birthday.substring(2, 4);
+            System.out.println(strDay);
             int day = Integer.parseInt(strDay);
 
             //출력 확인
