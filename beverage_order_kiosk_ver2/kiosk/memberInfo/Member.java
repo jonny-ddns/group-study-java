@@ -1,16 +1,16 @@
 package beverage_order_kiosk_ver2.kiosk.memberInfo;
 
 public class Member {
-    private String nick;
-    private String birthday;
     private String phone;
+    private String birthday;
+    private String nick;
     private int point;
 
-    public String getNick() {
-        return nick;
+    public String getPhone() {
+        return phone;
     }
-    public Member setNick(String nick) {
-        this.nick = nick;
+    public Member setPhone(String phone) {
+        this.phone = phone;
         return this;
     }
 
@@ -22,11 +22,11 @@ public class Member {
         return this;
     }
 
-    public String getPhone() {
-        return phone;
+    public String getNick() {
+        return nick;
     }
-    public Member setPhone(String phone) {
-        this.phone = phone;
+    public Member setNick(String nick) {
+        this.nick = nick;
         return this;
     }
 
