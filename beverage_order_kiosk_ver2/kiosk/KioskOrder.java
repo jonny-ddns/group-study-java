@@ -31,7 +31,10 @@ public class KioskOrder {
             result_orderWay = receiveOrderWay();
             System.out.println("result_orderWay : " + result_orderWay);
 
-            //2. 주문받기
+            //2. 고객정보 가져오기
+
+
+            //3. 주문받기
             int[] result_receiveOrder = receiveOrder();
             int resultSignal = result_receiveOrder[0];
             count = result_receiveOrder[1];
@@ -44,8 +47,7 @@ public class KioskOrder {
             //영수증 출력
             new CreateReceipt(count);
             scan.close();
-
-            this.orderStart();
+            this.orderStart();  //주문받기 재시작
         }
     }
 
