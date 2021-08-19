@@ -1,5 +1,7 @@
 package beverage_order_kiosk_ver2.kiosk.command.member_operation;
 
+import beverage_order_kiosk_ver2.kiosk.KioskOrder;
+
 import java.util.Scanner;
 
 //주문방식 결정하기 - 회원/비회원
@@ -14,11 +16,10 @@ public class MemberOperation_isMember implements MemberOperation {
     public int execute(Scanner scan) {
         int stepParameter = 2;
 
-        System.out.println("MemberOperation_isMember");
         boolean isOk = false;
         String scanInput;
 
-        System.out.println("1. 회원으로 주문");
+        System.out.println("\n1. 회원으로 주문");
         System.out.println("2. 비회원으로 주문");
 
         int count = 0;
@@ -47,10 +48,11 @@ public class MemberOperation_isMember implements MemberOperation {
             //비회원주문시 리턴 2
             if(Integer.parseInt(scanInput) == 1){
                 stepParameter = 1;
+            } else{
+                KioskOrder.setPersonBasic();
             }
             isOk = true;
         }
-        System.out.println("MemberOperation_isMember end");
         return stepParameter;
     }
 }

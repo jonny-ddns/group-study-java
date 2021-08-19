@@ -1,5 +1,6 @@
 package beverage_order_kiosk_ver2.kiosk.command.member_operation;
 
+import beverage_order_kiosk_ver2.kiosk.KioskOrder;
 import beverage_order_kiosk_ver2.kiosk.memberInfo.Member;
 import beverage_order_kiosk_ver2.kiosk.memberInfo.MemberCollection;
 import java.util.Scanner;
@@ -19,9 +20,6 @@ public class MemberOperation_signUp implements MemberOperation {
 
     @Override
     public int execute(Scanner scan) {
-        System.out.println("MemberOperation_signUp");
-
-        MemberCollection memberCollection =  null;
         int stepParameter = 0;
         boolean resultScan_phone;
         boolean resultScan_nick = false;
@@ -35,6 +33,7 @@ public class MemberOperation_signUp implements MemberOperation {
             resultScan_birthday = getScanBirthday(scan);
         }
 
+        MemberCollection memberCollection =  MemberCollection.getInstance();
         if(resultScan_birthday){
             //리스트에 회원정보 삽입하기
             Member member = new Member();
@@ -43,9 +42,8 @@ public class MemberOperation_signUp implements MemberOperation {
                     .setPhone(scan_phone)
                     .setPoint(0);
             memberCollection.addCustomer(member);
+            KioskOrder.setPersonNow(member);
         }
-
-
         System.out.println("MemberOperation_signUp end");
         return stepParameter;
     }
@@ -132,12 +130,11 @@ public class MemberOperation_signUp implements MemberOperation {
     
     //입력; 생일
     private boolean getScanBirthday(Scanner scan){
-        System.out.println("생일 4자리를 입력하세요 [0813] (취소는 c)");
+        System.out.println("생일 4자리를 입력하세요 [ex.0813] (취소는 c)");
         boolean goToNext = false;
         boolean scanWell = false;
         int count = 0;
         while(!scanWell){
-            System.out.println("생일 입력을 받습니다");
             count++;
             if( count>3 ){
                 System.out.println("처음부터 다시 시도해주시기 바랍니다");
@@ -177,7 +174,6 @@ public class MemberOperation_signUp implements MemberOperation {
             System.out.println("day : "+ day);
 
             if( !((0<month && month<13) || (0<day && day<32)) ){
-                System.out.println("정말요? 다시 입력해주세요");
                 continue;
             }
             goToNext = true;
