@@ -6,7 +6,7 @@ public class UnitChange {
 	
 	//int -> 요청사항(String)으로 변경
 	public static String toString_kind(int i) {
-		return 음료.values()[--i].toString();
+		return BeverKind_ko.values()[--i].toString();
 	}
 	
 	public static String toString_temper(int i) {

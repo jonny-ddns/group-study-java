@@ -1,6 +1,6 @@
 package beverage_order_kiosk_ver2.kiosk.menu_enum;
 
-public enum 음료 {
+public enum BeverKind_ko {
 	아메리카노,
     바닐라라떼,
     레몬에이드,

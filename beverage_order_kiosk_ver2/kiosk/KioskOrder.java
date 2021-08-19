@@ -8,7 +8,7 @@ import beverage_order_kiosk_ver2.kiosk.command.order_operation.*;
 import beverage_order_kiosk_ver2.kiosk.customerOrder.OrderCollection;
 import beverage_order_kiosk_ver2.kiosk.menu_enum.BeverKind;
 import beverage_order_kiosk_ver2.kiosk.menu_enum.Pricing;
-import beverage_order_kiosk_ver2.kiosk.menu_enum.음료;
+import beverage_order_kiosk_ver2.kiosk.menu_enum.BeverKind_ko;
 import beverage_order_kiosk_ver2.kiosk.receipt.CreateReceipt;
 import java.util.Scanner;
 
@@ -162,7 +162,7 @@ public class KioskOrder {
         
     //메뉴 출력
 	private void printMenu() {
-		음료[] 음료배열	= 음료.values();
+		BeverKind_ko[] beverKind_ko = BeverKind_ko.values();
 		Pricing p		= new Pricing();
 		int[] priceArr	= p.getBeveragePrice();
 		String line     = "----------------------";
@@ -170,7 +170,7 @@ public class KioskOrder {
 		System.out.println(line);
 		System.out.println("메뉴");
 		for(int i = 0; i< BeverKind.values().length; i++) {
-			System.out.printf(" %d. %s\t%d원\n", i+1, 음료배열[i], priceArr[i]);
+			System.out.printf(" %d. %s\t%d원\n", i+1, beverKind_ko[i], priceArr[i]);
 		}
         System.out.println(line);
     }
