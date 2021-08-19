@@ -13,7 +13,7 @@ public class OrderOperation4_where implements OrderOperation {
     public boolean execute(Scanner scan) {
     	int input	 		= 0;		//주문내역 저장
         boolean goToNext 	= false;	//반복 플래그 변수
-        boolean wantToCancel = false;	//리턴 객체
+        boolean isCanceled = false;		//리턴 객체
 		Order order = OrderCollection.get_orderData();
         
         while(!goToNext) {
@@ -59,7 +59,7 @@ public class OrderOperation4_where implements OrderOperation {
             	
             	if(isYesOrNo && request.equals("y")) {
 					System.out.println(m.getMent7_orderAgain());
-                	wantToCancel = true;
+                	isCanceled = true;
                 	break;
             	}
             }        
@@ -69,6 +69,6 @@ public class OrderOperation4_where implements OrderOperation {
     	}
     	order.setBeverWhere(input);
 
-		return wantToCancel;    	
+		return isCanceled;
     }
 }

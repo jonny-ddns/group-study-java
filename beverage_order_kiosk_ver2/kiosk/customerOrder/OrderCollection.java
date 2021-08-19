@@ -4,12 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class OrderCollection {
-	/*
-	 * singleton 으로 구성
-	 * -OrderCollection(클래스)
-	 * -orderList(List)
-	 * -order(Orders)
-	 */
     private static OrderCollection orderCollection = null;
     private static List<Order> orderList = null;
     private static Order order = null;
@@ -37,14 +31,9 @@ public class OrderCollection {
     	return order;
     }
 
-	private void resetData(){
-		orderList = null;
-	}
-
     //List에 데이터 추가하기
 	public List<Order> add_orderInfo(Order data) {
 		orderList = get_orderList();
-
 		Order orderData = new Order();
 		orderData.setBeverKind(data.getBeverKind())
 				 .setBeverTemper(data.getBeverTemper())
@@ -52,12 +41,10 @@ public class OrderCollection {
 				 .setBeverSize(data.getBeverSize())
 				 .setBeverWhere(data.getBeverWhere());
 		orderList.add(orderData);
-		
 		return orderList;
 	}
 
 	//List에 담긴 정보 초기화
-	public void reset_orderInfo() {
-		resetData();
-	}
+	public void reset_orderInfo() { resetData(); }
+	private void resetData(){ orderList.clear(); }
 }

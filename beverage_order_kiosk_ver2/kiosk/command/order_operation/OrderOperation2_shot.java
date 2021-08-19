@@ -13,7 +13,7 @@ public class OrderOperation2_shot implements OrderOperation {
 	public boolean execute(Scanner scan) {
         int input	 		= 0;		//주문내역 저장
         boolean goToNext 	= false;	//반복 플래그 변수
-        boolean wantToCancel = false;	//리턴 객체
+        boolean isCanceled = false;		//리턴 객체
 
 		//커피 종류를 주문하지 않았다면 아래 while 문 실행되지 않음
 		Order order = OrderCollection.get_orderData();
@@ -55,7 +55,7 @@ public class OrderOperation2_shot implements OrderOperation {
             	
             	if(isYesOrNo && request.equals("y")) {
 					System.out.println(m.getMent7_orderAgain());
-                	wantToCancel = true;
+                	isCanceled = true;
                 	break;
             	}
             }        
@@ -65,6 +65,6 @@ public class OrderOperation2_shot implements OrderOperation {
     	}
         order.setBeverShot(input);
 
-		return wantToCancel;
+		return isCanceled;
 	}
 }

@@ -13,7 +13,7 @@ public class OrderOperation0_kind implements OrderOperation {
     public boolean execute(Scanner scan) {
         int input	 		= 0;		//주문내역 저장
         boolean goToNext 	= false;	//반복 플래그 변수
-        boolean wantToCancel = false;	//리턴 객체
+        boolean isCanceled = false;	//리턴 객체
         //입력 반복문
         while(!goToNext) {
     	
@@ -51,7 +51,7 @@ public class OrderOperation0_kind implements OrderOperation {
             	
             	if(isYesOrNo && request.equals("y")) {
 					System.out.println(m.getMent7_orderAgain());
-                	wantToCancel = true;
+                	isCanceled = true;
                 	break;
             	}
             }        
@@ -63,6 +63,6 @@ public class OrderOperation0_kind implements OrderOperation {
         Order order = OrderCollection.get_orderData();
         order.setBeverKind(input);
     	
-    	return wantToCancel;
+    	return isCanceled;
     }    
 }

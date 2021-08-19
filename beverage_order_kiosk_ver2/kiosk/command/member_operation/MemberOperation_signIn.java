@@ -28,7 +28,7 @@ public class MemberOperation_signIn implements MemberOperation {
             count++;
             if( count>3 ){
                 System.out.println("처음부터 다시 시도해주시기 바랍니다");
-                stepParameter = 3;
+                stepParameter = 0;
                 break;
             }
 

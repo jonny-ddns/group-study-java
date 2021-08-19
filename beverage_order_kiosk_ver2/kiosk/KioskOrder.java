@@ -21,72 +21,31 @@ public class KioskOrder {
         orderStart();
     }
     
+    //주문받기
     private void orderStart() {
-        boolean orderMore = true;		//추가주문 여부
-        boolean orderCheck = true;		//주문확인 결과
-
-        int count = 0;
+        int result_orderWay = 0;    //주문방식- 취소/회원/비회원
+        int count;                  //주문개수
         
-        /*
-        코딩방법 
-        주문방식 -> 취소되면 다시 처음부터
-        주문내용 -> 최소되면 다시 처음부터
-        
-        주문내용 반복문으로 계속 추가주문 받아야 함
-        추가주문 횟수 받기
-         */
+        while(result_orderWay == 0) {
+            //1. 주문방식 결정
+            result_orderWay = receiveOrderWay();
+            System.out.println("result_orderWay : " + result_orderWay);
 
-        boolean isCanceled = false;
-        while(!isCanceled){
+            //2. 주문받기
+            int[] result_receiveOrder = receiveOrder();
+            int resultSignal = result_receiveOrder[0];
+            count = result_receiveOrder[1];
 
-            //주문방식 결정
-            int result_orderDecide = 0;
-            result_orderDecide = orderWayDecide();
-            System.out.println("result_orderDecide : "+ result_orderDecide);
-
-            if(result_orderDecide == 0){
-                continue;
-            }
-            
-            //주문내용 받기
-            boolean[] result_receiveOrder = receiveOrder();
-
-            System.out.println("취소여부/ 추가주문여부/ 주문확인여부");
-            for(boolean b : result_receiveOrder){
-                System.out.print(b+ "\t");
+            //주문취소시
+            if (resultSignal != 0) {
+            } else {
             }
 
-            //주문 취소시
-            if(!result_receiveOrder[0]){
-                continue;
-            }
-
-            System.out.println("반복문 종료");
-            isCanceled = true;
-        }
-
-
-          //추가주문하지 않을 때까지 반복
-//        while(orderMore) {
-//
-//
-//        	//디버깅
-
-//
-//            orderMore                  = receiveResults[0];
-//
-//            //주문개수 증가
-//            if(!receiveResults[1]){
-//                count++;
-//            }
-//        }
-        //주문확인 결과
-        if(orderCheck){
+            //영수증 출력
             new CreateReceipt(count);
             scan.close();
-        } else {
 
-        	this.orderStart();
+            this.orderStart();
         }
     }
 
@@ -98,8 +57,8 @@ public class KioskOrder {
 
     #리턴; 0취소 1회원 2비회원
     */
-    private int orderWayDecide(){
-        System.out.println("orderWayDecide");
+    private int receiveOrderWay(){
+        System.out.println("receiveOrderWay");
 
         MemberOperation memberOperation;
         int result_orderDecide = 0; //리턴값
@@ -130,64 +89,72 @@ public class KioskOrder {
                 result_orderDecide = 1;
             }
         }
-        System.out.println("orderWayDecide end");
+        System.out.println("receiveOrderWay end");
         return result_orderDecide;
     }
 
     //주문내용 받기
-    private boolean[] receiveOrder() {
-        boolean[] result_receiveOrder = new boolean[3];
-        boolean wantToCancel = false;
-        boolean orderMore = false;
-        boolean orderCheck = false;
-        OrderOperation orderOperation;
-        
-        //while 문 말고 다른 방식으로 코딩하기
-        while (!wantToCancel) {
-            printMenu();
+    private int[] receiveOrder() {
+        int[] result_receiveOrder;      //리턴객체
+        int count = 1;                  //주문개수
+        int resultSignal = 0;           //주문신호
+        boolean orderProgress = true;    //플래그
 
+        OrderOperation orderOperation;
+
+        while (orderProgress) {
+            printMenu();
             //음료 종류
             orderOperation = new OrderOperation0_kind();
-            wantToCancel = orderOperation.execute(scan);
-            if(wantToCancel) { reset(); break; }
-
+            if(orderOperation.execute(scan)) {
+                reset();
+                break;
+            }
         	//음료 온도
             orderOperation = new OrderOperation1_temper();
-            wantToCancel = orderOperation.execute(scan);
-            if(wantToCancel) { reset(); break; }
-
+            if(orderOperation.execute(scan)) {
+                reset();
+                break;
+            }
         	//음료 샷
             orderOperation = new OrderOperation2_shot();
-            wantToCancel = orderOperation.execute(scan);
-            if(wantToCancel) { reset(); break; }
-
+            if(orderOperation.execute(scan)) {
+                reset();
+                break;
+            }
         	//음료 크기
             orderOperation = new OrderOperation3_size();
-            wantToCancel = orderOperation.execute(scan);
-            if(wantToCancel) { reset(); break; }
-
+            if(orderOperation.execute(scan)) {
+                reset();
+                break;
+            }
         	//음료 섭취장소
             orderOperation = new OrderOperation4_where();
-            wantToCancel = orderOperation.execute(scan);
-            if(wantToCancel) { reset(); break; }
-
-            orderOperation = new OrderOperation5_orderMore();
-            orderMore = orderOperation.execute(scan);
-
-            //추가주문을 원치 않는다면
-            if(!orderMore) {
-                orderOperation = new OrderOperation6_orderCheck();
-                orderCheck = orderOperation.execute(scan);
-                if(!orderCheck){ reset(); break; }
+            if(orderOperation.execute(scan)) {
+                reset();
+                break;
             }
+            //추가주문 희망시 주문더 받기
+            orderOperation = new OrderOperation5_orderMore();
+            if(!orderOperation.execute(scan)) {
+                //추가주문 없을시 최종주문 확인하기
+                orderOperation = new OrderOperation6_orderCheck();
+                if(orderOperation.execute(scan)){
+                    resultSignal = 1;
+                    orderProgress = false;
+                } else {
+                    reset();
+                    orderProgress = false;
+                }
+            }
+            count++;
         }
-        result_receiveOrder[0] = wantToCancel;
-        result_receiveOrder[1] = orderMore;
-        result_receiveOrder[2] = orderCheck;
+        //주문결과 (결과번호, 주문개수)
+        result_receiveOrder = new int[]{resultSignal, count};
         return result_receiveOrder;
     }
 
-    //주문취소시 List를 초기화하는 메서드 호출
+    //주문취소시 주문내역 reset
     private void reset(){
         OrderCollection col = OrderCollection.getInstance();
         col.reset_orderInfo();
@@ -198,12 +165,13 @@ public class KioskOrder {
 		음료[] 음료배열	= 음료.values();
 		Pricing p		= new Pricing();
 		int[] priceArr	= p.getBeveragePrice();
+		String line     = "----------------------";
 		
-		System.out.println("----------------------");
+		System.out.println(line);
 		System.out.println("메뉴");
 		for(int i = 0; i< BeverKind.values().length; i++) {
 			System.out.printf(" %d. %s\t%d원\n", i+1, 음료배열[i], priceArr[i]);
 		}
-		System.out.println("----------------------");
-	}
+        System.out.println(line);
+    }
 }

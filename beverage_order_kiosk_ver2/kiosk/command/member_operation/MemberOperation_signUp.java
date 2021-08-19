@@ -137,6 +137,7 @@ public class MemberOperation_signUp implements MemberOperation {
         boolean scanWell = false;
         int count = 0;
         while(!scanWell){
+            System.out.println("생일 입력을 받습니다");
             count++;
             if( count>3 ){
                 System.out.println("처음부터 다시 시도해주시기 바랍니다");
@@ -145,6 +146,7 @@ public class MemberOperation_signUp implements MemberOperation {
 
             System.out.print("입력 : ");
             scan_birthday = scan.next().trim();
+            System.out.println("scan_birthday : "+ scan_birthday);
 
             //취소 입력
             if(scan_birthday.equals("c")) {
@@ -174,7 +176,7 @@ public class MemberOperation_signUp implements MemberOperation {
             System.out.println("month : "+ month);
             System.out.println("day : "+ day);
 
-            if( !(0<month && month<13) || (0<day && day<32) ){
+            if( !((0<month && month<13) || (0<day && day<32)) ){
                 System.out.println("정말요? 다시 입력해주세요");
                 continue;
             }
