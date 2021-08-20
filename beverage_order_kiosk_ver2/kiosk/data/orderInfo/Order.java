@@ -1,4 +1,4 @@
-package beverage_order_kiosk_ver2.kiosk.customerOrder;
+package beverage_order_kiosk_ver2.kiosk.data.orderInfo;
 
 public class Order {
     private int beverKind;		//Á¾·ù

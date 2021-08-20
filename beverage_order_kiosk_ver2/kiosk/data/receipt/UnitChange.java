@@ -1,6 +1,6 @@
 package beverage_order_kiosk_ver2.kiosk.receipt;
 
-import beverage_order_kiosk_ver2.kiosk.menu_enum.*;
+import beverage_order_kiosk_ver2.kiosk.data.beverageInfo.*;
 
 public class UnitChange {
 	

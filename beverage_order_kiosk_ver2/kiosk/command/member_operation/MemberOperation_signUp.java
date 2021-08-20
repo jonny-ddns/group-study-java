@@ -1,8 +1,8 @@
 package beverage_order_kiosk_ver2.kiosk.command.member_operation;
 
 import beverage_order_kiosk_ver2.kiosk.KioskOrder;
-import beverage_order_kiosk_ver2.kiosk.memberInfo.Member;
-import beverage_order_kiosk_ver2.kiosk.memberInfo.MemberCollection;
+import beverage_order_kiosk_ver2.kiosk.data.memberInfo.Member;
+import beverage_order_kiosk_ver2.kiosk.data.memberInfo.MemberCollection;
 import java.util.Scanner;
 
 //회원가입 처리하기

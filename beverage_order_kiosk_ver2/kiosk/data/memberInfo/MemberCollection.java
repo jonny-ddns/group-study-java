@@ -1,4 +1,4 @@
-package beverage_order_kiosk_ver2.kiosk.memberInfo;
+package beverage_order_kiosk_ver2.kiosk.data.memberInfo;
 
 import java.util.ArrayList;
 import java.util.List;

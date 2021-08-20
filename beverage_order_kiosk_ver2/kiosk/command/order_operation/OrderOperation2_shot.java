@@ -1,8 +1,8 @@
 package beverage_order_kiosk_ver2.kiosk.command.order_operation;
 
-import beverage_order_kiosk_ver2.kiosk.customerOrder.OrderCollection;
-import beverage_order_kiosk_ver2.kiosk.customerOrder.Order;
-import beverage_order_kiosk_ver2.kiosk.menu_enum.BeverShot;
+import beverage_order_kiosk_ver2.kiosk.data.orderInfo.OrderCollection;
+import beverage_order_kiosk_ver2.kiosk.data.orderInfo.Order;
+import beverage_order_kiosk_ver2.kiosk.data.beverageInfo.BeverShot;
 import beverage_order_kiosk_ver2.kiosk.receipt.UnitChange;
 import java.util.Scanner;
 

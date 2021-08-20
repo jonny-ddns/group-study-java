@@ -1,7 +1,7 @@
 package beverage_order_kiosk_ver2.kiosk.command.order_operation;
 
-import beverage_order_kiosk_ver2.kiosk.customerOrder.OrderCollection;
-import beverage_order_kiosk_ver2.kiosk.customerOrder.Order;
+import beverage_order_kiosk_ver2.kiosk.data.orderInfo.OrderCollection;
+import beverage_order_kiosk_ver2.kiosk.data.orderInfo.Order;
 import java.util.Scanner;
 
 //추가주문 여부를 입력받는 역할 수행

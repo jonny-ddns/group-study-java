@@ -1,7 +1,7 @@
 package beverage_order_kiosk_ver2.kiosk.receipt;
 
-import beverage_order_kiosk_ver2.kiosk.customerOrder.OrderCollection;
-import beverage_order_kiosk_ver2.kiosk.customerOrder.Order;
+import beverage_order_kiosk_ver2.kiosk.data.orderInfo.OrderCollection;
+import beverage_order_kiosk_ver2.kiosk.data.orderInfo.Order;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;

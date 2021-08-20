@@ -1,4 +1,4 @@
-package beverage_order_kiosk_ver2.kiosk.menu_enum;
+package beverage_order_kiosk_ver2.kiosk.data.beverageInfo;
 
 public enum BeverKind_ko {
 	아메리카노,

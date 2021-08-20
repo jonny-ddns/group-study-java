@@ -5,11 +5,11 @@ import beverage_order_kiosk_ver2.kiosk.command.member_operation.MemberOperation_
 import beverage_order_kiosk_ver2.kiosk.command.member_operation.MemberOperation_signIn;
 import beverage_order_kiosk_ver2.kiosk.command.member_operation.MemberOperation_signUp;
 import beverage_order_kiosk_ver2.kiosk.command.order_operation.*;
-import beverage_order_kiosk_ver2.kiosk.customerOrder.OrderCollection;
-import beverage_order_kiosk_ver2.kiosk.memberInfo.Member;
-import beverage_order_kiosk_ver2.kiosk.menu_enum.BeverKind;
-import beverage_order_kiosk_ver2.kiosk.menu_enum.Pricing;
-import beverage_order_kiosk_ver2.kiosk.menu_enum.BeverKind_ko;
+import beverage_order_kiosk_ver2.kiosk.data.orderInfo.OrderCollection;
+import beverage_order_kiosk_ver2.kiosk.data.memberInfo.Member;
+import beverage_order_kiosk_ver2.kiosk.data.beverageInfo.BeverKind;
+import beverage_order_kiosk_ver2.kiosk.data.beverageInfo.Pricing;
+import beverage_order_kiosk_ver2.kiosk.data.beverageInfo.BeverKind_ko;
 import beverage_order_kiosk_ver2.kiosk.receipt.Receipt;
 import java.util.Scanner;
 

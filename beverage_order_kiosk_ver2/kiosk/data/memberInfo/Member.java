@@ -1,4 +1,4 @@
-package beverage_order_kiosk_ver2.kiosk.memberInfo;
+package beverage_order_kiosk_ver2.kiosk.data.memberInfo;
 
 public class Member {
     private String phone;
