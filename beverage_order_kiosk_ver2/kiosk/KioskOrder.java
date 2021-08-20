@@ -54,16 +54,20 @@ public class KioskOrder {
             //1. 주문방식 결정
             if(receiveOrderWay() == 0) { continue; }
 
-            //2. 주문자 정보 가져오기
-            personNow = getPersonNow();
-
-            //3. 주문받기
+            //2. 주문받기
             int[] result_receiveOrder = receiveOrderMenu();
             int resultSignal    = result_receiveOrder[0];
             orderCount          = result_receiveOrder[1];
 
+            //3. 주문자 정보 가져오기
+            personNow = getPersonNow();
+
+            //4. 결제하기
+            receivePayment();
+
+
             //주문취소시
-            if (resultSignal == 0) { continue; }
+            if ( resultSignal==0 ) { continue; }
             orderFinish = true;
         }
         receipt.receiptPrint(orderCount);                               //영수증 생성 및 출력
@@ -120,7 +124,7 @@ public class KioskOrder {
         int[] result_receiveOrder;      //리턴객체
         int count = 0;                  //주문개수
         int resultSignal = 0;           //주문신호 (취소0 주문1)
-        boolean orderProgress = true;    //플래그
+        boolean orderProgress = true;   //플래그
 
         OrderOperation orderOperation;
 
@@ -173,6 +177,11 @@ public class KioskOrder {
         //주문결과 (결과번호, 주문개수)
         result_receiveOrder = new int[]{resultSignal, count};
         return result_receiveOrder;
+    }
+
+    //주문받기
+    private void receivePayment(){
+        
     }
 
     //주문취소시 주문내역 reset
