@@ -1,6 +1,6 @@
 # BEVERAGE ORDER KIOSK
 ### Authors
-    Jul.3, 2021 : jonny-ddns
+    Jul.3, 2021 : ภๅฟ๘มุ(Jang, wonjun)
 ### Change Logs   
 	Jul.4, 2021 : added comments.
 	Jul.9, 2021 : 

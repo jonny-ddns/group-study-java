@@ -1,8 +1,11 @@
-# BEVERAGE ORDER KIOSK
+# BEVERAGE ORDER KIOSK (ver.2)
 ### Authors
-    Aug.13, 2021 : 장원준(Wonjun.Jang)
+    Aug.13, 2021 : 장원준(Jang, wonjun)
 ### Change Logs   
-	
+	Aug.18, 2021 : 회원/비회원 주문 기능 추가
+	Aug.19, 2021 : 로그인/회원가입 기능 추가 
+	Aug.21, 2021 : 음료 주문시 결제기능 추가
+    
 ### Bugs
     
 ### Project Description
