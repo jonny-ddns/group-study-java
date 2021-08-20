@@ -36,16 +36,19 @@ public class KioskOrder {
     protected KioskOrder() {    	
     	System.out.println("ORDER START!");
     	scan = new Scanner(System.in);
+        do_orderStart();
+    }
+    public void do_orderStart(){
         orderStart();
     }
-    
+
     //주문받기
     private void orderStart() {
+        System.out.println("orderStart");
         personNow = null;           //주문자 정보 초기화
-        int result_orderWay = 0;    //주문방식- 취소/회원/비회원
-        int count;                  //주문개수
-        
-        while(true) {
+        boolean orderFinish = false;
+
+        while(!orderFinish) {
             //1. 주문방식 결정
             if(receiveOrderWay() == 0){
                 continue;
@@ -55,33 +58,34 @@ public class KioskOrder {
             personNow = getPersonNow();
 
             //3. 주문받기
-            int[] result_receiveOrder = receiveOrder();
-            int resultSignal = result_receiveOrder[0];
-            count = result_receiveOrder[1];
+            int[] result_receiveOrder = receiveOrderMenu();
+            int resultSignal    = result_receiveOrder[0];
+            int orderCount      = result_receiveOrder[1];
 
             //주문취소시
             if (resultSignal != 0) {
-                //주문하는 메서드 재호출하기
-            } else {
+                continue;
             }
+            System.out.println("주문개수 orderCount : "+ orderCount);
 
-            //영수증 출력
-            new CreateReceipt(count);
-            scan.close();
-            this.orderStart();  //주문받기 재시작
+            //영수증 생성 및 출력
+            new CreateReceipt(orderCount);
+            orderFinish = true;
         }
+        this.do_orderStart();
     }
 
     /*-----------------------------------*/
     /*
-    #리턴값에 따른 분기
+    @리턴값에 따른 분기
     .주문방식 - 0취소 / 1회원 / 2비회원
     .로그인 - 0취소 / 1로그인 / 2회원가입
     .회원가입 - 0취소 / 1가입완료
 
-    #리턴; 0취소 1회원 2비회원
+    @리턴; 0취소 1회원 2비회원
     */
     private int receiveOrderWay(){
+        System.out.println("receiveOrderWay");
         MemberOperation memberOperation;
         int result_orderDecide = 0; //리턴값
         int result_isMember;
@@ -99,30 +103,29 @@ public class KioskOrder {
         else if(result_isMember == 1) {
             memberOperation = new MemberOperation_signIn();
             result_signIn = memberOperation.execute(scan);
-            
-            //로그인 실패
-            if(result_signIn == 0){
-                result_orderDecide = 0;
-            }
+
             //로그인 성공
             if(result_signIn == 1){
                 result_orderDecide = 1;
             }
+
             //회원가입
             else if(result_signIn == 2){
                 memberOperation = new MemberOperation_signUp();
-                memberOperation.execute(scan);
-                result_orderDecide = 1;
+                if(memberOperation.execute(scan) != 0){
+                    result_orderDecide = 1;
+                }
             }
         }
         return result_orderDecide;
     }
 
     //주문내용 받기
-    private int[] receiveOrder() {
+    private int[] receiveOrderMenu() {
+        System.out.println("receiveOrderMenu");
         int[] result_receiveOrder;      //리턴객체
         int count = 1;                  //주문개수
-        int resultSignal = 0;           //주문신호
+        int resultSignal = 0;           //주문신호 (취소0 주문1)
         boolean orderProgress = true;    //플래그
 
         OrderOperation orderOperation;
@@ -166,11 +169,10 @@ public class KioskOrder {
                 orderOperation = new OrderOperation6_orderCheck();
                 if(orderOperation.execute(scan)){
                     resultSignal = 1;
-                    orderProgress = false;
                 } else {
                     reset();
-                    orderProgress = false;
                 }
+                orderProgress = false;
             }
             count++;
         }

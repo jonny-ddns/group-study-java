@@ -35,6 +35,7 @@ public class MemberOperation_signUp implements MemberOperation {
 
         MemberCollection memberCollection =  MemberCollection.getInstance();
         if(resultScan_birthday){
+            stepParameter = 1;
             //리스트에 회원정보 삽입하기
             Member member = new Member();
             member.setNick(scan_nick)
@@ -50,7 +51,7 @@ public class MemberOperation_signUp implements MemberOperation {
 
     //입력; 휴대폰번호
     private boolean getScanPhone(Scanner scan){
-        System.out.println("휴대폰번호를 입력하세요 (취소는 c)");
+        System.out.println("휴대폰번호를 숫자만 입력하세요 (취소는 c)");
         boolean goToNext = false;
         boolean scanWell = false;
         int count = 0;
@@ -77,7 +78,6 @@ public class MemberOperation_signUp implements MemberOperation {
             //취소 입력
             else if(scan_phone.equals("c")) {
                 System.out.println("취소되었습니다");
-                scanWell = false;
                 break;
             }
             //숫자 외에 다른 문자를 입력했다면
