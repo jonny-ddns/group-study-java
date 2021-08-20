@@ -1,4 +1,4 @@
-package beverage_order_kiosk_ver2.kiosk.receipt;
+package beverage_order_kiosk_ver2.kiosk.data.receipt;
 
 import beverage_order_kiosk_ver2.kiosk.data.orderInfo.OrderCollection;
 import beverage_order_kiosk_ver2.kiosk.data.orderInfo.Order;

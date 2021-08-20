@@ -1,7 +1,7 @@
 package beverage_order_kiosk_ver2.kiosk.command.order_operation;
 
 import beverage_order_kiosk_ver2.kiosk.data.beverageInfo.BeverKind;
-import beverage_order_kiosk_ver2.kiosk.receipt.UnitChange;
+import beverage_order_kiosk_ver2.kiosk.data.receipt.UnitChange;
 import java.util.Scanner;
 
 //음료 종류를 입력받는 역할 수행
