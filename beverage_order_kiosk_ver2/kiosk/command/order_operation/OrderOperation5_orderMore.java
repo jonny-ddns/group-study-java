@@ -2,15 +2,17 @@ package beverage_order_kiosk_ver2.kiosk.command.order_operation;
 
 import beverage_order_kiosk_ver2.kiosk.customerOrder.OrderCollection;
 import beverage_order_kiosk_ver2.kiosk.customerOrder.Order;
-
 import java.util.Scanner;
 
 //추가주문 여부를 입력받는 역할 수행
 public class OrderOperation5_orderMore implements OrderOperation {
+	OrderFunctions orderFunctions;
 	
 	@Override
 	public boolean execute(Scanner scan) {
-		String request 		= "";		//입력 버튼
+		orderFunctions = new OrderFunctions();
+
+		String request;					//입력 버튼
 		boolean goToNext 	= false;	//반복 플래그 변수
 		boolean orderMore	= false;	//추가 주문 여부 리턴
 
@@ -23,12 +25,11 @@ public class OrderOperation5_orderMore implements OrderOperation {
 
 		//추가주문 여부를 받기위한 반복문
     	while(!goToNext) {
-    		Mention m = new Mention();
-        	System.out.print(m.getMent5_orderMore());
+        	System.out.print("\n추가주문 하시겠습니까? (y/n): ");
         	request = scan.next().trim().toLowerCase();    	
     		
         	//y or n 입력 확인
-        	boolean isYesOrNo = CheckRequest.isYesOrNo(request);
+        	boolean isYesOrNo = orderFunctions.isYesOrNo(request);
 	        if(isYesOrNo){
 	        	if(request.equals("y")) {
 	        		orderMore = true;

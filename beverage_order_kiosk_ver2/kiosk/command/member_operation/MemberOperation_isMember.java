@@ -24,7 +24,7 @@ public class MemberOperation_isMember implements MemberOperation {
             //횟수 제한
             count++;
             if( count>3 ){
-                System.out.println(new Mention().getMENT_ORDER_AGAIN());
+                System.out.println("처음부터 다시 시도해주시기 바랍니다");
                 stepParameter = 3;
                 break;
             }
@@ -33,7 +33,7 @@ public class MemberOperation_isMember implements MemberOperation {
             scanInput = scan.next().trim();
 
             //입력한 번호 검증하기
-            MemberFunction f = new MemberFunction();
+            MemberFunctions f = new MemberFunctions();
             if(!f.isNumber(scanInput)){
                 System.out.println("숫자를 입력해주세요");
                 continue;

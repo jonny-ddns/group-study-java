@@ -64,7 +64,7 @@ public class MemberOperation_signUp implements MemberOperation {
             System.out.print("입력 : 010-");
             scan_phone = scan.next().trim();
 
-            MemberFunction f = new MemberFunction();
+            MemberFunctions f = new MemberFunctions();
             MemberCollection memberCollection = MemberCollection.getInstance();
             boolean isMember = memberCollection.isMemberInList(scan_phone);
 
@@ -133,7 +133,7 @@ public class MemberOperation_signUp implements MemberOperation {
         boolean goToNext = false;
         boolean scanWell = false;
         int count = 0;
-        MemberFunction f;
+        MemberFunctions f;
         while(!scanWell){
             count++;
             if( count>3 ){
@@ -150,7 +150,7 @@ public class MemberOperation_signUp implements MemberOperation {
                 break;
             }
             //숫자여부 확인
-            f = new MemberFunction();
+            f = new MemberFunctions();
             if(!f.isNumber(scan_birthday)){
                 continue;
             }

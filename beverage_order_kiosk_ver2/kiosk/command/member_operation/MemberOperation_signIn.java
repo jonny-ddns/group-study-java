@@ -16,7 +16,7 @@ public class MemberOperation_signIn implements MemberOperation {
     @Override
     public int execute(Scanner scan) {
         int stepParameter = 0;
-        
+
         System.out.println("\n회원여부를 확인합니다");
         System.out.println("휴대폰 뒷자리 8개를 입력하세요");
         System.out.println("(회원가입은 'q' 취소는 'c' 입력)");

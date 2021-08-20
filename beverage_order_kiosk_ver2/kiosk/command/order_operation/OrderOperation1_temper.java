@@ -4,13 +4,15 @@ import beverage_order_kiosk_ver2.kiosk.customerOrder.OrderCollection;
 import beverage_order_kiosk_ver2.kiosk.customerOrder.Order;
 import beverage_order_kiosk_ver2.kiosk.menu_enum.BeverTemper;
 import beverage_order_kiosk_ver2.kiosk.receipt.UnitChange;
-
 import java.util.Scanner;
 
 //음료 온도를 입력받는 역할 수행
 public class OrderOperation1_temper implements OrderOperation {
+	OrderFunctions orderFunctions;
+
     @Override
     public boolean execute(Scanner scan) {
+    	orderFunctions = new OrderFunctions();
         int input	 		= 0;		//주문내역 저장
         boolean goToNext 	= false;	//반복 플래그 변수
         boolean isCanceled = false;		//리턴 객체
@@ -22,10 +24,9 @@ public class OrderOperation1_temper implements OrderOperation {
 		}
     	
         while(!goToNext) {
-			Mention m = new Mention();
-			System.out.print(m.getMent1_temper());
+			System.out.print("\n1.ice 2.hot 선택 (주문취소 c): ");
 	    	String request = scan.next().trim().toLowerCase();
-      		boolean isNumber = CheckRequest.isNumber(request);
+      		boolean isNumber = orderFunctions.isNumber(request);
       		
             if(isNumber){
               	int num = Integer.parseInt(request);
@@ -45,23 +46,22 @@ public class OrderOperation1_temper implements OrderOperation {
             	}         
             }
             else if(request.equals("c")) {
-            	System.out.println(m.getMent6_cancel());
+            	System.out.println("\n주문을 취소하시겠습니까? (y/n): ");
             	
             	request = scan.next().trim().toLowerCase();
-            	boolean isYesOrNo = CheckRequest.isYesOrNo(request);
+            	boolean isYesOrNo = orderFunctions.isYesOrNo(request);
             	
             	if(isYesOrNo && request.equals("y")) {
-					System.out.println(m.getMent7_orderAgain());
+					System.out.println("주문이 취소되었습니다. 다시 입력해주세요");
                 	isCanceled = true;
                 	break;
             	}
             }        
             else {
-				System.out.println(m.getMent8_numberOnly());
+				System.out.println("숫자를 입력바랍니다");
             }
     	}
         order.setBeverTemper(input);
-
     	return isCanceled;
     }
 }
