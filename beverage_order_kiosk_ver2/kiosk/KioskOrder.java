@@ -10,12 +10,13 @@ import beverage_order_kiosk_ver2.kiosk.memberInfo.Member;
 import beverage_order_kiosk_ver2.kiosk.menu_enum.BeverKind;
 import beverage_order_kiosk_ver2.kiosk.menu_enum.Pricing;
 import beverage_order_kiosk_ver2.kiosk.menu_enum.BeverKind_ko;
-import beverage_order_kiosk_ver2.kiosk.receipt.CreateReceipt;
+import beverage_order_kiosk_ver2.kiosk.receipt.Receipt;
 import java.util.Scanner;
 
 public class KioskOrder {
     private final Scanner scan;
     private static Member personNow;
+    private Receipt receipt;
 
     public static Member getPersonNow() {
         return personNow;
@@ -35,7 +36,8 @@ public class KioskOrder {
 
     protected KioskOrder() {
     	System.out.println("ORDER START!");
-    	scan = new Scanner(System.in);
+    	scan    = new Scanner(System.in);
+        receipt = new Receipt();
         do_orderStart();
     }
     public void do_orderStart(){
@@ -64,7 +66,7 @@ public class KioskOrder {
             if (resultSignal == 0) { continue; }
             orderFinish = true;
         }
-        new CreateReceipt(orderCount);                                  //영수증 생성 및 출력
+        receipt.receiptPrint(orderCount);                               //영수증 생성 및 출력
         try { kioskSleep(); } catch (InterruptedException ignored){ }   //영수증 출력후 2초 sleep
         this.do_orderStart();                                           //키오스크 재호출
     }
@@ -116,7 +118,7 @@ public class KioskOrder {
     //주문내용 받기
     private int[] receiveOrderMenu() {
         int[] result_receiveOrder;      //리턴객체
-        int count = 1;                  //주문개수
+        int count = 0;                  //주문개수
         int resultSignal = 0;           //주문신호 (취소0 주문1)
         boolean orderProgress = true;    //플래그
 

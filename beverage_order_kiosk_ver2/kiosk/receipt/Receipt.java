@@ -6,24 +6,21 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-public class CreateReceipt {
-    int count;
-    
-    public CreateReceipt(int count) {
-        receiptTemplate(count);
-    }
-    
-    //영수증의 기본뼈대를 구성하는 메서드
-    private void receiptTemplate(int count) {
-        System.out.println("count : "+ count);
+public class Receipt {
+    StringBuilder sb = new StringBuilder();
 
-    	//주문번호 생성. 오늘날짜
-        SimpleDateFormat sdf = new SimpleDateFormat("MMdd");
-        String customerNum = sdf.format(new Date()) + count;
-        
-        StringBuilder sb = new StringBuilder();
+    public void receiptPrint(int count){
+        System.out.println(receiptTemplate(count));
+        sb.setLength(0);
+    }
+
+    //영수증의 기본뼈대를 구성하는 메서드
+    private String receiptTemplate(int count) {
+        //주문번호
+        String customerNum = receiptNum(count);
+
         sb.append("\n\n=====================\n");
-        sb.append("\t" + customerNum + "\n");
+        sb.append("\t").append(customerNum).append("\n");
         sb.append("========결제내역=======\n");
         sb.append("품목\t\t금액\n");
         sb.append("---------------------\n");
@@ -34,9 +31,9 @@ public class CreateReceipt {
         for (Order order : orders) {
         	
         	//ReceiptOrderInfo 클래스 인스턴스로 값 변환하기
-            ReceiptOrderInfo rc = new ReceiptOrderInfo();
-            String[] items		= rc.receiptItem(order);
-            int[] moneys		= rc.receiptMoney(order);
+            ReceiptOrderInfo receiptOrderInfo = new ReceiptOrderInfo();
+            String[] items	= receiptOrderInfo.receiptItem(order);
+            int[] moneys	= receiptOrderInfo.receiptMoney(order);
             
             String itemToPay = "";
             int moneyToPay = 0;
@@ -52,10 +49,17 @@ public class CreateReceipt {
             }
             sb.append("---------------------\n");
         }
-        sb.append("합계\t\t" + sum + "\n");
+        sb.append("합계\t\t").append(sum).append("\n");
         sb.append("=====================\n\n");
         sb.append("--영수증을 챙겨주세요--");
-        System.out.println(sb.toString());
+
+        return sb.toString();
+    }
+    
+    //주문번호 생성: 오늘날짜 + 주문개수
+    private String receiptNum(int count){
+        SimpleDateFormat sdf = new SimpleDateFormat("MMdd");
+        return sdf.format(new Date()) + count;
     }
 
     //주문내역을 담은 Orders클래스의 각 항목이 int 이므로 값을 적절히 변경된 값을 가져오는 역할 수행
