@@ -2,7 +2,6 @@ package beverage_order_kiosk_ver2.kiosk.receipt;
 
 import beverage_order_kiosk_ver2.kiosk.customerOrder.OrderCollection;
 import beverage_order_kiosk_ver2.kiosk.customerOrder.Order;
-
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -16,6 +15,7 @@ public class CreateReceipt {
     
     //영수증의 기본뼈대를 구성하는 메서드
     private void receiptTemplate(int count) {
+        System.out.println("count : "+ count);
 
     	//주문번호 생성. 오늘날짜
         SimpleDateFormat sdf = new SimpleDateFormat("MMdd");

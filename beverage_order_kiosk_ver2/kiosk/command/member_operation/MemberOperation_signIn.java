@@ -39,7 +39,7 @@ public class MemberOperation_signIn implements MemberOperation {
             }
             //2 회원가입 처리
             else if(scanInput.equals("q")) {
-                System.out.print("\n회원가입하시겠습니까[y/n] : ");
+                System.out.print("회원가입하시겠습니까[y/n] : ");
                 String inputSignup = scan.next().trim().toLowerCase();
 
                 if(inputSignup.equals("y")){

@@ -33,7 +33,7 @@ public class KioskOrder {
         setPersonNow(member);
     }
 
-    protected KioskOrder() {    	
+    protected KioskOrder() {
     	System.out.println("ORDER START!");
     	scan = new Scanner(System.in);
         do_orderStart();
@@ -44,15 +44,13 @@ public class KioskOrder {
 
     //주문받기
     private void orderStart() {
-        System.out.println("orderStart");
         personNow = null;           //주문자 정보 초기화
         boolean orderFinish = false;
+        int orderCount = 0;
 
         while(!orderFinish) {
             //1. 주문방식 결정
-            if(receiveOrderWay() == 0){
-                continue;
-            }
+            if(receiveOrderWay() == 0) { continue; }
 
             //2. 주문자 정보 가져오기
             personNow = getPersonNow();
@@ -60,19 +58,15 @@ public class KioskOrder {
             //3. 주문받기
             int[] result_receiveOrder = receiveOrderMenu();
             int resultSignal    = result_receiveOrder[0];
-            int orderCount      = result_receiveOrder[1];
+            orderCount          = result_receiveOrder[1];
 
             //주문취소시
-            if (resultSignal != 0) {
-                continue;
-            }
-            System.out.println("주문개수 orderCount : "+ orderCount);
-
-            //영수증 생성 및 출력
-            new CreateReceipt(orderCount);
+            if (resultSignal == 0) { continue; }
             orderFinish = true;
         }
-        this.do_orderStart();
+        new CreateReceipt(orderCount);                                  //영수증 생성 및 출력
+        try { kioskSleep(); } catch (InterruptedException ignored){ }   //영수증 출력후 2초 sleep
+        this.do_orderStart();                                           //키오스크 재호출
     }
 
     /*-----------------------------------*/
@@ -85,7 +79,6 @@ public class KioskOrder {
     @리턴; 0취소 1회원 2비회원
     */
     private int receiveOrderWay(){
-        System.out.println("receiveOrderWay");
         MemberOperation memberOperation;
         int result_orderDecide = 0; //리턴값
         int result_isMember;
@@ -122,7 +115,6 @@ public class KioskOrder {
 
     //주문내용 받기
     private int[] receiveOrderMenu() {
-        System.out.println("receiveOrderMenu");
         int[] result_receiveOrder;      //리턴객체
         int count = 1;                  //주문개수
         int resultSignal = 0;           //주문신호 (취소0 주문1)
@@ -200,5 +192,9 @@ public class KioskOrder {
 			System.out.printf(" %d. %s\t%d원\n", i+1, beverKind_ko[i], priceArr[i]);
 		}
         System.out.println(line);
+    }
+
+    private void kioskSleep() throws InterruptedException{
+        Thread.sleep(2000);
     }
 }

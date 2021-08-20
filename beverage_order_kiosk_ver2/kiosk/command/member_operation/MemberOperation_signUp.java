@@ -45,13 +45,12 @@ public class MemberOperation_signUp implements MemberOperation {
             memberCollection.addCustomer(member);
             KioskOrder.setPersonNow(member);
         }
-        System.out.println("MemberOperation_signUp end");
         return stepParameter;
     }
 
     //입력; 휴대폰번호
     private boolean getScanPhone(Scanner scan){
-        System.out.println("휴대폰번호를 숫자만 입력하세요 (취소는 c)");
+        System.out.println("휴대폰번호를 숫자만 입력하세요(취소는 c)");
         boolean goToNext = false;
         boolean scanWell = false;
         int count = 0;
@@ -98,7 +97,7 @@ public class MemberOperation_signUp implements MemberOperation {
 
     //입력; 닉네임
     private boolean getScanNick(Scanner scan){
-        System.out.println("닉네임을 입력하세요 (취소는 c)");
+        System.out.println("닉네임을 입력하세요(취소는 c)");
         boolean goToNext = false;
         boolean scanWell = false;
         int count = 0;
@@ -130,10 +129,11 @@ public class MemberOperation_signUp implements MemberOperation {
     
     //입력; 생일
     private boolean getScanBirthday(Scanner scan){
-        System.out.println("생일 4자리를 입력하세요 [ex.0813] (취소는 c)");
+        System.out.println("생일 4자리를 입력하세요(취소는 c) [ex.0813]");
         boolean goToNext = false;
         boolean scanWell = false;
         int count = 0;
+        MemberFunction f;
         while(!scanWell){
             count++;
             if( count>3 ){
@@ -143,7 +143,6 @@ public class MemberOperation_signUp implements MemberOperation {
 
             System.out.print("입력 : ");
             scan_birthday = scan.next().trim();
-            System.out.println("scan_birthday : "+ scan_birthday);
 
             //취소 입력
             if(scan_birthday.equals("c")) {
@@ -151,31 +150,26 @@ public class MemberOperation_signUp implements MemberOperation {
                 break;
             }
             //숫자여부 확인
-            MemberFunction f = new MemberFunction();
-            if(f.isNumber(scan_birthday)){
+            f = new MemberFunction();
+            if(!f.isNumber(scan_birthday)){
                 continue;
             }
-            else if(scan_birthday.length() != 4){
+            //4글자 입력 확인
+            if(scan_birthday.length() != 4){
                 System.out.println("생일을 4자리로 입력해주세요");
                 continue;
             }
-
             //월, 일 확인
             String strMonth = scan_birthday.substring(0, 2);
-            System.out.println(strMonth);
-            int month = Integer.parseInt(strMonth);
+            String strDay   = scan_birthday.substring(2, 4);
+            int month   = Integer.parseInt(strMonth);
+            int day     = Integer.parseInt(strDay);
 
-            String strDay = scan_birthday.substring(2, 4);
-            System.out.println(strDay);
-            int day = Integer.parseInt(strDay);
-
-            //출력 확인
-            System.out.println("month : "+ month);
-            System.out.println("day : "+ day);
-
-            if( !((0<month && month<13) || (0<day && day<32)) ){
+            if( !((0<month && month<13) && (0<day && day<32)) ){
+                System.out.println("날짜를 다시 입력바랍니다");
                 continue;
             }
+            System.out.println("\n회원가입 완료!");
             goToNext = true;
             scanWell = true;
         }

@@ -54,8 +54,8 @@ public class MemberOperation_isMember implements MemberOperation {
     }
 
     private void printWelcomeMent(){
-        System.out.println("안녕하세요. 음료주문 키오스크입니다. 주문방식을 선택해주세요");
-        System.out.println("\n1. 회원으로 주문");
+        System.out.println("안녕하세요. 음료주문 키오스크입니다\n주문방식을 선택해주세요\n");
+        System.out.println("1. 회원으로 주문");
         System.out.println("2. 비회원으로 주문");
     }
 }
