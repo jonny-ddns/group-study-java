@@ -1,4 +1,4 @@
-package beverage_order_kiosk_ver2.kiosk.command.member_operation;
+package beverage_order_kiosk_ver2.kiosk.command.member_command;
 
 import beverage_order_kiosk_ver2.kiosk.KioskOrder;
 import beverage_order_kiosk_ver2.kiosk.data.memberInfo.Member;
@@ -12,7 +12,7 @@ import java.util.Scanner;
 1 로그인
 2 가입
  */
-public class MemberOperation_signIn implements MemberOperation {
+public class MemberCommand_signIn implements MemberCommand {
     @Override
     public int execute(Scanner scan) {
         int stepParameter = 0;

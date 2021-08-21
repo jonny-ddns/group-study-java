@@ -1,21 +1,23 @@
-package beverage_order_kiosk_ver2.kiosk.command.order_operation;
+package beverage_order_kiosk_ver2.kiosk.command.order_command;
 
 import beverage_order_kiosk_ver2.kiosk.data.beverageInfo.BeverKind;
+import beverage_order_kiosk_ver2.kiosk.data.beverageInfo.BeverKind_ko;
+import beverage_order_kiosk_ver2.kiosk.data.beverageInfo.Pricing;
 import beverage_order_kiosk_ver2.kiosk.data.receipt.UnitChange;
 import java.util.Scanner;
 
 //음료 종류를 입력받는 역할 수행
 //취소여부 리턴
-public class OrderOperation0_kind implements OrderOperation {
-	OrderFunctions orderFunctions;
+public class OrderCommand_0kind implements OrderCommand {
+	private final OrderFunctions orderFunctions = new OrderFunctions();
 
 	@Override
 	public boolean execute(Scanner scan) {
-		orderFunctions = new OrderFunctions();
 		boolean isCanceled = false;
-		int count = 0;
-
 		boolean isOk = false;
+		int count = 0;
+		printMenu();
+
 		while(!isOk) {
 			count++;
 			if(count > 5) {
@@ -46,6 +48,23 @@ public class OrderOperation0_kind implements OrderOperation {
 	}
 
 	/*-------------------------*/
+
+	//메뉴 출력
+	private void printMenu() {
+		BeverKind_ko[] beverKind_ko = BeverKind_ko.values();
+		Pricing p		= new Pricing();
+		int[] priceArr	= p.getBeveragePrice();
+		String line     = "----------------------";
+
+		System.out.println(line);
+		System.out.println("메뉴");
+		for(int i = 0; i< BeverKind.values().length; i++) {
+			System.out.printf(" %d. %s\t%d원\n", i+1, beverKind_ko[i], priceArr[i]);
+		}
+		System.out.println(line);
+	}
+
+
 	//스캐너 입력받기
 	private String getScanInput(Scanner scan){
 		System.out.print("\n음료(번호)를 선택해주세요 (주문취소 c): ");

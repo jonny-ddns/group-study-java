@@ -1,7 +1,7 @@
-package beverage_order_kiosk_ver2.kiosk.command.member_operation;
+package beverage_order_kiosk_ver2.kiosk.command.member_command;
 
 import java.util.Scanner;
 
-public interface MemberOperation {
+public interface MemberCommand {
     int execute(Scanner scan);
 }

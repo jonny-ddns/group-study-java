@@ -1,4 +1,4 @@
-package beverage_order_kiosk_ver2.kiosk.command.order_operation;
+package beverage_order_kiosk_ver2.kiosk.command.order_command;
 
 import beverage_order_kiosk_ver2.kiosk.data.orderInfo.OrderCollection;
 import beverage_order_kiosk_ver2.kiosk.data.orderInfo.Order;
@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Scanner;
 
 //주문내역 확인결과를 입력받는 역할 수행
-public class OrderOperation6_orderCheck implements OrderOperation {
+public class OrderCommand_6orderCheck implements OrderCommand {
     OrderFunctions orderFunctions;
 
     @Override

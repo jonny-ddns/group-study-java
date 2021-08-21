@@ -1,4 +1,4 @@
-package beverage_order_kiosk_ver2.kiosk.command.order_operation;
+package beverage_order_kiosk_ver2.kiosk.command.order_command;
 
 import beverage_order_kiosk_ver2.kiosk.data.orderInfo.Order;
 import beverage_order_kiosk_ver2.kiosk.data.orderInfo.OrderCollection;
@@ -7,7 +7,7 @@ import beverage_order_kiosk_ver2.kiosk.data.receipt.UnitChange;
 import java.util.Scanner;
 
 //음료 온도를 입력받는 역할 수행
-public class OrderOperation1_temper implements OrderOperation {
+public class OrderCommand_1temper implements OrderCommand {
 	OrderFunctions orderFunctions;
 
 	@Override

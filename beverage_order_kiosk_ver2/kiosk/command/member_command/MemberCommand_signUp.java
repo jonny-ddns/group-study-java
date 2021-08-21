@@ -1,6 +1,7 @@
-package beverage_order_kiosk_ver2.kiosk.command.member_operation;
+package beverage_order_kiosk_ver2.kiosk.command.member_command;
 
 import beverage_order_kiosk_ver2.kiosk.KioskOrder;
+import beverage_order_kiosk_ver2.kiosk.command.CommandFunctions;
 import beverage_order_kiosk_ver2.kiosk.data.memberInfo.Member;
 import beverage_order_kiosk_ver2.kiosk.data.memberInfo.MemberCollection;
 import java.util.Scanner;
@@ -12,8 +13,9 @@ import java.util.Scanner;
 0 취소
 1 정상처리
  */
-public class MemberOperation_signUp implements MemberOperation {
-
+public class MemberCommand_signUp implements MemberCommand {
+    private final MemberCollection memberCollection = MemberCollection.getInstance();
+    private final CommandFunctions commandFunctions = new CommandFunctions();
     private String scan_phone = "";
     private String scan_nick = "";
     private String scan_birthday = "";
@@ -33,7 +35,6 @@ public class MemberOperation_signUp implements MemberOperation {
             resultScan_birthday = getScanBirthday(scan);
         }
 
-        MemberCollection memberCollection =  MemberCollection.getInstance();
         if(resultScan_birthday){
             stepParameter = 1;
             //리스트에 회원정보 삽입하기
@@ -64,8 +65,6 @@ public class MemberOperation_signUp implements MemberOperation {
             System.out.print("입력 : 010-");
             scan_phone = scan.next().trim();
 
-            MemberFunctions f = new MemberFunctions();
-            MemberCollection memberCollection = MemberCollection.getInstance();
             boolean isMember = memberCollection.isMemberInList(scan_phone);
 
             /* 예외상황 처리 */
@@ -80,7 +79,7 @@ public class MemberOperation_signUp implements MemberOperation {
                 break;
             }
             //숫자 외에 다른 문자를 입력했다면
-            else if( !f.isNumber(scan_phone) ){
+            else if( !commandFunctions.isNumber(scan_phone) ){
                 System.out.println("숫자만 입력바랍니다");
                 continue;
             }
@@ -133,7 +132,7 @@ public class MemberOperation_signUp implements MemberOperation {
         boolean goToNext = false;
         boolean scanWell = false;
         int count = 0;
-        MemberFunctions f;
+
         while(!scanWell){
             count++;
             if( count>3 ){
@@ -150,8 +149,7 @@ public class MemberOperation_signUp implements MemberOperation {
                 break;
             }
             //숫자여부 확인
-            f = new MemberFunctions();
-            if(!f.isNumber(scan_birthday)){
+            if(!commandFunctions.isNumber(scan_birthday)){
                 continue;
             }
             //4글자 입력 확인

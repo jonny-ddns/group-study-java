@@ -1,6 +1,7 @@
-package beverage_order_kiosk_ver2.kiosk.command.member_operation;
+package beverage_order_kiosk_ver2.kiosk.command.member_command;
 
 import beverage_order_kiosk_ver2.kiosk.KioskOrder;
+import beverage_order_kiosk_ver2.kiosk.command.CommandFunctions;
 import java.util.Scanner;
 
 //주문방식 결정하기 - 회원/비회원
@@ -10,7 +11,9 @@ import java.util.Scanner;
 1 회원
 2 비회원
  */
-public class MemberOperation_isMember implements MemberOperation {
+public class MemberCommand_isMember implements MemberCommand {
+    CommandFunctions commandFunctions;
+
     @Override
     public int execute(Scanner scan) {
         String scanInput;
@@ -33,8 +36,8 @@ public class MemberOperation_isMember implements MemberOperation {
             scanInput = scan.next().trim();
 
             //입력한 번호 검증하기
-            MemberFunctions f = new MemberFunctions();
-            if(!f.isNumber(scanInput)){
+            commandFunctions = new CommandFunctions();
+            if(!commandFunctions.isNumber(scanInput)){
                 System.out.println("숫자를 입력해주세요");
                 continue;
             } if(!(scanInput.equals("1") || scanInput.equals("2"))){

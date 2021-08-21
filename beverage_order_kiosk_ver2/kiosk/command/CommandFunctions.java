@@ -1,6 +1,6 @@
-package beverage_order_kiosk_ver2.kiosk.command.member_operation;
+package beverage_order_kiosk_ver2.kiosk.command;
 
-public class MemberFunctions {
+public class CommandFunctions {
     //인자값이 숫자인지 확인하기
     public boolean isNumber(String inputNumber){
         boolean isNum = false;
@@ -9,5 +9,10 @@ public class MemberFunctions {
             isNum = true;
         } catch (NumberFormatException ignored){ }
         return isNum;
+    }
+
+    //입력값이 y||n 인지 확인
+    public boolean isYesOrNo(String request) {
+        return request.equals("y") || request.equals("n");
     }
 }
