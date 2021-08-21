@@ -19,7 +19,7 @@ public class OrderCommand_1temper implements OrderCommand {
 
 		boolean isCanceled = false;
 		int count = 0;
-
+		String input = "0";
 		boolean isOk = false;
 		while(!isOk) {
 			count++;
@@ -27,7 +27,7 @@ public class OrderCommand_1temper implements OrderCommand {
 				isCanceled = true;
 				break;
 			}
-			String input = getScanInput(scan);
+			input = getScanInput(scan);
 
 			//취소시
 			if(input.equals("c")){
@@ -47,66 +47,10 @@ public class OrderCommand_1temper implements OrderCommand {
 				System.out.println("번호를 다시 입력바랍니다 (1~2)");
 			}
 		}
-		order.setBeverTemper(input);
+		order.setBeverTemper(Integer.parseInt(input));
 		return isCanceled;
 	}
 
-//    @Override
-//    public boolean execute(Scanner scan) {
-//    	orderFunctions = new OrderFunctions();
-//
-//		//커피 종류를 주문하지 않았다면 아래 while 문 실행되지 않음
-//		Order order = OrderCollection.get_orderData();
-//		if(!(order.getBeverKind()==1 || order.getBeverKind()==2)){
-//			goToNext = true;
-//		}
-//
-//        while(!goToNext) {
-//			System.out.print("\n1.ice 2.hot 선택 (주문취소 c): ");
-//	    	String request = scan.next().trim().toLowerCase();
-//      		boolean isNumber = orderFunctions.isNumber(request);
-//
-//            if(isNumber){
-//              	int num = Integer.parseInt(request);
-//                int count = BeverTemper.values().length;
-//
-//                if(0<num && num<count+1) {
-//                	input = num;
-//
-//                	int kind = order.getBeverKind();
-//                	String str1 = UnitChange.toString_kind(kind);
-//                	String str2 = UnitChange.toString_temper(num);
-//
-//                	System.out.printf("%s(%s)\n", str1, str2);
-//            		goToNext = true;
-//            	} else {
-//            		System.out.println("번호를 다시 입력바랍니다 (1~2)");
-//            	}
-//            }
-//            else if(request.equals("c")) {
-//            	System.out.println("\n주문을 취소하시겠습니까? (y/n): ");
-//
-//            	request = scan.next().trim().toLowerCase();
-//            	boolean isYesOrNo = orderFunctions.isYesOrNo(request);
-//
-//            	if(isYesOrNo && request.equals("y")) {
-//					System.out.println("주문이 취소되었습니다. 다시 입력해주세요");
-//                	isCanceled = true;
-//                	break;
-//            	}
-//            }
-//            else {
-//				System.out.println("숫자를 입력바랍니다");
-//            }
-//    	}
-//        order.setBeverTemper(input);
-//    	return isCanceled;
-//    }
-
-
-
-
-	/*-------------------------*/
 	//스캐너 입력받기
 	private String getScanInput(Scanner scan){
 		System.out.print("\n1.ice 2.hot 선택 (주문취소 c): ");

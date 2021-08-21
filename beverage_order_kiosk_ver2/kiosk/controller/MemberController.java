@@ -8,6 +8,17 @@ import beverage_order_kiosk_ver2.kiosk.command.member_command.MemberCommand_sign
 import java.util.Scanner;
 
 public class MemberController implements Controller{
+    private MemberController memberController;
+    public MemberController(){ }
+
+    @Override
+    public Controller getInstance(){
+        if(memberController == null){
+            memberController = new MemberController();
+        }
+        return memberController;
+    }
+
     @Override
     public int control(Scanner scan) {
 

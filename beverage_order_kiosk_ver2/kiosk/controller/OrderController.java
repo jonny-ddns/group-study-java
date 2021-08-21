@@ -6,6 +6,16 @@ import beverage_order_kiosk_ver2.kiosk.data.orderInfo.OrderCollection;
 import java.util.Scanner;
 
 public class OrderController implements Controller{
+    OrderController orderController;
+
+    @Override
+    public Controller getInstance(){
+        if(orderController == null){
+            orderController = new OrderController();
+        }
+        return orderController;
+    }
+
     @Override
     public int control(Scanner scan) {
         return 0;
