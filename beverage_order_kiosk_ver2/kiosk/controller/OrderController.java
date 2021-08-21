@@ -2,33 +2,12 @@ package beverage_order_kiosk_ver2.kiosk.controller;
 
 import beverage_order_kiosk_ver2.kiosk.command.order_command.*;
 import beverage_order_kiosk_ver2.kiosk.data.orderInfo.OrderCollection;
-
 import java.util.Scanner;
 
 public class OrderController implements Controller{
-    OrderController orderController;
-
-    @Override
-    public Controller getInstance(){
-        if(orderController == null){
-            orderController = new OrderController();
-        }
-        return orderController;
-    }
-
     @Override
     public int control(Scanner scan) {
-        return 0;
-    }
-
-    private void reset(){
-        OrderCollection orderCollection = OrderCollection.getInstance();
-        orderCollection.reset_orderInfo();
-    }
-
-    private int[] receiveOrderMenu(Scanner scan) {
-
-        int[] result_receiveOrder;      //리턴객체
+        int result_receiveOrder;        //리턴객체
         int count = 0;                  //주문개수
         int resultSignal = 0;           //주문신호 (취소0 주문1)
         boolean orderProgress = true;   //플래그
@@ -82,10 +61,12 @@ public class OrderController implements Controller{
             count++;
         }
         //주문결과 (결과번호, 주문개수)
-        result_receiveOrder = new int[]{resultSignal, count};
+        result_receiveOrder = resultSignal;
         return result_receiveOrder;
     }
 
-
-
+    private void reset(){
+        OrderCollection orderCollection = OrderCollection.getInstance();
+        orderCollection.reset_orderInfo();
+    }
 }

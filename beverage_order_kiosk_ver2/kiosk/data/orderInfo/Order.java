@@ -6,6 +6,7 @@ public class Order {
     private int beverShot;		//음료 샷
     private int beverSize;		//음료 크기
     private int beverWhere;		//음료 섭취장소
+    private int beverCount;     //주문개수
 
     public int getBeverKind() {
         return beverKind;
@@ -44,6 +45,15 @@ public class Order {
     }
     public Order setBeverWhere(int beverWhere) {
         this.beverWhere = beverWhere;
+        return this;
+    }
+
+    public int getBeverCount() {
+        return beverCount;
+    }
+
+    public Order setBeverCount(int beverCount) {
+        this.beverCount = beverCount;
         return this;
     }
 }

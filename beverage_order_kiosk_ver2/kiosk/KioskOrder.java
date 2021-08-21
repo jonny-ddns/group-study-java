@@ -13,8 +13,8 @@ public class KioskOrder {
     private final Controller orderController;
     private final Controller paymentController;
     private final Scanner scan;
-    private static Member personNow;
     private final Receipt receipt;
+    private static Member personNow;
 
     public static Member getPersonNow() {
         return personNow;
@@ -32,8 +32,6 @@ public class KioskOrder {
         setPersonNow(member);
     }
 
-
-
     protected KioskOrder() {
         System.out.println("ORDER START!");
         memberController    = new MemberController();
@@ -49,11 +47,27 @@ public class KioskOrder {
         personNow = null;           //주문자 정보 초기화
         boolean orderFinish = false;
         int orderCount = 0;
+        int controlResult;
 
         while(!orderFinish) {
-            
-            //클래스 만들어서 분리하기
-            int test01 = memberController.control(scan);
+            controlResult = memberController.control(scan);
+            //취소시 다시 처음부터
+            if(controlResult == 0){
+                continue;
+            }
+
+            //회원 정보 확인
+//            System.out.println(personNow.getBirthday());
+//            System.out.println(personNow.getNick());
+
+            int result02 = orderController.control(scan);
+            System.out.println(result02);
+
+            int result03 = paymentController.control(scan);
+            System.out.println(result03);
+
+            System.out.println("------------TEST-------------");
+//            break;
 
 //            controller = new OrderController();
 //            int test02 = controller.control(scan);
@@ -90,7 +104,6 @@ public class KioskOrder {
         try { kioskSleep(); } catch (InterruptedException ignored){ }   //영수증 출력후 2초 sleep
         this.orderStart();                                              //키오스크 재호출
     }
-
 
     private void kioskSleep() throws InterruptedException{
         Thread.sleep(2000);

@@ -33,6 +33,8 @@ public class OrderCommand_5orderMore implements OrderCommand {
 	        if(isYesOrNo){
 	        	if(request.equals("y")) {
 	        		orderMore = true;
+	        		int countNow = data.getBeverCount();
+
 	        	}
 	        	goToNext = true;
 	        } else {

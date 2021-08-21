@@ -4,37 +4,14 @@ import beverage_order_kiosk_ver2.kiosk.command.member_command.MemberCommand;
 import beverage_order_kiosk_ver2.kiosk.command.member_command.MemberCommand_isMember;
 import beverage_order_kiosk_ver2.kiosk.command.member_command.MemberCommand_signIn;
 import beverage_order_kiosk_ver2.kiosk.command.member_command.MemberCommand_signUp;
-
 import java.util.Scanner;
 
 public class MemberController implements Controller{
-    private MemberController memberController;
-    public MemberController(){ }
-
-    @Override
-    public Controller getInstance(){
-        if(memberController == null){
-            memberController = new MemberController();
-        }
-        return memberController;
-    }
-
+    /*
+    리턴; 0취소 1회원 2비회원
+    */
     @Override
     public int control(Scanner scan) {
-
-        return 0;
-    }
-
-    /*
-    @리턴값에 따른 분기
-    .주문방식 - 0취소 / 1회원 / 2비회원
-    .로그인 - 0취소 / 1로그인 / 2회원가입
-    .회원가입 - 0취소 / 1가입완료
-
-    @리턴; 0취소 1회원 2비회원
-    */
-
-    private int receiveOrderWay(Scanner scan){
         MemberCommand memberCommand;
         int result_orderDecide = 0; //리턴값
         int result_isMember;
@@ -68,7 +45,4 @@ public class MemberController implements Controller{
         }
         return result_orderDecide;
     }
-
-
-
 }
