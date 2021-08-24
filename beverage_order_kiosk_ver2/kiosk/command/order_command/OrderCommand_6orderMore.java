@@ -5,7 +5,7 @@ import beverage_order_kiosk_ver2.kiosk.data.orderInfo.Order;
 import java.util.Scanner;
 
 //추가주문 여부를 입력받는 역할 수행
-public class OrderCommand_5orderMore implements OrderCommand {
+public class OrderCommand_6orderMore implements OrderCommand {
 	OrderFunctions orderFunctions;
 	
 	@Override

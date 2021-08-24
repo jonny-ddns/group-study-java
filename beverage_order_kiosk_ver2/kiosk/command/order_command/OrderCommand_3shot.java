@@ -7,7 +7,7 @@ import beverage_order_kiosk_ver2.kiosk.data.receipt.UnitChange;
 import java.util.Scanner;
 
 //음료 샷 개수를 입력받는 역할 수행
-public class OrderCommand_2shot implements OrderCommand {
+public class OrderCommand_3shot implements OrderCommand {
 	OrderFunctions orderFunctions;
 
 	@Override

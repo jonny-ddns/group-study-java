@@ -8,7 +8,7 @@ import beverage_order_kiosk_ver2.kiosk.data.receipt.UnitChange;
 import java.util.Scanner;
 
 //음료 섭취장소를 입력받는 역할 수행
-public class OrderCommand_4where implements OrderCommand {
+public class OrderCommand_5where implements OrderCommand {
 	OrderFunctions orderFunctions;
 
     @Override

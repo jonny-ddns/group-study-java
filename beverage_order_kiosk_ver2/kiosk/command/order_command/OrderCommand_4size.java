@@ -7,7 +7,7 @@ import beverage_order_kiosk_ver2.kiosk.data.receipt.UnitChange;
 import java.util.Scanner;
 
 //음료 크기를 입력받는 역할 수행
-public class OrderCommand_3size implements OrderCommand {
+public class OrderCommand_4size implements OrderCommand {
 	OrderFunctions orderFunctions;
     @Override
     public boolean execute(Scanner scan) {

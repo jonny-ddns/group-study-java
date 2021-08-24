@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Scanner;
 
 //주문내역 확인결과를 입력받는 역할 수행
-public class OrderCommand_6orderCheck implements OrderCommand {
+public class OrderCommand_7orderCheck implements OrderCommand {
     OrderFunctions orderFunctions;
 
     @Override

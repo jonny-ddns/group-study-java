@@ -23,34 +23,34 @@ public class OrderController implements Controller{
                 break;
             }
             //음료 온도
-            orderCommand = new OrderCommand_1temper();
+            orderCommand = new OrderCommand_2temper();
             if(orderCommand.execute(scan)) {
                 reset();
                 break;
             }
             //음료 샷
-            orderCommand = new OrderCommand_2shot();
+            orderCommand = new OrderCommand_3shot();
             if(orderCommand.execute(scan)) {
                 reset();
                 break;
             }
             //음료 크기
-            orderCommand = new OrderCommand_3size();
+            orderCommand = new OrderCommand_4size();
             if(orderCommand.execute(scan)) {
                 reset();
                 break;
             }
             //음료 섭취장소
-            orderCommand = new OrderCommand_4where();
+            orderCommand = new OrderCommand_5where();
             if(orderCommand.execute(scan)) {
                 reset();
                 break;
             }
             //추가주문 희망시 주문더 받기
-            orderCommand = new OrderCommand_5orderMore();
+            orderCommand = new OrderCommand_6orderMore();
             if(!orderCommand.execute(scan)) {
                 //추가주문 없을시 최종주문 확인하기
-                orderCommand = new OrderCommand_6orderCheck();
+                orderCommand = new OrderCommand_7orderCheck();
                 if(orderCommand.execute(scan)){
                     resultSignal = 1;
                 } else {
