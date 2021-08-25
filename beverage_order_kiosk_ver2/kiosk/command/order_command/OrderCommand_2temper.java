@@ -1,21 +1,18 @@
 package beverage_order_kiosk_ver2.kiosk.command.order_command;
 
+import beverage_order_kiosk_ver2.kiosk.data.beverageInfo.BeverageInfo;
 import beverage_order_kiosk_ver2.kiosk.data.orderInfo.Order;
 import beverage_order_kiosk_ver2.kiosk.data.orderInfo.OrderCollection;
-import beverage_order_kiosk_ver2.kiosk.data.beverageInfo.BeverTemper;
 import beverage_order_kiosk_ver2.kiosk.data.receipt.UnitChange;
 import java.util.Scanner;
 
 //음료 온도를 입력받는 역할 수행
 public class OrderCommand_2temper implements OrderCommand {
 	OrderFunctions orderFunctions;
-
 	@Override
 	public boolean execute(Scanner scan) {
+		orderFunctions = new OrderFunctions();
 		Order order = OrderCollection.get_orderData();
-		if(!(order.getBeverKind()==1 || order.getBeverKind()==2)){
-			 boolean tmp = true;
-		}
 
 		boolean isCanceled = false;
 		int count = 0;
@@ -44,7 +41,7 @@ public class OrderCommand_2temper implements OrderCommand {
 				check_beverageChoose(input);
 				isOk = true;
 			} else{
-				System.out.println("번호를 다시 입력바랍니다 (1~2)");
+				System.out.printf("번호를 다시 입력바랍니다 (1~%d)\n", BeverageInfo.TEMPER.values().length);
 			}
 		}
 		order.setBeverTemper(Integer.parseInt(input));
@@ -62,7 +59,7 @@ public class OrderCommand_2temper implements OrderCommand {
 		boolean inputCheck = false;
 		if(orderFunctions.isNumber(input)){
 			int num = Integer.parseInt(input);
-			int count = BeverTemper.values().length;
+			int count = BeverageInfo.TEMPER.values().length;
 
 			//숫자가 범위에 해당하는지 확인
 			if(0<num && num<count+1) {
@@ -97,7 +94,7 @@ public class OrderCommand_2temper implements OrderCommand {
 	//단위변환
 	private void check_beverageChoose(String input){
 		int num = Integer.parseInt(input);
-		String str1 = UnitChange.toString_kind(num);
-		System.out.printf("%s\n", str1);
+		String str = UnitChange.toString_temper(num);
+		System.out.printf("%s\n", str);
 	}
 }

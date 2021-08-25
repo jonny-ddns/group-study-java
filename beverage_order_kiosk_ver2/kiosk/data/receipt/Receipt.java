@@ -64,7 +64,7 @@ public class Receipt {
 
     //주문내역을 담은 Orders클래스의 각 항목이 int 이므로 값을 적절히 변경된 값을 가져오는 역할 수행
     //UnitChange 클래스의 메서드를 사용하여 값을 변경함
-    private class ReceiptOrderInfo {
+    private static class ReceiptOrderInfo {
 
         //create bill items. 영수증 품목생성
         String[] receiptItem(Order order){

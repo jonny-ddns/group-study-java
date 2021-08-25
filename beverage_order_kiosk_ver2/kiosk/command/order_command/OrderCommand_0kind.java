@@ -1,9 +1,9 @@
 package beverage_order_kiosk_ver2.kiosk.command.order_command;
 
-import beverage_order_kiosk_ver2.kiosk.data.beverageInfo.BeverKind;
-import beverage_order_kiosk_ver2.kiosk.data.beverageInfo.BeverKind_ko;
-import beverage_order_kiosk_ver2.kiosk.data.beverageInfo.Pricing;
+import beverage_order_kiosk.kiosk.menu_enum.BeverKind;
+import beverage_order_kiosk_ver2.kiosk.data.beverageInfo.BeverageInfo;
 import beverage_order_kiosk_ver2.kiosk.data.receipt.UnitChange;
+import java.util.Map;
 import java.util.Scanner;
 
 //음료 종류를 입력받는 역할 수행
@@ -41,29 +41,31 @@ public class OrderCommand_0kind implements OrderCommand {
 				check_beverageChoose(input);
 				isOk = true;
 			} else{
-				System.out.println("번호를 다시 입력바랍니다 (1~6)");
+				System.out.printf("번호를 다시 입력바랍니다 (1~%d)\n", BeverageInfo.KIND.values().length);
 			}
 		}
 		return isCanceled;
 	}
 
 	/*-------------------------*/
-
 	//메뉴 출력
 	private void printMenu() {
-		BeverKind_ko[] beverKind_ko = BeverKind_ko.values();
-		Pricing p		= new Pricing();
-		int[] priceArr	= p.getBeveragePrice();
-		String line     = "----------------------";
+		Map<String, Integer> menuMap = new BeverageInfo().getBeverageMap();
+		BeverageInfo.KIND[] beverages = BeverageInfo.KIND.values();
 
+		String line     = "-------------------------";
 		System.out.println(line);
 		System.out.println("메뉴");
-		for(int i = 0; i< BeverKind.values().length; i++) {
-			System.out.printf(" %d. %s\t%d원\n", i+1, beverKind_ko[i], priceArr[i]);
+
+		String beverKind;
+		int price;
+		for(int i = 0; i< beverages.length; i++){
+			beverKind = beverages[i].toString();
+			price = menuMap.get(beverKind);
+			System.out.printf(" %d. %s\t%d원\n", i+1, beverKind, price);
 		}
 		System.out.println(line);
 	}
-
 
 	//스캐너 입력받기
 	private String getScanInput(Scanner scan){
@@ -76,7 +78,7 @@ public class OrderCommand_0kind implements OrderCommand {
 		boolean inputCheck = false;
 		if(orderFunctions.isNumber(input)){
 			int num = Integer.parseInt(input);
-			int count = BeverKind.values().length;
+			int count = BeverageInfo.KIND.values().length;
 
 			//숫자가 범위에 해당하는지 확인
 			if(0<num && num<count+1) {
