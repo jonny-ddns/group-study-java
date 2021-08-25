@@ -9,7 +9,7 @@ import java.util.List;
 public class Receipt {
     StringBuilder sb = new StringBuilder();
 
-    public void receiptPrint(int count){
+    public void receiptPrint(int count) {
         System.out.println(receiptTemplate(count));
         sb.setLength(0);
     }
@@ -24,21 +24,21 @@ public class Receipt {
         sb.append("========결제내역=======\n");
         sb.append("품목\t\t금액\n");
         sb.append("---------------------\n");
-        
+
         //항목별 금액 생성하기
-        List <Order> orders = OrderCollection.get_orderList();
+        List<Order> orders = OrderCollection.get_orderList();
         int sum = 0;
         for (Order order : orders) {
-        	
-        	//ReceiptOrderInfo 클래스 인스턴스로 값 변환하기
+
+            //ReceiptOrderInfo 클래스 인스턴스로 값 변환하기
             ReceiptOrderInfo receiptOrderInfo = new ReceiptOrderInfo();
-            String[] items	= receiptOrderInfo.receiptItem(order);
-            int[] moneys	= receiptOrderInfo.receiptMoney(order);
-            
+            String[] items = receiptOrderInfo.receiptItem(order);
+            int[] moneys = receiptOrderInfo.receiptMoney(order);
+
             String itemToPay = "";
             int moneyToPay = 0;
-            
-            for (int i = 0; i < items.length; i ++) {
+
+            for (int i = 0; i < items.length; i++) {
                 itemToPay = items[i];
                 moneyToPay = moneys[i];
                 sum += moneyToPay;
@@ -55,19 +55,19 @@ public class Receipt {
 
         return sb.toString();
     }
-    
+
     //주문번호 생성: 오늘날짜 + 주문개수
-    private String receiptNum(int count){
+    private String receiptNum(int count) {
         SimpleDateFormat sdf = new SimpleDateFormat("MMdd");
         return sdf.format(new Date()) + count;
     }
 
     //주문내역을 담은 Orders클래스의 각 항목이 int 이므로 값을 적절히 변경된 값을 가져오는 역할 수행
     //UnitChange 클래스의 메서드를 사용하여 값을 변경함
-    private static class ReceiptOrderInfo {
+    private class ReceiptOrderInfo {
 
         //create bill items. 영수증 품목생성
-        String[] receiptItem(Order order){
+        String[] receiptItem(Order order) {
             String[] billCategory = new String[5];
 
             int kindInt = order.getBeverKind();
@@ -76,23 +76,23 @@ public class Receipt {
             int sizeInt = order.getBeverSize();
             int whereInt = order.getBeverWhere();
 
-            String kindString = UnitChange.toString_kind(kindInt);
-            String temperString = UnitChange.toString_temper(temperInt);
-            String shotString = UnitChange.toString_shot(shotInt);
-            String sizeString = UnitChange.toString_size(sizeInt);
-            String whereString = UnitChange.toString_where(whereInt);
-
-            billCategory[0] = kindString;
-            billCategory[1] = temperString;
-            billCategory[2] = shotString;
-            billCategory[3] = sizeString;
-            billCategory[4] = whereString;
+//            String kindString = UnitChange.toString_kind(kindInt);
+//            String temperString = UnitChange.toString_temper(temperInt);
+//            String shotString = UnitChange.toString_shot(shotInt);
+//            String sizeString = UnitChange.toString_size(sizeInt);
+//            String whereString = UnitChange.toString_where(whereInt);
+//
+//            billCategory[0] = kindString;
+//            billCategory[1] = temperString;
+//            billCategory[2] = shotString;
+//            billCategory[3] = sizeString;
+//            billCategory[4] = whereString;
 
             return billCategory;
         }
 
         //create bill money. 영수증 금액 생성
-        int[] receiptMoney(Order order){
+        int[] receiptMoney(Order order) {
             UnitChange cu = new UnitChange();
             int[] billMoney = new int[5];
 
@@ -117,4 +117,43 @@ public class Receipt {
             return billMoney;
         }
     }
+
+
+    class UnitChange {
+
+        /*------------------------------------------*/
+        //int -> 금액(int)으로 변경
+        public int toMoney_kind(int i) {
+//		Pricing p = new Pricing();
+//		return p.getBeveragePrice()[i-1];
+            return 999 * i;
+        }
+
+        public int toMoney_temper(int i) {
+            return 0;
+        }
+
+        public int toMoney_shot(int i) {
+            int money = 0;
+            if (i == 2) {
+                money = 500;
+            }
+            return money;
+        }
+
+        public int toMoney_size(int i) {
+            return 500 * --i;
+        }
+
+        public int toMoney_where(int i) {
+            int money = 0;
+            if (i == 1) {
+                money = 500;
+            }
+            return money;
+        }
+    }
 }
+
+
+

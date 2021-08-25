@@ -15,7 +15,7 @@ public class BeverageInfo {
     public enum SHOT { ONE_SHOT, TWO_SHOT }
     public enum SIZE { S, M, L }
     public enum TEMPER { ICE, HOT }
-    public enum WHERE { STORE, TAKEOUT}
+    public enum WHERE { STORE, TAKEOUT }
 
     public Map<String, Integer> getBeverageMap() {
         Map<String, Integer> map = new HashMap<>();

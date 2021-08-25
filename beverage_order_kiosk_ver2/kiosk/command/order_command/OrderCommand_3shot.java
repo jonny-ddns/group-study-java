@@ -3,7 +3,6 @@ package beverage_order_kiosk_ver2.kiosk.command.order_command;
 import beverage_order_kiosk_ver2.kiosk.data.beverageInfo.BeverageInfo;
 import beverage_order_kiosk_ver2.kiosk.data.orderInfo.OrderCollection;
 import beverage_order_kiosk_ver2.kiosk.data.orderInfo.Order;
-import beverage_order_kiosk_ver2.kiosk.data.receipt.UnitChange;
 import java.util.Scanner;
 
 //음료 샷 개수를 입력받는 역할 수행

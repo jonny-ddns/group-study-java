@@ -1,8 +1,8 @@
 package beverage_order_kiosk_ver2.kiosk.command.order_command;
 
-import beverage_order_kiosk.kiosk.menu_enum.BeverKind;
 import beverage_order_kiosk_ver2.kiosk.data.beverageInfo.BeverageInfo;
-import beverage_order_kiosk_ver2.kiosk.data.receipt.UnitChange;
+import beverage_order_kiosk_ver2.kiosk.data.orderInfo.Order;
+import beverage_order_kiosk_ver2.kiosk.data.orderInfo.OrderCollection;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -17,14 +17,14 @@ public class OrderCommand_0kind implements OrderCommand {
 		boolean isOk = false;
 		int count = 0;
 		printMenu();
-
+		String input = "0";
 		while(!isOk) {
 			count++;
 			if(count > 5) {
 				isCanceled = true;
 				break;
 			}
-			String input = getScanInput(scan);
+			input = getScanInput(scan);
 
 			//취소시
 			if(input.equals("c")){
@@ -44,6 +44,7 @@ public class OrderCommand_0kind implements OrderCommand {
 				System.out.printf("번호를 다시 입력바랍니다 (1~%d)\n", BeverageInfo.KIND.values().length);
 			}
 		}
+		setOrderData(Integer.parseInt(input));
 		return isCanceled;
 	}
 
@@ -88,7 +89,7 @@ public class OrderCommand_0kind implements OrderCommand {
 		return inputCheck;
 	}
 
-	//반복문 돌면서 취소여부 물어보기
+	//취소여부 물어보기
 	private boolean askOrderCancel(Scanner scan){
 		System.out.println("\n주문을 취소하시겠습니까? (y/n): ");
 		boolean wantToCancel = false;
@@ -115,5 +116,10 @@ public class OrderCommand_0kind implements OrderCommand {
 		int num = Integer.parseInt(input);
 		String str1 = UnitChange.toString_kind(num);
 		System.out.printf("%s\n", str1);
+	}
+
+	private void setOrderData(int num){
+		Order order = OrderCollection.get_orderData();
+		order.setBeverKind(num);
 	}
 }

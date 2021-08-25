@@ -7,6 +7,7 @@ import java.util.Scanner;
 public class OrderController implements Controller{
     @Override
     public int control(Scanner scan) {
+        System.out.println("OrderController - control");
         int result_receiveOrder;        //리턴객체
         int count = 0;                  //주문개수
         int resultSignal = 0;           //주문신호 (취소0 주문1)
@@ -15,7 +16,7 @@ public class OrderController implements Controller{
         OrderCommand orderCommand;
 
         while (orderProgress) {
-//            printMenu();
+            System.out.println("OrderController - while 시작");
             //음료 종류
             orderCommand = new OrderCommand_0kind();
             if(orderCommand.execute(scan)) {
@@ -60,6 +61,7 @@ public class OrderController implements Controller{
             }
             count++;
         }
+        System.out.println("OrderController - while 종료");
         //주문결과 (결과번호, 주문개수)
         result_receiveOrder = resultSignal;
         return result_receiveOrder;

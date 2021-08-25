@@ -10,8 +10,7 @@ import java.util.Scanner;
 //입력; 휴대전화, 닉네임, 생일
 /*
 #리턴
-0 취소
-1 정상처리
+0취소 / 1정상
  */
 public class MemberCommand_signUp implements MemberCommand {
     private final MemberCollection memberCollection = MemberCollection.getInstance();

@@ -2,17 +2,26 @@ package beverage_order_kiosk_ver2.kiosk.data.orderInfo;
 
 public class Order {
     private int beverKind;		//종류
+    private int beverCount;     //주문개수
     private int beverTemper;	//음료 온도
     private int beverShot;		//음료 샷
     private int beverSize;		//음료 크기
     private int beverWhere;		//음료 섭취장소
-    private int beverCount;     //주문개수
+
 
     public int getBeverKind() {
         return beverKind;
     }
     public Order setBeverKind(int beverKind) {
         this.beverKind = beverKind;
+        return this;
+    }
+
+    public int getBeverCount() {
+        return beverCount;
+    }
+    public Order setBeverCount(int beverCount) {
+        this.beverCount = beverCount;
         return this;
     }
 
@@ -48,12 +57,5 @@ public class Order {
         return this;
     }
 
-    public int getBeverCount() {
-        return beverCount;
-    }
 
-    public Order setBeverCount(int beverCount) {
-        this.beverCount = beverCount;
-        return this;
-    }
 }

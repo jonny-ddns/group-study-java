@@ -3,7 +3,6 @@ package beverage_order_kiosk_ver2.kiosk.command.order_command;
 import beverage_order_kiosk_ver2.kiosk.data.beverageInfo.BeverageInfo;
 import beverage_order_kiosk_ver2.kiosk.data.orderInfo.OrderCollection;
 import beverage_order_kiosk_ver2.kiosk.data.orderInfo.Order;
-import beverage_order_kiosk_ver2.kiosk.data.receipt.UnitChange;
 import java.util.Scanner;
 
 //음료 크기를 입력받는 역할 수행
@@ -95,7 +94,7 @@ public class OrderCommand_4size implements OrderCommand {
 	//단위변환
 	private void check_beverageChoose(String input){
 		int num = Integer.parseInt(input);
-		String str = UnitChange.toString_temper(num);
+		String str = UnitChange.toString_size(num);
 		System.out.printf("%s\n", str);
 	}
 }

@@ -49,11 +49,9 @@ public class MemberCollection {
     public boolean isMemberInList(String phone){
         memberList = get_memberList();
         boolean isMember = false;
-        Member member = null;
         for(Member m : memberList){
             if( m.getPhone().equals(phone) ){
                 isMember = true;
-                member = m;
                 break;
             }
         }

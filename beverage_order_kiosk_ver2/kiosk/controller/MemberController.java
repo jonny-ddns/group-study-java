@@ -12,6 +12,7 @@ public class MemberController implements Controller{
     */
     @Override
     public int control(Scanner scan) {
+        System.out.println("MemberController - control");
         MemberCommand memberCommand;
         int result_orderDecide = 0; //¸®ÅÏ°ª
         int result_isMember;

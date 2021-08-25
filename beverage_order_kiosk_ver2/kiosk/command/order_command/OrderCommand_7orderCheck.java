@@ -2,7 +2,6 @@ package beverage_order_kiosk_ver2.kiosk.command.order_command;
 
 import beverage_order_kiosk_ver2.kiosk.data.orderInfo.OrderCollection;
 import beverage_order_kiosk_ver2.kiosk.data.orderInfo.Order;
-import beverage_order_kiosk_ver2.kiosk.data.receipt.UnitChange;
 import java.util.List;
 import java.util.Scanner;
 
@@ -12,49 +11,54 @@ public class OrderCommand_7orderCheck implements OrderCommand {
 
     @Override
     public boolean execute(Scanner scan) {
-        orderFunctions = new OrderFunctions();
+        System.out.println("OrderCommand_7orderCheck - execute");
 
-        boolean goToNext 	= false;	//반복 플래그 변수
-        boolean OrderCheck	= false;	//주문 확인결과 리턴
+        boolean OrderCheck = false;
+        boolean isYesOrNo;
+        String input;
+        int count = 0;
 
-        //주문내역 출력하기
-        List<Order> orderList = OrderCollection.get_orderList();
+        printWhatOrdered();
+        while(count<3) {
+            count++;
+            input = scanInput(scan);
 
-        //OrderCollection 접근해서 List에 담긴 요청사항 출력하기
-        System.out.println();
-        for(Order order: orderList) {
-	        String str1 = UnitChange.toString_kind(order.getBeverKind());
-	        String str2 = UnitChange.toString_temper(order.getBeverTemper());
-	        String str3 = UnitChange.toString_shot(order.getBeverShot());
-	        String str4 = UnitChange.toString_size(order.getBeverSize());
-	        String str5 = UnitChange.toString_where(order.getBeverWhere());
-	        System.out.printf("%s(%s/%s/%s/%s)\n", str1, str2, str3, str4, str5);
-        }
-        System.out.print("주문하시겠습니까? (y/n): ");
-        
-		//주문확인 결과를 받기위한 반복문
-        int count=0;
-        while(!goToNext) {
-
-            String request = scan.next().trim().toLowerCase();
-            boolean isYesOrNo = orderFunctions.isYesOrNo(request);
-
+            isYesOrNo = orderFunctions.isYesOrNo(input);
             if(isYesOrNo) {
-                if(request.equals("y")){
+                if(input.equals("y")) {
                     OrderCheck = true;
                     break;
-                } else if(request.equals("n")){
+                } else if (input.equals("n")) {
                     System.out.println("주문이 취소되었습니다. 다시 입력해주세요");
                     break;
                 }
             } else {
                 System.out.println("y 혹은 n을 입력바랍니다");
             }
-
-            if(++count > 4){
-                goToNext = true;
-            }
         }
         return OrderCheck;
+    }
+
+    private void printWhatOrdered() {
+        System.out.println("printWhatOrdered");
+        orderFunctions = new OrderFunctions();
+        List<Order> orderList = OrderCollection.get_orderList();
+
+        //주문내용 출력하기
+        System.out.println();
+        for (Order order : orderList) {
+            String str1 = UnitChange.toString_kind(order.getBeverKind());
+            String str2 = UnitChange.toString_temper(order.getBeverTemper());
+            String str3 = UnitChange.toString_shot(order.getBeverShot());
+            String str4 = UnitChange.toString_size(order.getBeverSize());
+            String str5 = UnitChange.toString_where(order.getBeverWhere());
+            System.out.printf("%s(%s/%s/%s/%s)", str1, str2, str3, str4, str5);
+        }
+        System.out.println("\n주문내용을 확인해주세요 (y/n): ");
+    }
+
+    private String scanInput(Scanner scan) {
+        System.out.print("입력 : ");
+        return scan.next().trim().toLowerCase();
     }
 }

@@ -5,6 +5,7 @@ import java.util.Scanner;
 public class PaymentController implements Controller{
     @Override
     public int control(Scanner scan) {
+        System.out.println("PaymentController - control");
         return 0;
     }
 }
