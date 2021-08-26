@@ -8,7 +8,6 @@ public class Order {
     private int beverSize;		//음료 크기
     private int beverWhere;		//음료 섭취장소
 
-
     public int getBeverKind() {
         return beverKind;
     }

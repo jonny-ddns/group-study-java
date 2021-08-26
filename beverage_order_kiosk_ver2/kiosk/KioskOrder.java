@@ -4,7 +4,7 @@ import beverage_order_kiosk_ver2.kiosk.controller.Controller;
 import beverage_order_kiosk_ver2.kiosk.controller.MemberController;
 import beverage_order_kiosk_ver2.kiosk.controller.OrderController;
 import beverage_order_kiosk_ver2.kiosk.controller.PaymentController;
-import beverage_order_kiosk_ver2.kiosk.data.memberInfo.Member;
+//import beverage_order_kiosk_ver2.kiosk.data.memberInfo.Member;
 import beverage_order_kiosk_ver2.kiosk.data.receipt.Receipt;
 import java.util.Scanner;
 
@@ -14,23 +14,23 @@ public class KioskOrder {
     private final Controller paymentController;
     private final Scanner scan;
     private final Receipt receipt;
-    private static Member personNow;
+//    private static Member personNow;
 
-    public static Member getPersonNow() {
-        return personNow;
-    }
-    public static void setPersonNow(Member personNow) {
-        KioskOrder.personNow = personNow;
-    }
+//    public static Member getPersonNow() {
+//        return personNow;
+//    }
+//    public static void setPersonNow(Member personNow) {
+//        KioskOrder.personNow = personNow;
+//    }
 
-    public static void setPersonBasic() {
-        Member member = new Member();
-        member.setPhone("00000000")
-                .setBirthday("0000")
-                .setNick("NOT_A_MEMBER")
-                .setPoint(0);
-        setPersonNow(member);
-    }
+//    public static void setPersonBasic() {
+//        Member member = new Member();
+//        member.setPhone("00000000")
+//                .setBirthday("0000")
+//                .setNick("NOT_A_MEMBER")
+//                .setPoint(0);
+//        setPersonNow(member);
+//    }
 
     protected KioskOrder() {
         System.out.println("ORDER START!");
@@ -44,7 +44,7 @@ public class KioskOrder {
 
     //주문받기
     private void orderStart() {
-        personNow = null;           //주문자 정보 초기화
+//        personNow = null;           //주문자 정보 초기화
         boolean orderFinish = false;
         int orderCount = 0;
         int controlResult;

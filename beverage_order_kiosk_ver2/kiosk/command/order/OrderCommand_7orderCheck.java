@@ -1,16 +1,18 @@
 package beverage_order_kiosk_ver2.kiosk.command.order_command;
 
-import beverage_order_kiosk_ver2.kiosk.data.orderInfo.OrderCollection;
+import beverage_order_kiosk_ver2.kiosk.command.UnitChange;
+import beverage_order_kiosk_ver2.kiosk.data.orderInfo.OrderInfos;
 import beverage_order_kiosk_ver2.kiosk.data.orderInfo.Order;
+
+import java.util.Collection;
 import java.util.List;
 import java.util.Scanner;
 
 //주문내역 확인결과를 입력받는 역할 수행
 public class OrderCommand_7orderCheck implements OrderCommand {
-    OrderFunctions orderFunctions;
-
+    private final OrderFunctions orderFunctions = new OrderFunctions();
     @Override
-    public boolean execute(Scanner scan) {
+    public int[] execute(Scanner scan) {
         System.out.println("OrderCommand_7orderCheck - execute");
 
         boolean OrderCheck = false;
@@ -18,7 +20,7 @@ public class OrderCommand_7orderCheck implements OrderCommand {
         String input;
         int count = 0;
 
-        printWhatOrdered();
+        printWhatOrdered(orderFunctions);
         while(count<3) {
             count++;
             input = scanInput(scan);
@@ -36,22 +38,25 @@ public class OrderCommand_7orderCheck implements OrderCommand {
                 System.out.println("y 혹은 n을 입력바랍니다");
             }
         }
-        return OrderCheck;
+//        return OrderCheck;
+        return null;
     }
 
-    private void printWhatOrdered() {
+    private void printWhatOrdered(OrderFunctions orderFunctions) {
         System.out.println("printWhatOrdered");
         orderFunctions = new OrderFunctions();
-        List<Order> orderList = OrderCollection.get_orderList();
+        Collection<Order> orderList = OrderInfos.getOrderCollection();
+
+        UnitChange unitChange = new UnitChange();
 
         //주문내용 출력하기
         System.out.println();
         for (Order order : orderList) {
-            String str1 = UnitChange.toString_kind(order.getBeverKind());
-            String str2 = UnitChange.toString_temper(order.getBeverTemper());
-            String str3 = UnitChange.toString_shot(order.getBeverShot());
-            String str4 = UnitChange.toString_size(order.getBeverSize());
-            String str5 = UnitChange.toString_where(order.getBeverWhere());
+            String str1 = unitChange.toString_kind(order.getBeverKind());
+            String str2 = unitChange.toString_temper(order.getBeverTemper());
+            String str3 = unitChange.toString_shot(order.getBeverShot());
+            String str4 = unitChange.toString_size(order.getBeverSize());
+            String str5 = unitChange.toString_where(order.getBeverWhere());
             System.out.printf("%s(%s/%s/%s/%s)", str1, str2, str3, str4, str5);
         }
         System.out.println("\n주문내용을 확인해주세요 (y/n): ");

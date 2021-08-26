@@ -1,8 +1,7 @@
 package beverage_order_kiosk_ver2.kiosk.command.member_command;
 
-import beverage_order_kiosk_ver2.kiosk.KioskOrder;
 import beverage_order_kiosk_ver2.kiosk.data.memberInfo.Member;
-import beverage_order_kiosk_ver2.kiosk.data.memberInfo.MemberCollection;
+import beverage_order_kiosk_ver2.kiosk.data.memberInfo.MemberInfos;
 import java.util.Scanner;
 
 //회원 로그인 처리하기
@@ -49,8 +48,8 @@ public class MemberCommand_signIn implements MemberCommand {
             }
             //1 로그인 처리
             //회원 정보 가져와서 리스트의 휴대전화 데이터와 비교하기
-            MemberCollection memberCollection = MemberCollection.getInstance();
-            Member member = memberCollection.checkMemberInList(scanInput);
+            MemberInfos memberInfos = MemberInfos.getInstance();
+            Member member = memberInfos.checkMemberInList(scanInput);
 
             //일치하는 회원정보가 없음
             if(member == null){
@@ -61,7 +60,6 @@ public class MemberCommand_signIn implements MemberCommand {
                 isOk = true;
                 stepParameter = 1;
             }
-            KioskOrder.setPersonNow(member);
         }
         return stepParameter;
     }

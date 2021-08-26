@@ -1,9 +1,8 @@
 package beverage_order_kiosk_ver2.kiosk.command.member_command;
 
-import beverage_order_kiosk_ver2.kiosk.KioskOrder;
 import beverage_order_kiosk_ver2.kiosk.command.CommandFunctions;
 import beverage_order_kiosk_ver2.kiosk.data.memberInfo.Member;
-import beverage_order_kiosk_ver2.kiosk.data.memberInfo.MemberCollection;
+import beverage_order_kiosk_ver2.kiosk.data.memberInfo.MemberInfos;
 import java.util.Scanner;
 
 //회원가입 처리하기
@@ -13,7 +12,7 @@ import java.util.Scanner;
 0취소 / 1정상
  */
 public class MemberCommand_signUp implements MemberCommand {
-    private final MemberCollection memberCollection = MemberCollection.getInstance();
+    private final MemberInfos memberInfos = MemberInfos.getInstance();
     private final CommandFunctions commandFunctions = new CommandFunctions();
     private String scan_phone = "";
     private String scan_nick = "";
@@ -42,8 +41,7 @@ public class MemberCommand_signUp implements MemberCommand {
                     .setBirthday(scan_birthday)
                     .setPhone(scan_phone)
                     .setPoint(0);
-            memberCollection.addCustomer(member);
-            KioskOrder.setPersonNow(member);
+            memberInfos.addCustomer(member);
         }
         return stepParameter;
     }
@@ -64,7 +62,7 @@ public class MemberCommand_signUp implements MemberCommand {
             System.out.print("입력 : 010-");
             scan_phone = scan.next().trim();
 
-            boolean isMember = memberCollection.isMemberInList(scan_phone);
+            boolean isMember = memberInfos.isMemberInList(scan_phone);
 
             /* 예외상황 처리 */
             //동일한 휴대폰 번호가 있는지 확인하기

@@ -1,7 +1,7 @@
 package beverage_order_kiosk_ver2.kiosk.command.member_command;
 
-import beverage_order_kiosk_ver2.kiosk.KioskOrder;
 import beverage_order_kiosk_ver2.kiosk.command.CommandFunctions;
+
 import java.util.Scanner;
 
 //주문방식 결정하기 - 회원/비회원
@@ -48,8 +48,6 @@ public class MemberCommand_isMember implements MemberCommand {
             //비회원주문시 리턴 2
             if(Integer.parseInt(scanInput) == 1){
                 stepParameter = 1;
-            } else{
-                KioskOrder.setPersonBasic();
             }
             isOk = true;
         }

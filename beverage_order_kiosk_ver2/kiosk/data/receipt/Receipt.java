@@ -1,10 +1,11 @@
 package beverage_order_kiosk_ver2.kiosk.data.receipt;
 
-import beverage_order_kiosk_ver2.kiosk.data.orderInfo.OrderCollection;
+import beverage_order_kiosk_ver2.kiosk.command.UnitChange;
+import beverage_order_kiosk_ver2.kiosk.data.orderInfo.OrderInfos;
 import beverage_order_kiosk_ver2.kiosk.data.orderInfo.Order;
 import java.text.SimpleDateFormat;
+import java.util.Collection;
 import java.util.Date;
-import java.util.List;
 
 public class Receipt {
     StringBuilder sb = new StringBuilder();
@@ -26,7 +27,7 @@ public class Receipt {
         sb.append("---------------------\n");
 
         //항목별 금액 생성하기
-        List<Order> orders = OrderCollection.get_orderList();
+        Collection<Order> orders = OrderInfos.getOrderCollection();
         int sum = 0;
         for (Order order : orders) {
 
@@ -65,6 +66,7 @@ public class Receipt {
     //주문내역을 담은 Orders클래스의 각 항목이 int 이므로 값을 적절히 변경된 값을 가져오는 역할 수행
     //UnitChange 클래스의 메서드를 사용하여 값을 변경함
     private class ReceiptOrderInfo {
+        UnitChange unitChange = new UnitChange();
 
         //create bill items. 영수증 품목생성
         String[] receiptItem(Order order) {
@@ -76,17 +78,17 @@ public class Receipt {
             int sizeInt = order.getBeverSize();
             int whereInt = order.getBeverWhere();
 
-//            String kindString = UnitChange.toString_kind(kindInt);
-//            String temperString = UnitChange.toString_temper(temperInt);
-//            String shotString = UnitChange.toString_shot(shotInt);
-//            String sizeString = UnitChange.toString_size(sizeInt);
-//            String whereString = UnitChange.toString_where(whereInt);
-//
-//            billCategory[0] = kindString;
-//            billCategory[1] = temperString;
-//            billCategory[2] = shotString;
-//            billCategory[3] = sizeString;
-//            billCategory[4] = whereString;
+            String kindString = unitChange.toString_kind(kindInt);
+            String temperString = unitChange.toString_temper(temperInt);
+            String shotString = unitChange.toString_shot(shotInt);
+            String sizeString = unitChange.toString_size(sizeInt);
+            String whereString = unitChange.toString_where(whereInt);
+
+            billCategory[0] = kindString;
+            billCategory[1] = temperString;
+            billCategory[2] = shotString;
+            billCategory[3] = sizeString;
+            billCategory[4] = whereString;
 
             return billCategory;
         }
@@ -102,11 +104,11 @@ public class Receipt {
             int sizeInt = order.getBeverSize();
             int whereInt = order.getBeverWhere();
 
-            int kindString = cu.toMoney_kind(kindInt);
-            int temperString = cu.toMoney_temper(temperInt);
-            int shotString = cu.toMoney_shot(shotInt);
-            int sizeString = cu.toMoney_size(sizeInt);
-            int whereString = cu.toMoney_where(whereInt);
+            int kindString = toMoney_kind(kindInt);
+            int temperString = toMoney_temper(temperInt);
+            int shotString = toMoney_shot(shotInt);
+            int sizeString = toMoney_size(sizeInt);
+            int whereString = toMoney_where(whereInt);
 
             billMoney[0] = kindString;
             billMoney[1] = temperString;
@@ -118,11 +120,10 @@ public class Receipt {
         }
     }
 
-
-    class UnitChange {
-
-        /*------------------------------------------*/
-        //int -> 금액(int)으로 변경
+//    private static class UnitChange {
+//
+//        /*------------------------------------------*/
+//        //int -> 금액(int)으로 변경
         public int toMoney_kind(int i) {
 //		Pricing p = new Pricing();
 //		return p.getBeveragePrice()[i-1];
@@ -152,7 +153,7 @@ public class Receipt {
             }
             return money;
         }
-    }
+//    }
 }
 
 
