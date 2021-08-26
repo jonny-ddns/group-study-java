@@ -4,7 +4,6 @@ import beverage_order_kiosk_ver2.kiosk.controller.Controller;
 import beverage_order_kiosk_ver2.kiosk.controller.MemberController;
 import beverage_order_kiosk_ver2.kiosk.controller.OrderController;
 import beverage_order_kiosk_ver2.kiosk.controller.PaymentController;
-//import beverage_order_kiosk_ver2.kiosk.data.memberInfo.Member;
 import beverage_order_kiosk_ver2.kiosk.data.receipt.Receipt;
 import java.util.Scanner;
 

@@ -1,9 +1,9 @@
-package beverage_order_kiosk_ver2.kiosk.command.order_command;
+package beverage_order_kiosk_ver2.kiosk.command.order;
 
 import java.util.Scanner;
 
 //음료 개수 입력받기
-public class OrderCommand_1Count implements OrderCommand{
+public class OrderCommand_1_Count implements OrderCommand{
     private final OrderFunctions orderFunctions = new OrderFunctions();
     @Override
     public int[] execute(Scanner scan) {

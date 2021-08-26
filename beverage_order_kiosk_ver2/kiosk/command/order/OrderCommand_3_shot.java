@@ -1,10 +1,10 @@
-package beverage_order_kiosk_ver2.kiosk.command.order_command;
+package beverage_order_kiosk_ver2.kiosk.command.order;
 
 import beverage_order_kiosk_ver2.kiosk.data.beverageInfo.BeverageInfo;
 import java.util.Scanner;
 
-//음료 크기를 입력받는 역할 수행
-public class OrderCommand_4size implements OrderCommand {
+//음료 샷 개수를 입력받는 역할 수행
+public class OrderCommand_3_shot implements OrderCommand {
 	private final OrderFunctions orderFunctions = new OrderFunctions();
 	@Override
 	public int[] execute(Scanner scan) {
@@ -14,7 +14,7 @@ public class OrderCommand_4size implements OrderCommand {
 		boolean isOk = false;
 		String input = "0";
 
-		System.out.println("\n1.S(+0원) 2.M(+500원) 3.L(+1000원) 선택 (주문취소 c)");
+		System.out.println("\n1.1샷(+0원) 2.2샷(+500원) 선택 (주문취소 c)");
 		while(!isOk) {
 			count++;
 			if(count > 5) {
@@ -34,11 +34,12 @@ public class OrderCommand_4size implements OrderCommand {
 			}
 
 			//입력값 확인
-			int index = BeverageInfo.SIZE.values().length;
+			int index = BeverageInfo.SHOT.values().length;
 			if(orderFunctions.checkInputRange(input, index)){
+				isCanceled = 0;
 				isOk = true;
 			} else{
-				System.out.printf("번호를 다시 입력바랍니다 (1~%d)\n", BeverageInfo.SIZE.values().length);
+				System.out.printf("번호를 다시 입력바랍니다 (1~%d)\n", BeverageInfo.SHOT.values().length);
 			}
 		}
 		answer = Integer.parseInt(input);

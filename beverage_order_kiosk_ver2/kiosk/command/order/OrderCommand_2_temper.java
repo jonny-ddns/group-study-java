@@ -1,10 +1,10 @@
-package beverage_order_kiosk_ver2.kiosk.command.order_command;
+package beverage_order_kiosk_ver2.kiosk.command.order;
 
 import beverage_order_kiosk_ver2.kiosk.data.beverageInfo.BeverageInfo;
 import java.util.Scanner;
 
 //음료 온도를 입력받는 역할 수행
-public class OrderCommand_2temper implements OrderCommand {
+public class OrderCommand_2_temper implements OrderCommand {
 	private final OrderFunctions orderFunctions = new OrderFunctions();
 	@Override
 	public int[] execute(Scanner scan) {

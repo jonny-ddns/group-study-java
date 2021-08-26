@@ -1,6 +1,6 @@
 package beverage_order_kiosk_ver2.kiosk.command;
 
-public class CommandFunctions {
+public class Functions {
     //인자값이 숫자인지 확인하기
     public boolean isNumber(String inputNumber){
         boolean isNum = false;

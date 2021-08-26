@@ -1,15 +1,14 @@
-package beverage_order_kiosk_ver2.kiosk.command.order_command;
+package beverage_order_kiosk_ver2.kiosk.command.order;
 
 import beverage_order_kiosk_ver2.kiosk.command.UnitChange;
 import beverage_order_kiosk_ver2.kiosk.data.orderInfo.OrderInfos;
 import beverage_order_kiosk_ver2.kiosk.data.orderInfo.Order;
 
 import java.util.Collection;
-import java.util.List;
 import java.util.Scanner;
 
 //주문내역 확인결과를 입력받는 역할 수행
-public class OrderCommand_7orderCheck implements OrderCommand {
+public class OrderCommand_10_orderCheck implements OrderCommand {
     private final OrderFunctions orderFunctions = new OrderFunctions();
     @Override
     public int[] execute(Scanner scan) {

@@ -36,8 +36,8 @@ public class Receipt {
             String[] items = receiptOrderInfo.receiptItem(order);
             int[] moneys = receiptOrderInfo.receiptMoney(order);
 
-            String itemToPay = "";
-            int moneyToPay = 0;
+            String itemToPay;
+            int moneyToPay;
 
             for (int i = 0; i < items.length; i++) {
                 itemToPay = items[i];
@@ -95,7 +95,6 @@ public class Receipt {
 
         //create bill money. 영수증 금액 생성
         int[] receiptMoney(Order order) {
-            UnitChange cu = new UnitChange();
             int[] billMoney = new int[5];
 
             int kindInt = order.getBeverKind();

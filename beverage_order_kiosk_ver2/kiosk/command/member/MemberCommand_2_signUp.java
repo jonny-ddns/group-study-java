@@ -1,6 +1,6 @@
-package beverage_order_kiosk_ver2.kiosk.command.member_command;
+package beverage_order_kiosk_ver2.kiosk.command.member;
 
-import beverage_order_kiosk_ver2.kiosk.command.CommandFunctions;
+import beverage_order_kiosk_ver2.kiosk.command.Functions;
 import beverage_order_kiosk_ver2.kiosk.data.memberInfo.Member;
 import beverage_order_kiosk_ver2.kiosk.data.memberInfo.MemberInfos;
 import java.util.Scanner;
@@ -11,9 +11,9 @@ import java.util.Scanner;
 #리턴
 0취소 / 1정상
  */
-public class MemberCommand_signUp implements MemberCommand {
+public class MemberCommand_2_signUp implements MemberCommand {
     private final MemberInfos memberInfos = MemberInfos.getInstance();
-    private final CommandFunctions commandFunctions = new CommandFunctions();
+    private final Functions functions = new Functions();
     private String scan_phone = "";
     private String scan_nick = "";
     private String scan_birthday = "";
@@ -76,7 +76,7 @@ public class MemberCommand_signUp implements MemberCommand {
                 break;
             }
             //숫자 외에 다른 문자를 입력했다면
-            else if( !commandFunctions.isNumber(scan_phone) ){
+            else if( !functions.isNumber(scan_phone) ){
                 System.out.println("숫자만 입력바랍니다");
                 continue;
             }
@@ -146,7 +146,7 @@ public class MemberCommand_signUp implements MemberCommand {
                 break;
             }
             //숫자여부 확인
-            if(!commandFunctions.isNumber(scan_birthday)){
+            if(!functions.isNumber(scan_birthday)){
                 continue;
             }
             //4글자 입력 확인
