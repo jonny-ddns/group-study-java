@@ -1,11 +1,10 @@
-package beverage_order_kiosk_ver2.kiosk.command.order;
+package beverage_order_kiosk_ver2.kiosk.command;
 
-import beverage_order_kiosk_ver2.kiosk.command.UnitChange;
 import beverage_order_kiosk_ver2.kiosk.data.beverageInfo.BeverageInfo;
 import java.util.Map;
 import java.util.Scanner;
 
-public class OrderFunctions {
+public class CommandFunctions {
     public boolean isNumber(String request){
         boolean isNum = false;
         try{
@@ -64,7 +63,7 @@ public class OrderFunctions {
         System.out.printf("%s\n", str);
     }
 
-    //메뉴 출력
+    //주문메뉴 출력
     public void printMenu() {
         Map<String, Integer> menuMap = new BeverageInfo().getBeverageMap();
         BeverageInfo.KIND[] beverages = BeverageInfo.KIND.values();
@@ -81,5 +80,11 @@ public class OrderFunctions {
             System.out.printf(" %d. %s\t%d원\n", i+1, beverKind, price);
         }
         System.out.println(line);
+    }
+
+
+    //결제 정상여부 반환
+    private boolean calculate(){
+        return false;
     }
 }

@@ -1,11 +1,12 @@
 package beverage_order_kiosk_ver2.kiosk.command.order;
 
-import beverage_order_kiosk_ver2.kiosk.data.beverageInfo.BeverageInfo;
+import beverage_order_kiosk_ver2.kiosk.command.CommandFunctions;
 import java.util.Scanner;
 
 //추가주문 여부를 입력받기
-public class OrderCommand_20_orderMore implements OrderCommand {
-	private final OrderFunctions orderFunctions = new OrderFunctions();
+//리턴 - 취소여부/추가주문여부
+public class OrderCommand_10_orderMore implements OrderCommand {
+	private final CommandFunctions commandFunctions = new CommandFunctions();
 	@Override
 	public int[] execute(Scanner scan) {
 		int isCanceled = 1;
@@ -25,7 +26,7 @@ public class OrderCommand_20_orderMore implements OrderCommand {
 
 			//취소시
 			if(input.equals("c")){
-				if(orderFunctions.askOrderCancel(scan)){
+				if(commandFunctions.askOrderCancel(scan)){
 //					System.out.println("주문이 취소되었습니다. 다시 입력해주세요");
 					break;
 				}
@@ -34,14 +35,20 @@ public class OrderCommand_20_orderMore implements OrderCommand {
 			}
 
 			//입력값 확인
-			int index = BeverageInfo.SHOT.values().length;
-			if(orderFunctions.checkInputRange(input, index)){
-//				check_beverageChoose(input);
-				isCanceled = 0;
-				isOk = true;
-			} else{
-				System.out.printf("번호를 다시 입력바랍니다 (1~%d)\n", BeverageInfo.WHERE.values().length);
+			if(!commandFunctions.isYesOrNo(input)){
+				System.out.println("y 혹은 n을 입력바랍니다");
+				continue;
 			}
+
+			if(input.equals("y")){
+				System.out.println("추가주문 YES");
+				input = "1";
+			} else {
+				System.out.println("추가주문 NO");
+				input = "0";
+			}
+			isCanceled = 0;
+			isOk = true;
 		}
 		answer = Integer.parseInt(input);
 		return new int[]{isCanceled, answer};

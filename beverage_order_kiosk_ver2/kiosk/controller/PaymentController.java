@@ -17,29 +17,39 @@ public class PaymentController extends ControllerFunctions implements Controller
         int result_isMember;
         int result_signIn;
 
-        paymentCommand = new PaymentCommand_0_kind();
-        int paymentWay = paymentCommand.execute(scan)[0];
+        paymentCommand = new PaymentCommand_1_kind();
+        int[] result_paymentKind = paymentCommand.execute(scan);
+        int isCanceled = result_paymentKind[0];
+        int paymentWay = result_paymentKind[1];
 
+        //∞·¡¶ 
+        if(!(isCanceled == 0)){
+            System.out.println("111");
+            //√Îº“µ 
+            return 0;
+        } else {
+            System.out.println("222");
+            paymentCommand = new PaymentCommand_0_price();
 
-
-
-
-        return 0;
+            paymentCommand.execute(scan);
+            setPayment(paymentWay);
+        }
+        return 1;
     }
 
     private void setPayment(int paymentWay){
         int result;
         switch(paymentWay){
             case 1:
-                paymentCommand = new PaymentCommand_1_cash();
+                paymentCommand = new PaymentCommand_11_cash();
                 paymentCommand.execute(scan);
                 break;
             case 2:
-                paymentCommand = new PaymentCommand_2_creditCard();
+                paymentCommand = new PaymentCommand_12_creditCard();
                 paymentCommand.execute(scan);
                 break;
             case 3:
-                paymentCommand = new PaymentCommand_3_other();
+                paymentCommand = new PaymentCommand_13_other();
                 paymentCommand.execute(scan);
                 break;
         }

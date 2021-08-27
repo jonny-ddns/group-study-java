@@ -7,6 +7,7 @@ import java.util.Collection;
 import java.util.Scanner;
 
 public class OrderController extends ControllerFunctions implements Controller{
+    private OrderCommand orderCommand;
 
     //입력값 반영하기
     int input_kind = 0;
@@ -19,27 +20,56 @@ public class OrderController extends ControllerFunctions implements Controller{
     @Override
     public int control(Scanner scan) {
         System.out.println("OrderController - control");
-        int result_receiveOrder;        //리턴객체
 
+        int[] answerArr;
         int resultSignal = 0;
-        boolean isCanceled = getRequest(scan);
-        if(!isCanceled){
-            resultSignal = 1;
-            save(setOrderInfo());
-        }
+        boolean orderFinish = false;
+        boolean isCanceled;
+        boolean isChecked;
+        boolean orderMore;
 
-        //주문결과 (결과번호, 주문개수)
-        result_receiveOrder = resultSignal;
-        return result_receiveOrder;
+        while (!orderFinish){
+            //주문 받기
+            isCanceled = getRequest_order(scan);
+            //주문내역에 반영하기
+            if(!isCanceled) {
+                save(setOrderInfo());
+            }
+
+            //1) 추가주문 확인
+            answerArr = getRequest_orderMore(scan);
+            isCanceled = intToBoolean(answerArr[0]);
+            orderMore = intToBoolean(answerArr[1]);
+
+            //주문취소
+            if(isCanceled) {
+                System.out.println("주문 취소되었습니다");
+                break;
+            }
+
+            //추가주문
+            if(orderMore){
+                continue;
+            }
+
+            //2) 주문확인
+            answerArr = getRequest_orderCheck(scan);
+            isChecked = intToBoolean(answerArr[0]);
+            if(isChecked){
+                System.out.println("주문확인 OK");
+                resultSignal = 1;
+                orderFinish = true;
+            }
+        }
+        return resultSignal;
     }
 
     //차례로 주문정보 받기
-    private boolean getRequest(Scanner scan){
-        OrderCommand orderCommand;
-        boolean isCanceled = true;  //주문신호 (취소0 주문1)
+    private boolean getRequest_order(Scanner scan){
         int[] answerArr;
-
+        boolean isCanceled = true;      //주문신호 (취소0 주문1)
         boolean orderProgress = true;   //플래그
+
         while (orderProgress) {
             //음료 종류
             orderCommand = new OrderCommand_0_kind();
@@ -50,13 +80,13 @@ public class OrderController extends ControllerFunctions implements Controller{
                 input_kind = answerArr[1];
             }
 
-            //음료 개수
+            //음료 종류
             orderCommand = new OrderCommand_1_Count();
             answerArr = orderCommand.execute(scan);
             if(intToBoolean(answerArr[0])) {
                 break;
             } else {
-                input_count = answerArr[1];
+                input_kind = answerArr[1];
             }
 
             //음료 온도
@@ -94,24 +124,23 @@ public class OrderController extends ControllerFunctions implements Controller{
             } else {
                 input_where = answerArr[1];
             }
-
-            //추가주문
-            orderCommand = new OrderCommand_20_orderMore();
-            answerArr = orderCommand.execute(scan);
-
-            //추가주문 여부 확인
-            if(!intToBoolean(answerArr[0])) {
-                //추가주문 없을시 최종주문 확인하기
-                orderCommand = new OrderCommand_10_orderCheck();
-                answerArr = orderCommand.execute(scan);
-                //주문 확인함
-                if(intToBoolean(answerArr[0])){
-                    isCanceled = false;
-                }
-                orderProgress = false;
-            }
+            isCanceled = false;
+            orderProgress = false;
         }
         return isCanceled;
+    }
+
+    //추가주문 받기
+    private int[] getRequest_orderMore(Scanner scan){
+        //추가주문
+        orderCommand = new OrderCommand_10_orderMore();
+        return orderCommand.execute(scan);
+    }
+
+    //주문확인 받기
+    private int[] getRequest_orderCheck(Scanner scan){
+        orderCommand = new OrderCommand_20_orderCheck();
+        return orderCommand.execute(scan);
     }
 
     //한번에 setting 해서 대입하기
@@ -135,7 +164,4 @@ public class OrderController extends ControllerFunctions implements Controller{
     public boolean intToBoolean(int i) {
         return super.intToBoolean(i);
     }
-
 }
-
-

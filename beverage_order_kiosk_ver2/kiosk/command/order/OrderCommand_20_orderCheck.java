@@ -1,49 +1,51 @@
 package beverage_order_kiosk_ver2.kiosk.command.order;
 
+import beverage_order_kiosk_ver2.kiosk.command.CommandFunctions;
 import beverage_order_kiosk_ver2.kiosk.command.UnitChange;
 import beverage_order_kiosk_ver2.kiosk.data.orderInfo.OrderInfos;
 import beverage_order_kiosk_ver2.kiosk.data.orderInfo.Order;
-
 import java.util.Collection;
 import java.util.Scanner;
 
 //주문내역 확인결과를 입력받는 역할 수행
-public class OrderCommand_10_orderCheck implements OrderCommand {
-    private final OrderFunctions orderFunctions = new OrderFunctions();
+//리턴 - 주문확인여부
+public class OrderCommand_20_orderCheck implements OrderCommand {
+    private final CommandFunctions commandFunctions = new CommandFunctions();
+
     @Override
     public int[] execute(Scanner scan) {
-        System.out.println("OrderCommand_7orderCheck - execute");
-
-        boolean OrderCheck = false;
+        int OrderCheck = 0;
+        int count = 0;
         boolean isYesOrNo;
         String input;
-        int count = 0;
 
-        printWhatOrdered(orderFunctions);
+        printWhatOrdered(commandFunctions);
+
         while(count<3) {
             count++;
             input = scanInput(scan);
+            isYesOrNo = commandFunctions.isYesOrNo(input);
 
-            isYesOrNo = orderFunctions.isYesOrNo(input);
-            if(isYesOrNo) {
-                if(input.equals("y")) {
-                    OrderCheck = true;
-                    break;
-                } else if (input.equals("n")) {
-                    System.out.println("주문이 취소되었습니다. 다시 입력해주세요");
-                    break;
-                }
-            } else {
+            if(!isYesOrNo){
                 System.out.println("y 혹은 n을 입력바랍니다");
+                continue;
+            }
+
+            if(isYesOrNo && input.equals("n")) {
+                System.out.println("주문이 취소되었습니다. 다시 주문해주세요");
+                break;
+            }
+
+            if(isYesOrNo && input.equals("y")) {
+                OrderCheck = 1;
+                break;
             }
         }
-//        return OrderCheck;
-        return null;
+        return new int[]{OrderCheck};
     }
 
-    private void printWhatOrdered(OrderFunctions orderFunctions) {
+    private void printWhatOrdered(CommandFunctions commandFunctions) {
         System.out.println("printWhatOrdered");
-        orderFunctions = new OrderFunctions();
         Collection<Order> orderList = OrderInfos.getOrderCollection();
 
         UnitChange unitChange = new UnitChange();
@@ -56,9 +58,9 @@ public class OrderCommand_10_orderCheck implements OrderCommand {
             String str3 = unitChange.toString_shot(order.getBeverShot());
             String str4 = unitChange.toString_size(order.getBeverSize());
             String str5 = unitChange.toString_where(order.getBeverWhere());
-            System.out.printf("%s(%s/%s/%s/%s)", str1, str2, str3, str4, str5);
+            System.out.printf("%s(%s/%s/%s/%s)\n", str1, str2, str3, str4, str5);
         }
-        System.out.println("\n주문내용을 확인해주세요 (y/n): ");
+        System.out.println("\n주문내용을 확인해주세요 (y/n)");
     }
 
     private String scanInput(Scanner scan) {

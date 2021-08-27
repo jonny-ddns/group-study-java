@@ -1,11 +1,12 @@
 package beverage_order_kiosk_ver2.kiosk.command.order;
 
+import beverage_order_kiosk_ver2.kiosk.command.CommandFunctions;
 import beverage_order_kiosk_ver2.kiosk.data.beverageInfo.BeverageInfo;
 import java.util.Scanner;
 
 //음료 온도를 입력받는 역할 수행
 public class OrderCommand_2_temper implements OrderCommand {
-	private final OrderFunctions orderFunctions = new OrderFunctions();
+	private final CommandFunctions commandFunctions = new CommandFunctions();
 	@Override
 	public int[] execute(Scanner scan) {
 		int isCanceled = 1;
@@ -25,7 +26,7 @@ public class OrderCommand_2_temper implements OrderCommand {
 
 			//취소시
 			if(input.equals("c")){
-				if(orderFunctions.askOrderCancel(scan)){
+				if(commandFunctions.askOrderCancel(scan)){
 					System.out.println("주문이 취소되었습니다. 다시 입력해주세요");
 					break;
 				}
@@ -35,7 +36,7 @@ public class OrderCommand_2_temper implements OrderCommand {
 
 			//입력값 확인
 			int index = BeverageInfo.TEMPER.values().length;
-			if(orderFunctions.checkInputRange(input, index)){
+			if(commandFunctions.checkInputRange(input, index)){
 				isCanceled = 0;
 				isOk = true;
 			} else{
