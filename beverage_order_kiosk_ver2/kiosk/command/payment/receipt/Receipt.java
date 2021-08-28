@@ -1,4 +1,4 @@
-package beverage_order_kiosk_ver2.kiosk.data.receipt;
+package beverage_order_kiosk_ver2.kiosk.command.payment.receipt;
 
 import beverage_order_kiosk_ver2.kiosk.command.UnitChange;
 import beverage_order_kiosk_ver2.kiosk.data.orderInfo.OrderInfos;

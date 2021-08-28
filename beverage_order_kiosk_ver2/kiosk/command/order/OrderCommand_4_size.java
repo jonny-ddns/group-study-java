@@ -43,7 +43,7 @@ public class OrderCommand_4_size implements OrderCommand {
 				System.out.printf("번호를 다시 입력바랍니다 (1~%d)\n", SIZE.values().length);
 			}
 		}
-		answer = Integer.parseInt(input);
+		answer = Integer.parseInt(input) -1;
 		return new int[]{isCanceled, answer};
 	}
 }

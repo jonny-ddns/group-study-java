@@ -16,28 +16,32 @@ public class PaymentController extends ControllerFunctions implements Controller
     PaymentCommand paymentCommand;
     Scanner scan;
 
+
     @Override
     public int control(Scanner scan) {
         System.out.println("PaymentController - control");
         this.scan = scan;
 
         int controllerResult = 0;   //리턴값
-        int result_isMember;
-        int result_signIn;
+//        int result_isMember;
+//        int result_signIn;
+        int[] result;
         
         //가격안내
         paymentCommand = new PaymentCommand_0_price();
-        paymentCommand.execute(scan);
-               
+        result = paymentCommand.execute(scan);
+        //공유객체에 가격 설정하기
+        int price = result[0];
+
         //결제방법
-        paymentCommand = new PaymentCommand_1_kind();
+        paymentCommand = new PaymentCommand_1_way();
         int[] result_paymentKind = paymentCommand.execute(scan);
         int isCanceled = result_paymentKind[0];
         int paymentWay = result_paymentKind[1];
 
         //결제방식 선택
         if(isCanceled == 0){
-            int resultPaymentWay = setPayment(paymentWay);
+            int resultPaymentWay = setPayment(paymentWay, price);
             controllerResult = 1;
         }
         
@@ -48,28 +52,29 @@ public class PaymentController extends ControllerFunctions implements Controller
         return controllerResult;
     }
 
-    //결제방법 선택
-    private int setPayment(int paymentWay){
+
+    //결제방법 선택 -> 결제방식별 command 호출
+    private int[] setPayment(int paymentWay, int price){
         System.out.println("setPayment - 결제방식 switch");
-        int resultPaymentWay = 0;
+        int[] result = null;
         switch(paymentWay){
             case 1:
-                paymentCommand = new PaymentCommand_11_cash();
-                resultPaymentWay = paymentCommand.execute(scan)[1];
+                result = new PaymentCommand_11_cash()
+                    .setTotalPrice(price)
+                    .execute(scan);
                 break;
             case 2:
-                paymentCommand = new PaymentCommand_12_creditCard();
-                resultPaymentWay = paymentCommand.execute(scan)[1];
+                result = new PaymentCommand_12_creditCard()
+                    .setTotalPrice(price)
+                    .execute(scan);
                 break;
             case 3:
-                paymentCommand = new PaymentCommand_13_other();
-                resultPaymentWay = paymentCommand.execute(scan)[1];
-                break;
-            default:
-                System.out.println("알 수 없는 결제방식");
+                result = new PaymentCommand_13_other()
+                    .setTotalPrice(price)
+                    .execute(scan);
                 break;
         }
-        return resultPaymentWay;
+        return result;
     }
 
 

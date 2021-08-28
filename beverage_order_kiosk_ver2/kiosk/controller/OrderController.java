@@ -56,7 +56,6 @@ public class OrderController extends ControllerFunctions implements Controller{
             answerArr = getRequest_orderCheck(scan);
             isChecked = intToBoolean(answerArr[0]);
             if(isChecked){
-                System.out.println("주문확인 OK");
                 resultSignal = 1;
                 orderFinish = true;
             }

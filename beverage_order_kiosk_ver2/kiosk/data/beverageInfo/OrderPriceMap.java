@@ -5,14 +5,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 //옵션 별 가격정보를 담은 Map
-public class BeverageInfo {
-    private static final Map<String, Integer> BEVERAGE_MAP_KIND = new HashMap<>();
-    private static final Map<String, Integer> BEVERAGE_MAP_SHOT = new HashMap<>();
-    private static final Map<String, Integer> BEVERAGE_MAP_SIZE = new HashMap<>();
-    private static final Map<String, Integer> BEVERAGE_MAP_TEMPER = new HashMap<>();
-    private static final Map<String, Integer> BEVERAGE_MAP_WHERE = new HashMap<>();
+public class OrderPriceMap {
+    private final Map<String, Integer> BEVERAGE_MAP_KIND = new HashMap<>();
+    private final Map<String, Integer> BEVERAGE_MAP_SHOT = new HashMap<>();
+    private final Map<String, Integer> BEVERAGE_MAP_SIZE = new HashMap<>();
+    private final Map<String, Integer> BEVERAGE_MAP_TEMPER = new HashMap<>();
+    private final Map<String, Integer> BEVERAGE_MAP_WHERE = new HashMap<>();
 
-    public BeverageInfo() {
+    public OrderPriceMap() {
         setBeverageMap_kind();
         setBeverageMap_shot();
         setBeverageMap_size();
@@ -20,7 +20,7 @@ public class BeverageInfo {
         setBeverageMap_where();
     }
 
-    public static Map<String, Integer> getBeverageMapKind() {
+    public Map<String, Integer> getBeverageMapKind() {
         return BEVERAGE_MAP_KIND;
     }
     public void setBeverageMap_kind() {
@@ -32,36 +32,36 @@ public class BeverageInfo {
         BEVERAGE_MAP_KIND.put(KIND.TOMATO_JUICE.name(), 4000);
     }
 
-    public static Map<String, Integer> getBeverageMapShot() {
+    public Map<String, Integer> getBeverageMapShot() {
         return BEVERAGE_MAP_SHOT;
     }
     public void setBeverageMap_shot() {
-        BEVERAGE_MAP_SHOT.put(SHOT.ONE_SHOT.name(), 1000);
-        BEVERAGE_MAP_SHOT.put(SHOT.TWO_SHOT.name(), 1000);
+        BEVERAGE_MAP_SHOT.put(SHOT.ONE_SHOT.name(), 0);
+        BEVERAGE_MAP_SHOT.put(SHOT.TWO_SHOT.name(), 500);
     }
 
-    public static Map<String, Integer> getBeverageMapSize() {
+    public Map<String, Integer> getBeverageMapSize() {
         return BEVERAGE_MAP_SIZE;
     }
     public void setBeverageMap_size() {
-        BEVERAGE_MAP_SIZE.put(SIZE.S.name(), 1000);
-        BEVERAGE_MAP_SIZE.put(SIZE.M.name(), 1000);
+        BEVERAGE_MAP_SIZE.put(SIZE.S.name(), 0);
+        BEVERAGE_MAP_SIZE.put(SIZE.M.name(), 500);
         BEVERAGE_MAP_SIZE.put(SIZE.L.name(), 1000);
     }
 
-    public static Map<String, Integer> getBeverageMapTemper() {
+    public Map<String, Integer> getBeverageMapTemper() {
         return BEVERAGE_MAP_TEMPER;
     }
     public void setBeverageMap_temper() {
-        BEVERAGE_MAP_TEMPER.put(TEMPER.ICE.name(), 4000);
-        BEVERAGE_MAP_TEMPER.put(TEMPER.HOT.name(), 4000);
+        BEVERAGE_MAP_TEMPER.put(TEMPER.HOT.name(), 0);
+        BEVERAGE_MAP_TEMPER.put(TEMPER.ICE.name(), 500);
     }
 
-    public static Map<String, Integer> getBeverageMapWhere() {
+    public Map<String, Integer> getBeverageMapWhere() {
         return BEVERAGE_MAP_WHERE;
     }
     public void setBeverageMap_where() {
-        BEVERAGE_MAP_WHERE.put(WHERE.STORE.name(), 1000);
-        BEVERAGE_MAP_WHERE.put(WHERE.TAKEOUT.name(), 1000);
+        BEVERAGE_MAP_WHERE.put(WHERE.STORE.name(), 500);
+        BEVERAGE_MAP_WHERE.put(WHERE.TAKEOUT.name(), 0);
     }
 }

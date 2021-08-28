@@ -1,6 +1,7 @@
 package beverage_order_kiosk_ver2.kiosk.command;
 
-import beverage_order_kiosk_ver2.kiosk.data.beverageInfo.BeverageInfo;
+import beverage_order_kiosk_ver2.kiosk.data.beverageInfo.OrderPriceMap;
+import beverage_order_kiosk_ver2.kiosk.data.beverageInfo.enums.KIND;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -65,8 +66,8 @@ public class CommandFunctions {
 
     //주문메뉴 출력
     public void printMenu() {
-        Map<String, Integer> menuMap = new BeverageInfo().getBeverageMap_kind();
-        BeverageInfo.KIND[] beverages = BeverageInfo.KIND.values();
+        Map<String, Integer> beverageMapKind = new OrderPriceMap().getBeverageMapKind();
+        KIND[] beverages = KIND.values();
 
         String line     = "-------------------------";
         System.out.println(line);
@@ -76,15 +77,19 @@ public class CommandFunctions {
         int price;
         for(int i = 0; i< beverages.length; i++){
             beverKind = beverages[i].toString();
-            price = menuMap.get(beverKind);
+            price = beverageMapKind.get(beverKind);
             System.out.printf(" %d. %s\t%d원\n", i+1, beverKind, price);
         }
         System.out.println(line);
     }
 
-
     //결제 정상여부 반환
-    private boolean calculate(){
+    public boolean calculate(){
         return false;
+    }
+
+    public void paymentGuide(String way){
+        System.out.println(way+ "결제를 선택하였습니다");
+        System.out.println(way+"을 넣어주세요");
     }
 }

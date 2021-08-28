@@ -5,11 +5,12 @@ import java.util.Scanner;
 
 //결제할 수단 확인하기
 //리턴; 취소여부/결제방식
-public class PaymentCommand_1_kind implements PaymentCommand {
+public class PaymentCommand_1_way implements PaymentCommand {
     private final CommandFunctions commandFunctions = new CommandFunctions();
 
     @Override
     public int[] execute(Scanner scan) {
+        System.out.println("PaymentCommand_1_way");
         int isCanceled = 1;
         int answer;
         int count = 0;
