@@ -1,7 +1,6 @@
 package beverage_order_kiosk_ver2.kiosk.command.member;
 
 import beverage_order_kiosk_ver2.kiosk.command.CommandFunctions;
-
 import java.util.Scanner;
 
 //주문방식 결정하기 - 회원/비회원

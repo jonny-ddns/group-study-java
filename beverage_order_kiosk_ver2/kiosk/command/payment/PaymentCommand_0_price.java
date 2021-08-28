@@ -1,5 +1,6 @@
 package beverage_order_kiosk_ver2.kiosk.command.payment;
 
+import beverage_order_kiosk_ver2.kiosk.command.UnitChange;
 import beverage_order_kiosk_ver2.kiosk.data.orderInfo.Order;
 import beverage_order_kiosk_ver2.kiosk.data.orderInfo.OrderInfos;
 import java.util.Collection;
@@ -19,13 +20,21 @@ public class PaymentCommand_0_price implements PaymentCommand {
 
     @Override
     public int[] execute(Scanner scan) {
-        System.out.println("PaymentCommand_1_price");
-
-
-        System.out.println("가격정보 가져오기");
-
+        System.out.println("PaymentCommand_0_price");
+        System.out.println("가격은 얼마입니다");
 
         Collection<Order> orderCollection = OrderInfos.getOrderCollection();
+
+/*
+음료종류:
+개수:
+온도:
+샷:
+크기:
+장소:
+
+
+ */
 
         System.out.println("주문개수 : "+ orderCollection.size());
         AtomicInteger sum = new AtomicInteger();
@@ -45,6 +54,7 @@ public class PaymentCommand_0_price implements PaymentCommand {
 
     //주문정보 가져오기
     private void printOrderInfo(Order order){
+
         beverage_kind = order.getBeverKind();
         beverage_count = order.getBeverCount();
         beverage_temper = order.getBeverTemper();
@@ -79,5 +89,6 @@ public class PaymentCommand_0_price implements PaymentCommand {
             beverage_where;
         return price;
     }
+
 
 }

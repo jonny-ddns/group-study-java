@@ -19,7 +19,7 @@ public class OrderCommand_20_orderCheck implements OrderCommand {
         boolean isYesOrNo;
         String input;
 
-        printWhatOrdered(commandFunctions);
+        printWhatOrdered();
 
         while(count<3) {
             count++;
@@ -31,12 +31,12 @@ public class OrderCommand_20_orderCheck implements OrderCommand {
                 continue;
             }
 
-            if(isYesOrNo && input.equals("n")) {
+            if(input.equals("n")) {
                 System.out.println("주문이 취소되었습니다. 다시 주문해주세요");
                 break;
             }
 
-            if(isYesOrNo && input.equals("y")) {
+            if(input.equals("y")) {
                 OrderCheck = 1;
                 break;
             }
@@ -44,21 +44,21 @@ public class OrderCommand_20_orderCheck implements OrderCommand {
         return new int[]{OrderCheck};
     }
 
-    private void printWhatOrdered(CommandFunctions commandFunctions) {
-        System.out.println("printWhatOrdered");
+    private void printWhatOrdered() {
         Collection<Order> orderList = OrderInfos.getOrderCollection();
-
         UnitChange unitChange = new UnitChange();
 
         //주문내용 출력하기
         System.out.println();
+        assert orderList != null;
         for (Order order : orderList) {
             String str1 = unitChange.toString_kind(order.getBeverKind());
             String str2 = unitChange.toString_temper(order.getBeverTemper());
             String str3 = unitChange.toString_shot(order.getBeverShot());
             String str4 = unitChange.toString_size(order.getBeverSize());
             String str5 = unitChange.toString_where(order.getBeverWhere());
-            System.out.printf("%s(%s/%s/%s/%s)\n", str1, str2, str3, str4, str5);
+            int int01 = order.getBeverCount();
+            System.out.printf("%s(%s/%s/%s/%s/%d잔)\n", str1, str2, str3, str4, str5, int01);
         }
         System.out.println("\n주문내용을 확인해주세요 (y/n)");
     }

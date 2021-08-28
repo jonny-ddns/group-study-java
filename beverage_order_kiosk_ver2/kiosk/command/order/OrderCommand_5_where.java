@@ -1,7 +1,7 @@
 package beverage_order_kiosk_ver2.kiosk.command.order;
 
 import beverage_order_kiosk_ver2.kiosk.command.CommandFunctions;
-import beverage_order_kiosk_ver2.kiosk.data.beverageInfo.BeverageInfo;
+import beverage_order_kiosk_ver2.kiosk.data.beverageInfo.enums.WHERE;
 import java.util.Scanner;
 
 //음료 섭취장소를 입력받는 역할 수행
@@ -35,12 +35,12 @@ public class OrderCommand_5_where implements OrderCommand {
 			}
 
 			//입력값 확인
-			int index = BeverageInfo.WHERE.values().length;
+			int index = WHERE.values().length;
 			if(commandFunctions.checkInputRange(input, index)){
 				isCanceled = 0;
 				isOk = true;
 			} else{
-				System.out.printf("번호를 다시 입력바랍니다 (1~%d)\n", BeverageInfo.WHERE.values().length);
+				System.out.printf("번호를 다시 입력바랍니다 (1~%d)\n", WHERE.values().length);
 			}
 		}
 		answer = Integer.parseInt(input);

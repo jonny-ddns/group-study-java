@@ -65,7 +65,7 @@ public class CommandFunctions {
 
     //주문메뉴 출력
     public void printMenu() {
-        Map<String, Integer> menuMap = new BeverageInfo().getBeverageMap();
+        Map<String, Integer> menuMap = new BeverageInfo().getBeverageMap_kind();
         BeverageInfo.KIND[] beverages = BeverageInfo.KIND.values();
 
         String line     = "-------------------------";

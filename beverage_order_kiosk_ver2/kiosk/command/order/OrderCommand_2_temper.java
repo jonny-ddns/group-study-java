@@ -1,7 +1,7 @@
 package beverage_order_kiosk_ver2.kiosk.command.order;
 
 import beverage_order_kiosk_ver2.kiosk.command.CommandFunctions;
-import beverage_order_kiosk_ver2.kiosk.data.beverageInfo.BeverageInfo;
+import beverage_order_kiosk_ver2.kiosk.data.beverageInfo.enums.TEMPER;
 import java.util.Scanner;
 
 //음료 온도를 입력받는 역할 수행
@@ -35,12 +35,12 @@ public class OrderCommand_2_temper implements OrderCommand {
 			}
 
 			//입력값 확인
-			int index = BeverageInfo.TEMPER.values().length;
+			int index = TEMPER.values().length;
 			if(commandFunctions.checkInputRange(input, index)){
 				isCanceled = 0;
 				isOk = true;
 			} else{
-				System.out.printf("번호를 다시 입력바랍니다 (1~%d)\n", BeverageInfo.TEMPER.values().length);
+				System.out.printf("번호를 다시 입력바랍니다 (1~%d)\n", TEMPER.values().length);
 			}
 		}
 		answer = Integer.parseInt(input);

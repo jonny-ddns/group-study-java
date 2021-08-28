@@ -86,7 +86,7 @@ public class OrderController extends ControllerFunctions implements Controller{
             if(intToBoolean(answerArr[0])) {
                 break;
             } else {
-                input_kind = answerArr[1];
+                input_count = answerArr[1];
             }
 
             //음료 온도

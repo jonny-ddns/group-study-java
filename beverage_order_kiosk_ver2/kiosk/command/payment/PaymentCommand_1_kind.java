@@ -22,7 +22,7 @@ public class PaymentCommand_1_kind implements PaymentCommand {
             if(++count>10){
                 break;
             }
-            System.out.println("입력 : ");
+            System.out.print("입력 : ");
 
             input = scan.next().trim().toLowerCase();
             if(input.equals("c")){
@@ -49,7 +49,8 @@ public class PaymentCommand_1_kind implements PaymentCommand {
     }
 
     private void printPaymentWay(){
-        System.out.println("결제하실 수단을 선택하세요");
+        System.out.println("결제하실 수단을 선택하세요 ");
         System.out.println("1. 현금\n2. 카드\n3. 기타");
+        System.out.println("(다시 주문하려면 c 입력)");
     }
 }

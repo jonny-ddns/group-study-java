@@ -2,10 +2,19 @@ package beverage_order_kiosk_ver2.kiosk.command.payment;
 
 import java.util.Scanner;
 
-//실제 결제를 처리하는 클래스
+//결제처리
+//리턴결제성공여부
 public class PaymentCommand_30_pay implements PaymentCommand{
+    private int paymentWay; //결제방식
     @Override
     public int[] execute(Scanner scan) {
+        
+
         return new int[0];
+    }
+
+    public PaymentCommand setPaymentWay(int paymentWay){
+        this.paymentWay = paymentWay;
+        return this;
     }
 }
