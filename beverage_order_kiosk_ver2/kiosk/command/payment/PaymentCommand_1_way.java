@@ -11,7 +11,7 @@ public class PaymentCommand_1_way implements PaymentCommand {
     @Override
     public int[] execute(Scanner scan) {
         System.out.println("PaymentCommand_1_way");
-        int isCanceled = 1;
+        int signal = 0;
         int answer;
         int count = 0;
         boolean isOk = false;
@@ -36,7 +36,7 @@ public class PaymentCommand_1_way implements PaymentCommand {
 
             if(commandFunctions.isNumber(input)){
                 if(commandFunctions.checkInputRange(input, 3)){
-                    isCanceled = 0;
+                    signal = 1;
                     isOk = true;
                 } else {
                     System.out.println("번호를 다시 입력바랍니다 (1~3)");
@@ -46,7 +46,7 @@ public class PaymentCommand_1_way implements PaymentCommand {
             }
         }
         answer = Integer.parseInt(input);
-        return new int[]{isCanceled, answer};
+        return new int[]{signal, answer};
     }
 
     private void printPaymentWay(){

@@ -15,13 +15,16 @@ public class PaymentCommand_0_price implements PaymentCommand {
     @Override
     public int[] execute(Scanner scan) {
         StringBuilder sb = new StringBuilder();
+        String line = "------------------------";
 
-        sb.append("------------------------").append("\n");
+        //주문내역 생성
+        sb.append(line).append("\n");
         sb.append("주문금액 확인하세요 (아래)").append("\n");
 
         int priceTotal = getCategoryInfo(sb);
 
-        sb.append("------------------------").append("\n");
+        //총금액 생성
+        sb.append(line).append("\n");
         sb.append("\t").append("total : ").append(priceTotal);
 
         System.out.println(sb);
@@ -32,17 +35,18 @@ public class PaymentCommand_0_price implements PaymentCommand {
     //각 주문별 금액 리턴하기
     private int getCategoryInfo(StringBuilder sb){
         Collection<Order> orderCollection = OrderInfos.getOrderCollection();
-        int countIndividual = 0;    //종류개수
+        int countIndividual;    //종류개수
         int priceIndividual;    //종류가격
         int priceCategory;
         int priceTotal = 0;
 
         //order정보를 넣으면 -> 카테고리와 가격을 가져오기
         for (Order order : orderCollection) {
+            String line = "------------------------";
             priceIndividual = getData(sb, order);
             countIndividual = order.getBeverCount();
             sb.append("count : ").append(countIndividual).append("\n");
-            sb.append("----------------------").append("\n");
+            sb.append(line).append("\n");
 
             //음료 개수 반영한 정보 생성
             priceCategory = countIndividual * priceIndividual;

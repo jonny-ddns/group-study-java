@@ -1,4 +1,4 @@
-package beverage_order_kiosk_ver2.kiosk.command.payment.receipt;
+package beverage_order_kiosk_ver2.kiosk.command.payment;
 
 import beverage_order_kiosk_ver2.kiosk.command.UnitChange;
 import beverage_order_kiosk_ver2.kiosk.data.orderInfo.OrderInfos;
@@ -6,22 +6,47 @@ import beverage_order_kiosk_ver2.kiosk.data.orderInfo.Order;
 import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Date;
+import java.util.Scanner;
 
-public class Receipt {
-    StringBuilder sb = new StringBuilder();
+public class PaymentCommand_30_receipt implements PaymentCommand {
 
-    public void receiptPrint(int count) {
-        System.out.println(receiptTemplate(count));
+    private int paymentWay;
+    private int receivedMoney;
+    private final StringBuilder sb = new StringBuilder();
+
+    public int getPaymentWay() {
+        return paymentWay;
+    }
+    public PaymentCommand_30_receipt setPaymentWay(int paymentWay) {
+        this.paymentWay = paymentWay;
+        return this;
+    }
+    public int getReceivedMoney() {
+        return receivedMoney;
+    }
+    public PaymentCommand_30_receipt setReceivedMoney(int receivedMoney) {
+        this.receivedMoney = receivedMoney;
+        return this;
+    }
+
+    @Override
+    public int[] execute(Scanner scan) {
+        String receipt = receiptTemplate();
+        System.out.println(receipt);
         sb.setLength(0);
+        return new int[0];
     }
 
     //영수증의 기본뼈대를 구성하는 메서드
-    private String receiptTemplate(int count) {
+    private String receiptTemplate() {
+        int paymentWay = getPaymentWay();
+        int receivedMoney = getReceivedMoney();
+
         //주문번호
-        String customerNum = receiptNum(count);
+        String receiptNum = receiptNum();
 
         sb.append("\n\n=====================\n");
-        sb.append("\t").append(customerNum).append("\n");
+        sb.append("\t").append(receiptNum).append("\n");
         sb.append("========결제내역=======\n");
         sb.append("품목\t\t금액\n");
         sb.append("---------------------\n");
@@ -30,7 +55,6 @@ public class Receipt {
         Collection<Order> orders = OrderInfos.getOrderCollection();
         int sum = 0;
         for (Order order : orders) {
-
             //ReceiptOrderInfo 클래스 인스턴스로 값 변환하기
             ReceiptOrderInfo receiptOrderInfo = new ReceiptOrderInfo();
             String[] items = receiptOrderInfo.receiptItem(order);
@@ -57,10 +81,20 @@ public class Receipt {
         return sb.toString();
     }
 
-    //주문번호 생성: 오늘날짜 + 주문개수
-    private String receiptNum(int count) {
-        SimpleDateFormat sdf = new SimpleDateFormat("MMdd");
-        return sdf.format(new Date()) + count;
+    //주문번호 생성
+    //ex. 210901131312 - 00000000
+    private String receiptNum() {
+        return createReceiptNum_timeNow()+ "-"+ createReceiptNum_memberNum();
+    }
+
+    //연월일시초(12)
+    private String createReceiptNum_timeNow(){
+        return new SimpleDateFormat("yyMMddHHmmss").format(new Date());
+    }
+
+    //회원번호는 휴대전화 앞자리 * 뒷자리 -
+    private String createReceiptNum_memberNum(){
+        return "00000001";
     }
 
     //주문내역을 담은 Orders클래스의 각 항목이 int 이므로 값을 적절히 변경된 값을 가져오는 역할 수행
@@ -119,40 +153,33 @@ public class Receipt {
         }
     }
 
-//    private static class UnitChange {
-//
-//        /*------------------------------------------*/
-//        //int -> 금액(int)으로 변경
-        public int toMoney_kind(int i) {
-//		Pricing p = new Pricing();
-//		return p.getBeveragePrice()[i-1];
-            return 999 * i;
-        }
+    public int toMoney_kind(int i) {
+        return 999 * i;
+    }
 
-        public int toMoney_temper(int i) {
-            return 0;
-        }
+    public int toMoney_temper(int i) {
+        return 0;
+    }
 
-        public int toMoney_shot(int i) {
-            int money = 0;
-            if (i == 2) {
-                money = 500;
-            }
-            return money;
+    public int toMoney_shot(int i) {
+        int money = 0;
+        if (i == 2) {
+            money = 500;
         }
+        return money;
+    }
 
-        public int toMoney_size(int i) {
-            return 500 * --i;
-        }
+    public int toMoney_size(int i) {
+        return 500 * --i;
+    }
 
-        public int toMoney_where(int i) {
-            int money = 0;
-            if (i == 1) {
-                money = 500;
-            }
-            return money;
+    public int toMoney_where(int i) {
+        int money = 0;
+        if (i == 1) {
+            money = 500;
         }
-//    }
+        return money;
+    }
 }
 
 

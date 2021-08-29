@@ -2,7 +2,6 @@ package beverage_order_kiosk_ver2.kiosk.data.memberInfo;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 public class MemberInfos {
     private static MemberInfos memberInfos = null;

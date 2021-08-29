@@ -13,6 +13,9 @@ public class PaymentCommand_13_other implements PaymentCommand {
     }
     @Override
     public int[] execute(Scanner scan) {
+        System.out.println("PaymentCommand_13_other");
+        System.out.println("지금은 지원되지 않는 기능입니다");
+        System.out.println("다른 방법으로 결제해주세요");
         return new int[0];
     }
 }

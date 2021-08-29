@@ -55,15 +55,6 @@ public class CommandFunctions {
         return inputCheck;
     }
 
-    //단위변환
-    public void check_beverageChoose(String input, int index){
-        System.out.println("주문자가 선택한 정보 출력");
-        System.out.println(input+ "을 선택하였습니다");
-        int num = Integer.parseInt(input);
-        String str = new UnitChange().toString_kind(num);
-        System.out.printf("%s\n", str);
-    }
-
     //주문메뉴 출력
     public void printMenu() {
         Map<String, Integer> beverageMapKind = new OrderPriceMap().getBeverageMapKind();
@@ -90,6 +81,20 @@ public class CommandFunctions {
 
     public void paymentGuide(String way){
         System.out.println(way+ "결제를 선택하였습니다");
-        System.out.println(way+"을 넣어주세요");
+        System.out.println(way+" 넣어주세요");
+    }
+
+    public String getMonenyFromCustomer(Scanner scan){
+        System.out.print("금액 : ");
+        return scan.next().trim();
+    }
+
+    //잔액계산. 결제실패시 -1 리턴
+    public int calculateBalance(int price, int receivedMoney){
+        if(price <= receivedMoney){
+            return receivedMoney - price;
+        } else {
+            return -1;
+        }
     }
 }

@@ -66,10 +66,10 @@ public class OrderController extends ControllerFunctions implements Controller{
     //차례로 주문정보 받기
     private boolean getRequest_order(Scanner scan){
         int[] answerArr;
-        boolean isCanceled = true;      //주문신호 (취소0 주문1)
-        boolean orderProgress = true;   //플래그
+        boolean isCanceled = true;  //주문신호 (취소0 주문1)
+        boolean isFinished = false; //플래그
 
-        while (orderProgress) {
+        while (!isFinished) {
             //음료 종류
             orderCommand = new OrderCommand_0_kind();
             answerArr = orderCommand.execute(scan);
@@ -124,7 +124,7 @@ public class OrderController extends ControllerFunctions implements Controller{
                 input_where = answerArr[1];
             }
             isCanceled = false;
-            orderProgress = false;
+            isFinished = true;
         }
         return isCanceled;
     }

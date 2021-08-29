@@ -3,58 +3,53 @@ package beverage_order_kiosk_ver2.kiosk.controller;
 import beverage_order_kiosk_ver2.kiosk.command.payment.*;
 import java.util.Scanner;
 
-/*
-가격안내
-> 결제방식 선택 
-> 현금, 카드, 기타 방식으로 결제
-> 회원은 포인트 안내하기
-> 결제실패하면 다시 결제방식 선택
-> 결제성공하면 결제성공 안내
-> 영수증 출력
- */
 public class PaymentController extends ControllerFunctions implements Controller{
-    PaymentCommand paymentCommand;
-    Scanner scan;
-
-
     @Override
     public int control(Scanner scan) {
         System.out.println("PaymentController - control");
-        this.scan = scan;
-
+        PaymentCommand paymentCommand;
         int controllerResult = 0;   //리턴값
-//        int result_isMember;
-//        int result_signIn;
         int[] result;
-        
-        //가격안내
-        paymentCommand = new PaymentCommand_0_price();
-        result = paymentCommand.execute(scan);
-        //공유객체에 가격 설정하기
-        int price = result[0];
+        int signal;
+        int answer;
+        int price;
+        int receivedMoney;
 
-        //결제방법
-        paymentCommand = new PaymentCommand_1_way();
-        int[] result_paymentKind = paymentCommand.execute(scan);
-        int isCanceled = result_paymentKind[0];
-        int paymentWay = result_paymentKind[1];
+        boolean paymentFinish = false;
+        while(!paymentFinish){
+            //가격안내
+            paymentCommand = new PaymentCommand_0_price();
+            price = paymentCommand.execute(scan)[0];    //결제할 가격 설정
 
-        //결제방식 선택
-        if(isCanceled == 0){
-            int resultPaymentWay = setPayment(paymentWay, price);
+            //결제방법에 따른 결제
+            paymentCommand = new PaymentCommand_1_way();
+            result = paymentCommand.execute(scan);
+            signal = result[0];
+            answer = result[1];
+
+            //결제취소시
+            if(signal == 0){ continue; }
+
+            result = setPayment(scan, answer, price);
+            signal  = result[0];
+            answer  = result[1];
+            receivedMoney = result[2];
+
+            //결제 실패시
+            if(signal == 0){ continue; }
+            
+            //영수증 출력
+            new PaymentCommand_30_receipt().setPaymentWay(answer)
+                    .setReceivedMoney(receivedMoney)
+                    .execute(scan);
             controllerResult = 1;
+            paymentFinish = true;
         }
-        
-        //결제하기
-        controllerResult = new PaymentCommand_30_pay()
-                                .setPaymentWay(1)
-                                .execute(scan)[0];
         return controllerResult;
     }
 
-
     //결제방법 선택 -> 결제방식별 command 호출
-    private int[] setPayment(int paymentWay, int price){
+    private int[] setPayment(Scanner scan, int paymentWay, int price){
         System.out.println("setPayment - 결제방식 switch");
         int[] result = null;
         switch(paymentWay){
@@ -75,11 +70,5 @@ public class PaymentController extends ControllerFunctions implements Controller
                 break;
         }
         return result;
-    }
-
-
-    @Override
-    public boolean intToBoolean(int i) {
-        return super.intToBoolean(i);
     }
 }
